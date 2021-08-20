@@ -12,18 +12,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity ^0.7.0;
+pragma solidity ^0.7.1;
+pragma experimental ABIEncoderV2;
 
 import "@balancer-labs/v2-solidity-utils/contracts/math/FixedPoint.sol";
 import "@balancer-labs/v2-solidity-utils/contracts/math/Math.sol";
 
-contract StationMath {
-    using FixedPoint for uint256;
-    // solhint-disable private-vars-leading-underscore
-    // solhint-disable var-name-mixedcase
-    uint256 internal constant ONEH = 100;
-    uint256 internal constant TENTHOU = 10000;
-
+library MathLib {
     struct RateInfo {
         uint256[] rates;
         uint256[] rateDiffs;
@@ -55,6 +50,15 @@ contract StationMath {
         uint256 bptTempOut;
         uint256 bptTempIn;
     }
+}
+
+contract StationMath {
+    using FixedPoint for uint256;
+    using MathLib for *;
+    // solhint-disable private-vars-leading-underscore
+    // solhint-disable var-name-mixedcase
+    uint256 internal constant ONEH = 100;
+    uint256 internal constant TENTHOU = 10000;
 
     function _inGivenOut(
         uint256 tokenIndexIn,
@@ -90,27 +94,26 @@ contract StationMath {
         uint256 totalBPT,
         uint256[] memory prices
     ) internal pure returns (uint256) {
-        if (totalBPT == 0) {
-            return 10**19;
+        if(totalBPT == 1e18){
+            return 1e18;
         }
-        ValueInfo memory VAL;
-        RateInfo memory RT;
-        BptInfo memory BPT;
+
+        MathLib.ValueInfo memory VAL;
+        MathLib.RateInfo memory RT;
+        MathLib.BptInfo memory BPT;
         uint256 len = balances.length;
-        (VAL.values, VAL.outValues, VAL.totalValue, VAL.totalInValue) = (new uint256[](len), new uint256[](len), 0, 0);
-
+        uint256 result;
+        (VAL.values, VAL.inValues, VAL.totalValue, VAL.totalInValue) = (new uint256[](len), new uint256[](len), 0, 0);
+      
         for (uint256 i = 0; i < len; i++) {
-            VAL.values[i] = balances[i].mulDown(prices[i]);
-            VAL.totalValue = VAL.totalValue.add(VAL.values[i]);
+            VAL.values[i] = balances[i].mulUp(prices[i]);
+            VAL.totalValue += VAL.values[i];
             VAL.inValues[i] = amountsIn[i].mulUp(prices[i]);
-            VAL.totalInValue = VAL.totalInValue.add(VAL.inValues[i]);
-        }
-
-        BPT.bptOut;
-
+            VAL.totalInValue += VAL.inValues[i];
+        } 
         if (VAL.totalInValue > VAL.totalValue) {
-            BPT.bptOut = VAL.totalInValue.divDown(VAL.totalValue).mulDown(totalBPT);
-            return BPT.bptOut;
+            VAL.totalValue == 0 ? result = totalBPT : result = VAL.totalInValue.divDown(VAL.totalValue).mulUp(totalBPT);
+            return result;
         }
 
         if (VAL.totalInValue == VAL.totalValue) {
@@ -118,7 +121,7 @@ contract StationMath {
         }
 
         RT.meanRate = ONEH / len;
-        RT.rateDiffs = new uint256[](len);
+        //RT.rateDiffs = new uint256[](len);
         RT.rates = new uint256[](len);
         RT.amountsInRates = new uint256[](len);
 
@@ -126,26 +129,19 @@ contract StationMath {
         for (uint256 i = 0; i < len; i++) {
             if (VAL.inValues[i] != 0) {
                 BPT.bptTempOut;
-                RT.rates[i] = ONEH.divUp(VAL.totalValue.divUp(VAL.values[i]));
-
-                RT.meanRate >= RT.rates[i] ? RT.rateDiffs[i] = RT.meanRate - RT.rates[i] : RT.rateDiffs[i] =
-                    RT.rates[i] -
-                    RT.meanRate;
-                RT.amountsInRates[i] = ONEH.divDown(VAL.totalValue.divUp(VAL.inValues[i]));
-                BPT.bptTempOut = totalBPT.divDown(RT.amountsInRates[i]).mulDown(
-                    RT.amountsInRates[i].divUp(ONEH.divUp(RT.amountsInRates[i]))
-                ); //ONEH.div(totalBPT.divDown(RT.amountsInRates[i]));
-
-                BPT.bptTempOut += BPT.bptTempOut.divDown(RT.rateDiffs[i]).mulDown(
-                    RT.rateDiffs[i].divUp(ONEH.divUp(RT.rateDiffs[i]))
-                );
+                 RT.rates[i] = ONEH.divDown(VAL.totalValue.divDown(VAL.values[i]));
+                //RT.meanRate >= RT.rates[i] ? RT.rateDiffs[i] = RT.meanRate - RT.rates[i] : 
+                //RT.rateDiffs[i] = RT.rates[i] - RT.meanRate;
+                RT.amountsInRates[i] = ONEH.divUp(VAL.totalValue.add(VAL.totalInValue).divUp(VAL.inValues[i]));
+                BPT.bptTempOut = (totalBPT.mulUp(RT.amountsInRates[i])).divUp(ONEH);
+                //if(RT.rateDiffs[i] != 0) {
+                   // BPT.bptTempOut += BPT.bptTempOut.divDown(RT.rateDiffs[i]);
+                //} else 
                 tempBPT += BPT.bptTempOut;
             }
         }
 
-        BPT.bptOut = tempBPT;
-
-        return BPT.bptOut;
+        return tempBPT;
     }
 
     function _bptInForAllTokensOut(
@@ -154,9 +150,9 @@ contract StationMath {
         uint256 totalBPT,
         uint256[] memory prices
     ) internal pure returns (uint256, uint256[] memory) {
-        ValueInfo memory VAL;
-        RateInfo memory RT;
-        BptInfo memory BPT;
+        MathLib.ValueInfo memory VAL;
+        MathLib.RateInfo memory RT;
+        MathLib.BptInfo memory BPT;
         uint256 len = balances.length;
         (VAL.values, VAL.outValues, VAL.totalValue, VAL.totalOutValue) = (new uint256[](len), new uint256[](len), 0, 0);
         (RT.rates, BPT.bptIn) = (new uint256[](len), 0);
@@ -187,22 +183,22 @@ contract StationMath {
         uint256 totalBPT,
         uint256[] memory prices
     ) internal pure returns (uint256[] memory) {
-        ValueInfo memory VAL;
-        RateInfo memory RT;
-        BptInfo memory BPT;
+        MathLib.ValueInfo memory VAL;
+        MathLib.RateInfo memory RT;
+        MathLib.BptInfo memory BPT;
         uint256 len = balances.length;
         (VAL.values, VAL.outValues, VAL.totalValue) = (new uint256[](len), new uint256[](len), 0);
         (RT.rates, BPT.bptIn) = (new uint256[](len), bptAmountIn);
 
         for (uint256 i = 0; i < len; i++) {
-            VAL.values[i] = balances[i].mulDown(prices[i]);
+            VAL.values[i] = balances[i].mulUp(prices[i]);
             VAL.totalValue += VAL.values[i];
         }
         uint256 bptRatio = BPT.bptIn.divDown(totalBPT);
         uint256[] memory amountsOut = new uint256[](balances.length);
 
         for (uint256 i = 0; i < balances.length; i++) {
-            VAL.outValues[i] = VAL.values[i].mulDown(bptRatio);
+            VAL.outValues[i] = VAL.values[i].mulUp(bptRatio);
             amountsOut[i] = VAL.outValues[i].divDown(prices[i]);
         }
         return amountsOut;
@@ -216,7 +212,7 @@ contract StationMath {
         uint256 amp,
         uint256[] memory prices
     ) internal pure returns (uint256 feeRate) {
-        ValueInfo memory VAL;
+        MathLib.ValueInfo memory VAL;
         uint256 len = balances.length;
         (VAL.values, VAL.inValues, VAL.outValues) = (new uint256[](len), new uint256[](len), new uint256[](len));
         VAL.totalValue = 0;
@@ -269,6 +265,22 @@ contract StationMath {
         return feeTotal;
     }
 
+    function _calcDueTokenProtocolSwapFeeAmount(
+        uint256[] memory feeTotals,
+        uint256[] memory prices,
+        uint256 protocolSwapFeePercentage
+    ) internal pure returns (uint256[] memory) {
+        MathLib.ValueInfo memory VAL;
+        VAL.totalValue;
+        for(uint i = 0; i < prices.length; i++){
+            uint256 tempVal = feeTotals[i].mulDown(prices[i]);
+            VAL.totalValue += tempVal; 
+        }
+        uint256[] memory feesDue = new uint256[](prices.length);
+        feesDue[0] = protocolSwapFeePercentage.mulDown(VAL.totalValue.divDown(prices[0]));
+        return feesDue;
+    }
+
     function _calculateWithdrawFee(
         //zero division on withdraw fee rate = 0
         uint256[] memory amountsOut,
@@ -292,19 +304,6 @@ contract StationMath {
         return withdrawFees;
     }
 
-    function _calcDueTokenProtocolSwapFeeAmount(
-        uint256[] memory feeTotals,
-        uint256[] memory prices
-    ) internal pure returns (uint256[] memory) {
-        ValueInfo memory VAL;
-        VAL.totalValue;
-        for(uint i = 0; i < prices.length; i++){
-            uint256 tempVal = feeTotals[i].mulDown(prices[i]);
-            VAL.totalValue += tempVal; 
-        }
-        uint256[] memory feesDue = new uint256[](prices.length);
-        feesDue[0] = VAL.totalValue.divDown(prices[0]);
-        return feesDue;
-    }
+
 
 }

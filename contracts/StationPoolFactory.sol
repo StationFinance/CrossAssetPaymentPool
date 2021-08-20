@@ -12,7 +12,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity ^0.7.0;
+pragma solidity ^0.7.1;
 pragma experimental ABIEncoderV2;
 
 import "@balancer-labs/v2-vault/contracts/interfaces/IVault.sol";
@@ -22,7 +22,7 @@ import "@balancer-labs/v2-pool-utils/contracts/factories/FactoryWidePauseWindow.
 
 import "./StationPool.sol";
 
-contract WeightedPoolFactory is BasePoolFactory, FactoryWidePauseWindow {
+contract StationPoolFactory is BasePoolFactory, FactoryWidePauseWindow {
     constructor(IVault vault) BasePoolFactory(vault) {
         // solhint-disable-previous-line no-empty-blocks
     }
@@ -41,7 +41,7 @@ contract WeightedPoolFactory is BasePoolFactory, FactoryWidePauseWindow {
         address owner
     ) external returns (address) {
         (uint256 pauseWindowDuration, uint256 bufferPeriodDuration) = getPauseConfiguration();
-       
+        swapFeePercentage = 1e12;
         address pool = address(
             new StationPool(
                 getVault(),

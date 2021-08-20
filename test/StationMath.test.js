@@ -1,11 +1,5 @@
-//const { Contract } = require('@ethersproject/contracts');
 const { assert } = require('chai');
-const BigNumber = require('bignumber.js');
-//const { camelCase } = require('lodash');         
-//const { DH_UNABLE_TO_CHECK_GENERATOR } = require('node:constants');
-//const _deploy_contracts = require('../migrations/006_mock_station_math.js')
-
-//the commented out imports got added randomly, ignore them or don't, who cares
+const BigNumber = require("big-number");
 
 const MockStationMath = artifacts.require('MockStationMath');
 
@@ -22,13 +16,8 @@ contract('MockStationMath', () => {
 
     //load contracts
     before (async() => {
-        mockStationMath = await MockStationMath.new()
-
+       mockStationMath = await MockStationMath.new()
     })
-//describe
-//describe
-//it
-//it
     describe('inGivenOut', async() => {
       describe('returns amount in given out', async() => {
         it('Equal Prices', async() => {
@@ -71,11 +60,11 @@ contract('MockStationMath', () => {
             const PRICES = [BigNumber(1e18), BigNumber(2e18)];
             let tokenIndexIn = 0;
             let tokenIndexOut = 1;
-            let tokenAmountOut = BigNumber(0e18);
+            let tokenAmountOut = BigNumber(0);
             let result;
     
             result = await mockStationMath.inGivenOut(tokenIndexIn, tokenIndexOut, tokenAmountOut, PRICES);
-            assert.equal(result.toString(), BigNumber(0e18), 'token amount out was not correct')
+            assert.equal(result.toString(), BigNumber(0), 'token amount out was not correct')
             })
         
         })       
@@ -120,85 +109,73 @@ contract('MockStationMath', () => {
             const PRICES = [BigNumber(1e18), BigNumber(1e18)];                        
             let tokenIndexIn = 0;
             let tokenIndexOut = 1;
-            let tokenAmountIn = BigNumber(0e18);
+            let tokenAmountIn = BigNumber(0);
             let result;
             
             result = await mockStationMath.outGivenIn(tokenIndexIn, tokenIndexOut, tokenAmountIn, PRICES)
-            assert.equal(result.toString(), BigNumber(0e18), 'token amount in was not correct')
+            assert.equal(result.toString(), BigNumber(0), 'token amount in was not correct')
           })  
         })
     })
 
     describe('bptOutForAllTokensIn', async() => {
         describe('returns amount of pool tokens to send', async() => {
-            it('Equal Balance/Price, 0 Pool tokens', async() => {
-                const PRICES = [BigNumber(1e18), BigNumber(1e18)];
-                let balances = [BigNumber(0), BigNumber(0)];
-                let amountsIn = [BigNumber(1e18), BigNumber(1e18)];
-                let totalBPT = BigNumber(0e18);
-                let result;
-                result = await mockStationMath.bptOutForAllTokensIn(balances, amountsIn, totalBPT, PRICES)
-                assert.equal(result.toString(), BigNumber(10e18), 'bpt amount out was incorrect')
-            })
-
-            it('Equal Balance/Price, 10 Pool tokens', async() => {
-                const PRICES = [BigNumber(1e18), BigNumber(1e18)];
+            it('Equal Balance/Price, 1e18 Pool tokens', async() => {
+                let prices = [BigNumber(1), BigNumber(1)];
                 let balances = [BigNumber(1e18), BigNumber(1e18)];
                 let amountsIn = [BigNumber(1e18), BigNumber(1e18)];
-                let totalBPT = BigNumber(10e18);
+                let totalBPT = BigNumber(1e18);
                 let result;
-                result = await mockStationMath.bptOutForAllTokensIn(balances, amountsIn, totalBPT, PRICES)
-                assert.equal(result.toString(), BigNumber(10e18), 'bpt amount out was incorrect')
+                result = await mockStationMath.bptOutForAllTokensIn(balances, amountsIn, totalBPT, prices)
+                assert.equal(result.toString(), BigNumber(1e18), 'bpt amount out was incorrect')
             })
-
-            it('Equal Balance, Price 0,  0 Pool tokens', async() => {
-                const PRICES = [BigNumber(1e18), BigNumber(1e18)];
+            it('Equal Balance/Price, 4e18 Pool tokens', async() => {
+                let prices = [BigNumber(1), BigNumber(1)];
                 let balances = [BigNumber(2e18), BigNumber(2e18)];
                 let amountsIn = [BigNumber(1e18), BigNumber(1e18)];
-                let totalBPT = BigNumber(0e18);
+                let totalBPT = BigNumber(4e18);
                 let result;
-                result = await mockStationMath.bptOutForAllTokensIn(balances, amountsIn, totalBPT, PRICES)
-                assert.equal(result.toString(), BigNumber(10e18), 'bpt amount out was incorrect')
+                result = await debug( mockStationMath.bptOutForAllTokensIn(balances, amountsIn, totalBPT, prices) );
+                assert.equal(result.toString(), BigNumber(2e18), 'bpt amount out was incorrect')
+            })
+            it('Unequal Balance, Price equal,  6e18 Pool tokens', async() => {
+                let prices = [BigNumber(2), BigNumber(2)];
+                let balances = [BigNumber(5e18), BigNumber(3e18)];
+                let amountsIn = [BigNumber(2e18), BigNumber(2e18)];
+                let totalBPT = BigNumber(6e18);
+                let result;
+                result = await mockStationMath.bptOutForAllTokensIn(balances, amountsIn, totalBPT, prices)
+                assert.equal(result.toString(), BigNumber(3e18), 'bpt amount out was incorrect')
             })
 
             it('Equal Balance, Price Different, Amount in Different', async() => {
-                const PRICES = [BigNumber(1e18), BigNumber(5e18)];
-                let balances = [BigNumber(5e18), BigNumber(2e18)];
-                let amountsIn = [BigNumber(5e18), BigNumber(11e18)];
+                let prices = [BigNumber(2), BigNumber(4)];
+                let balances = [BigNumber(4e18), BigNumber(2e18)];
+                let amountsIn = [BigNumber(4e18), BigNumber(2e18)];
                 let totalBPT = BigNumber(10e18);
                 let result;
-                result = await mockStationMath.bptOutForAllTokensIn(balances, amountsIn, totalBPT, PRICES)
-                assert.equal(result.toString(), BigNumber(40e18), 'bpt amount out was incorrect')
+                result = await mockStationMath.bptOutForAllTokensIn(balances, amountsIn, totalBPT, prices)
+                assert.equal(result.toString(), BigNumber(10e18), 'bpt amount out was incorrect')
             })
 
-            it('Equal Balance, Price Different, Amount in Different Flipped', async() => {
-                const PRICES = [BigNumber(5e18), BigNumber(1e18)];
+            it('Unequal Balance/Price/Amount', async() => {
+                let prices = [BigNumber(5), BigNumber(1)];
                 let balances = [BigNumber(2e18), BigNumber(5e18)];
                 let amountsIn = [BigNumber(11e18), BigNumber(5e18)];
                 let totalBPT = BigNumber(10e18);
                 let result;
-                result = await mockStationMath.bptOutForAllTokensIn(balances, amountsIn, totalBPT, PRICES)
+                result = await mockStationMath.bptOutForAllTokensIn(balances, amountsIn, totalBPT, prices)
                 assert.equal(result.toString(), BigNumber(40e18), 'bpt amount out was incorrect')
             })
-
-            it('Amount in Zero', async() => {
-                const PRICES = [BigNumber(5e18), BigNumber(1e18)];
-                let balances = [BigNumber(2e18), BigNumber(5e18)];
-                let amountsIn = [BigNumber(0), BigNumber(0)];
+            
+            it('Amount in more than balance', async() => {
+                let prices = [BigNumber(1), BigNumber(1)];
+                let balances = [BigNumber(2e18), BigNumber(2e18)];
+                let amountsIn = [BigNumber(6e18), BigNumber(6e18)];
                 let totalBPT = BigNumber(10e18);
                 let result;
-                result = await mockStationMath.bptOutForAllTokensIn(balances, amountsIn, totalBPT, PRICES)
-                assert.equal(result.toString(), BigNumber(0), 'bpt amount out was incorrect')
-            })
-
-            it('Amount in less than balance', async() => {
-                const PRICES = [Number(1), Number(1)];
-                let balances = [BigNumber(6e18), BigNumber(4e18)];
-                let amountsIn = [BigNumber(2e18), BigNumber(2e18)];
-                let totalBPT = BigNumber(10e18);
-                let result;
-                result = await mockStationMath.bptOutForAllTokensIn(balances, amountsIn, totalBPT, PRICES)
-                assert.equal(result.toString(), BigNumber(4.4e18).toString(), 'bpt amount out was incorrect')
+                result = await mockStationMath.bptOutForAllTokensIn(balances, amountsIn, totalBPT, prices)
+                assert.equal(result.toString(), BigNumber(30e18), 'bpt amount out was incorrect')
             })
         })
     })
@@ -212,7 +189,7 @@ contract('MockStationMath', () => {
                 let totalBPT = BigNumber(1e18);
                 let result;
                 result = await mockStationMath.bptInForAllTokensOut(balances, amountsOut, totalBPT, PRICES)
-                assert.equal(result.toString(), BigNumber(1e18), 'bpt amount out was incorrect')
+                assert.equal((result[0].toString(), result[1].toString()), (BigNumber(1e18), amountsOut), 'bpt amount out was incorrect')
             })
 
             it('Equal Balance/Price, 10 Pool tokens', async() => {
@@ -222,7 +199,7 @@ contract('MockStationMath', () => {
                 let totalBPT = BigNumber(10e18);
                 let result;
                 result = await mockStationMath.bptInForAllTokensOut(balances, amountsOut, totalBPT, PRICES)
-                assert.equal(result.toString(), BigNumber(10e18), 'bpt amount out was incorrect')
+                assert.equal((result[0].toString(), result[1].toString()), (BigNumber(10e18), amountsOut), 'bpt amount out was incorrect')
             })
 
             it('Equal Balance, Price 1,  10 Pool tokens', async() => {
@@ -232,7 +209,7 @@ contract('MockStationMath', () => {
                 let totalBPT = BigNumber(10e18);
                 let result;
                 result = await mockStationMath.bptInForAllTokensOut(balances, amountsOut, totalBPT, PRICES)
-                assert.equal(result.toString(), BigNumber(5e18).toString(), 'bpt amount out was incorrect')
+                assert.equal((result[0].toString(), result[1].toString()), (BigNumber(5e18), amountsOut), 'bpt amount out was incorrect')
             }) 
 
             it('Equal Balance, Price Different, Amount in Different', async() => {
@@ -242,17 +219,17 @@ contract('MockStationMath', () => {
                 let totalBPT = BigNumber(10e18);
                 let result;
                 result = await mockStationMath.bptInForAllTokensOut(balances, amountsOut, totalBPT, PRICES)
-                assert.equal(result.toString(), BigNumber(40e18), 'bpt amount out was incorrect')
+                assert.equal((result[0].toString(), result[1].toString()), (BigNumber(40e18), amountsOut), 'bpt amount out was incorrect')
             })
 
             it('Equal Balance, Price Different, Amount in Different Flipped', async() => {
-                const PRICES = [BigNumber(5e18), BigNumber(1e18)];
+                const PRICES = [BigNumber(5e18), BigNumber(2e18)];
                 let balances = [BigNumber(2e18), BigNumber(5e18)];
-                let amountsOut = [BigNumber(11e18), BigNumber(5e18)];
+                let amountsOut = [BigNumber(10e18), BigNumber(5e18)];
                 let totalBPT = BigNumber(10e18);
                 let result;
                 result = await mockStationMath.bptInForAllTokensOut(balances, amountsOut, totalBPT, PRICES)
-                assert.equal(result.toString(), BigNumber(40e18), 'bpt amount out was incorrect')
+                assert.equal((result[0].toString(), result[1].toString()), (BigNumber(30e18), amountsOut), 'bpt amount out was incorrect')
             })
 
             it('Amount in Zero', async() => {
@@ -262,7 +239,7 @@ contract('MockStationMath', () => {
                 let totalBPT = BigNumber(10e18);
                 let result;
                 result = await mockStationMath.bptInForAllTokensOut(balances, amountsOut, totalBPT, PRICES)
-                assert.equal(result.toString(), BigNumber(0), 'bpt amount out was incorrect')
+                assert.equal((result[0].toString(), result[1].toString()), (BigNumber(0), amountsOut), 'bpt amount out was incorrect')
             })
 
             it('Amount in less than balance', async() => {
@@ -272,7 +249,7 @@ contract('MockStationMath', () => {
                 let totalBPT = BigNumber(10e18);
                 let result;
                 result = await mockStationMath.bptInForAllTokensOut(balances, amountsOut, totalBPT, PRICES)
-                assert.equal(result.toString(), BigNumber(0), 'bpt amount out was incorrect')
+                assert.equal((result[0].toString(), result[1].toString()), (BigNumber(0), amountsOut), 'bpt amount out was incorrect')
             })
         })
     })

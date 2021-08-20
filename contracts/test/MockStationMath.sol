@@ -12,13 +12,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity ^0.7.0;
+pragma solidity ^0.7.1;
 
 import "../StationMath.sol";
 
 contract MockStationMath is StationMath {
-    
-    function outGivenIn(
+// solhint-disable private-vars-leading-underscore
+// solhint-disable var-name-mixedcase
+        function inGivenOut(
+            uint256 tokenIndexIn,
+            uint256 tokenIndexOut,
+            uint256 tokenAmountOut,
+            uint256[] memory prices
+        ) external pure returns(uint256) {
+            return _inGivenOut(tokenIndexIn,
+             tokenIndexOut,
+             tokenAmountOut,
+             prices);
+        }
+
+        function outGivenIn(
         uint256 tokenIndexIn,
         uint256 tokenIndexOut, 
         uint256 tokenAmountIn, 
@@ -32,25 +45,14 @@ contract MockStationMath is StationMath {
                 );
         }
 
-        function inGivenOut(
-            uint256 tokenIndexIn,
-            uint256 tokenIndexOut,
-            uint256 tokenAmountOut,
-            uint256[] memory prices
-        ) external pure returns(uint256) {
-            return _inGivenOut(tokenIndexIn,
-             tokenIndexOut,
-             tokenAmountOut,
-             prices);
-        }
-
-        function bptOutForAllTokensIn(
+       function bptOutForAllTokensIn(
             uint256[] memory balances,
             uint256[] memory amountsIn,
             uint256 totalBPT,
             uint256[] memory prices
-        ) external pure returns (uint256) {
-            return _bptOutForAllTokensIn(balances,
+        ) external pure returns(uint256) {
+            return _bptOutForAllTokensIn(
+                balances,
                 amountsIn,
                 totalBPT,
                 prices);
@@ -102,8 +104,18 @@ contract MockStationMath is StationMath {
 
         function calcDueTokenProtocolSwapFeeAmount(
             uint256[] memory feeTotals,
+            uint256[] memory prices,
+            uint256 protocolSwapFeePercentage
+            
+        ) external pure returns (uint256[] memory) {
+            return _calcDueTokenProtocolSwapFeeAmount(feeTotals, prices, protocolSwapFeePercentage);
+        }
+        
+        function calculateWithdrawFee(
+            uint256[] memory amountsOut,
+            uint256 withdrawFeeRate,
             uint256[] memory prices
         ) external pure returns (uint256[] memory) {
-            return _calcDueTokenProtocolSwapFeeAmount(feeTotals, prices);
+            return _calculateWithdrawFee(amountsOut, withdrawFeeRate, prices);
         }
 }

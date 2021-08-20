@@ -12,9 +12,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity ^0.7.0;
+pragma solidity ^0.7.1;
 pragma experimental ABIEncoderV2;
-
 import "./BaseStationPool.sol";
 
 
@@ -23,6 +22,7 @@ contract StationPool is BaseStationPool{
     // solhint-disable private-vars-leading-underscore
     // The protocol fees will always be charged using the token associated with the max weight in the pool.
     // Since these Pools will register tokens only once, we can assume this index will be constant.
+    uint256 private constant _MINIMUM_BPT = 1e18;
     uint256 private immutable _maxValWeightTokenIndex;
     uint256 internal constant _MIN_WEIGHT = 0.01e18;
 
@@ -48,8 +48,7 @@ contract StationPool is BaseStationPool{
         uint256 pauseWindowDuration,
         uint256 bufferPeriodDuration,
         address owner
-    )
-        BaseStationPool(
+    ) BaseStationPool(
             vault,
             name,
             symbol,
@@ -63,7 +62,6 @@ contract StationPool is BaseStationPool{
     {
         _amp = amp;
         uint256 numTokens = tokens.length;
-        InputHelpers.ensureInputLengthMatch(numTokens, normValWeights.length);
 
         // Ensure  each normalized weight is above them minimum and find the token index of the maximum weight
         uint256 normalizedSum = 0;

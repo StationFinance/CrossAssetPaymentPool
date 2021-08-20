@@ -12,7 +12,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity ^0.7.0;
+pragma solidity ^0.7.1;
 pragma experimental ABIEncoderV2;
 
 import "@balancer-labs/v2-solidity-utils/contracts/math/FixedPoint.sol";
@@ -21,14 +21,14 @@ import "@balancer-labs/v2-solidity-utils/contracts/helpers/BalancerErrors.sol";
 import "@balancer-labs/v2-pool-utils/contracts/BaseMinimalSwapInfoPool.sol";
 import "./StationMath.sol";
 import "./StationPoolUserDataHelpers.sol";
-import "./Oracle.sol";
+import "./test/MockOracle.sol";
 
 abstract contract BaseStationPool is BaseMinimalSwapInfoPool, StationMath {
     using FixedPoint for uint256;
     using StationPoolUserDataHelpers for bytes;
     using Errors for Errors;
     // solhint-disable private-vars-leading-underscore
-    Oracle constant public PRICE_PROVIDER = Oracle(0xCD9B0fc977f1Baf6Fbc96e8373915078fB095154);
+    MockOracle public PRICE_PROVIDER = MockOracle(0x12828E3Fc80e876fD5a471D10bE521493404d1c4);
     uint256[] public _prices = PRICE_PROVIDER.getMultiPrices();
     mapping(IERC20 => uint256) public _feeTokens;
     
@@ -45,9 +45,8 @@ abstract contract BaseStationPool is BaseMinimalSwapInfoPool, StationMath {
         uint256 pauseWindowDuration,
         uint256 bufferPeriodDuration,
         address owner
-    )BasePool(
+    )BaseMinimalSwapInfoPool(
             vault,
-            tokens.length == 2 ? IVault.PoolSpecialization.TWO_TOKEN : IVault.PoolSpecialization.MINIMAL_SWAP_INFO,
             name,
             symbol,
             tokens,
@@ -58,7 +57,6 @@ abstract contract BaseStationPool is BaseMinimalSwapInfoPool, StationMath {
             owner
         )
         {
-            // solhint-disable-previous-line no-empty-blocks
         }
 
         /**
@@ -98,7 +96,6 @@ abstract contract BaseStationPool is BaseMinimalSwapInfoPool, StationMath {
         bytes32,
         address,
         address,
-        uint256[] memory scalingFactors,
         bytes memory userData
     ) internal virtual override whenNotPaused returns (uint256, uint256[] memory) {
         // It would be strange for the Pool to be paused before it is initialized, but for consistency we prevent
@@ -109,7 +106,7 @@ abstract contract BaseStationPool is BaseMinimalSwapInfoPool, StationMath {
 
         uint256[] memory amountsIn = userData.initialAmountsIn();
         InputHelpers.ensureInputLengthMatch(_getTotalTokens(), amountsIn.length);
-        _upscaleArray(amountsIn, scalingFactors);
+        _upscaleArray(amountsIn, _scalingFactors());
         uint256[] memory balances= new uint256[](amountsIn.length);
         for(uint i = 0; i < amountsIn.length; i++){
             balances[i] = 0;
@@ -132,8 +129,7 @@ abstract contract BaseStationPool is BaseMinimalSwapInfoPool, StationMath {
         address,
         uint256[] memory balances,
         uint256,
-        uint256,
-        uint256[] memory scalingFactors,
+        uint256 protocolSwapFeePercentage,
         bytes memory userData
     )
         internal
@@ -153,14 +149,16 @@ abstract contract BaseStationPool is BaseMinimalSwapInfoPool, StationMath {
         // or exit event and now - the invariant's growth is due exclusively to swap fees. This avoids spending gas
         // computing them on each individual swap
      
-        uint256[] memory dueProtocolFeeAmounts = new uint256[](balances.length);
+        uint256[] memory dueProtocolFeeAmounts =  _getDueProtocolFeeAmounts(
+            protocolSwapFeePercentage
+        );
            
 
         // Update current balances by subtracting the protocol fee amounts
         _mutateAmounts(balances, dueProtocolFeeAmounts, FixedPoint.sub);
         (uint256 bptAmountOut, uint256[] memory amountsIn) = _doJoin(
             balances,
-            scalingFactors,
+            _getNormValWeights(),
             userData
         );
 
@@ -211,8 +209,7 @@ abstract contract BaseStationPool is BaseMinimalSwapInfoPool, StationMath {
         address,
         uint256[] memory balances,
         uint256,
-        uint256,
-        uint256[] memory scalingFactors,
+        uint256 protocolSwapFeePercentage,
         bytes memory userData
     )
         internal
@@ -234,6 +231,7 @@ abstract contract BaseStationPool is BaseMinimalSwapInfoPool, StationMath {
             // spending gas calculating the fees on each individual swap.
             
             dueProtocolFeeAmounts = _getDueProtocolFeeAmounts(
+                protocolSwapFeePercentage
             );
 
             // Update current balances by subtracting the protocol fee amounts
@@ -244,7 +242,7 @@ abstract contract BaseStationPool is BaseMinimalSwapInfoPool, StationMath {
             dueProtocolFeeAmounts = new uint256[](_getTotalTokens());
         }
 
-        (bptAmountIn, amountsOut) = _doExit(balances, scalingFactors, userData);
+        (bptAmountIn, amountsOut) = _doExit(balances, _getNormValWeights(), userData);
 
         return (bptAmountIn, amountsOut, dueProtocolFeeAmounts);
     }
@@ -301,9 +299,9 @@ abstract contract BaseStationPool is BaseMinimalSwapInfoPool, StationMath {
         return (bptAmountIn, amountsOut);
         }
 
-         function _getDueProtocolFeeAmounts() private view returns (uint256[] memory) {
+         function _getDueProtocolFeeAmounts(uint256 protocolSwapFeePercentage) private view returns (uint256[] memory) {
         // Initialize with zeros
-        uint256[] memory dueProtocolFeeAmounts = new uint256[](_prices.length);
+        uint256[] memory dueProtocolFeeAmounts;
         uint256[] memory feeTotals;
         (IERC20[] memory tokens, ,) = getVault().getPoolTokens(getPoolId());
         for(uint i = 0; i < _prices.length; i++){
@@ -313,7 +311,8 @@ abstract contract BaseStationPool is BaseMinimalSwapInfoPool, StationMath {
         // token that is expected to have the largest balance, using it to pay fees should not unbalance the Pool.
         dueProtocolFeeAmounts = StationMath._calcDueTokenProtocolSwapFeeAmount(
             feeTotals,
-            _prices
+            _prices,
+            protocolSwapFeePercentage
         );
 
         return dueProtocolFeeAmounts;
