@@ -1,6 +1,6 @@
 # CrossAssetPaymentPool
 
-WIP, Needs updating to match changes in BalancerV2 codebase
+WIP, Needs updating to match changes in BalancerV2 codebase.
 Passing most test.
 to run the test yourself use truffle + ganache-cli:
 
