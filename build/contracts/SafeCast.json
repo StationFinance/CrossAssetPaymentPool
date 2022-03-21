@@ -1,0 +1,802 @@
+{
+  "contractName": "SafeCast",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.1+commit.f4a555be\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"details\":\"Wrappers over Solidity's uintXX/intXX casting operators with added overflow checks. Downcasting from uint256/int256 in Solidity does not revert on overflow. This can easily result in undesired exploitation or bugs, since developers usually assume that overflows raise errors. `SafeCast` restores this intuition by reverting the transaction when such an operation overflows. Using this library instead of the unchecked operations eliminates an entire class of bugs, so it's recommended to use it always. Can be combined with {SafeMath} and {SignedSafeMath} to extend it to smaller types, by performing all math on `uint256` and `int256` and then downcasting.\",\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/SafeCast.sol\":\"SafeCast\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@balancer-labs/v2-solidity-utils/contracts/helpers/BalancerErrors.sol\":{\"keccak256\":\"0x905bd095ec81b0ae31c85b234d0b6ef2b51c49b6ed8e3ae49f13466825e82d2a\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://caa51272d7427f1d0e3cc715c93e887c01b4d4b2d6177d0bae5c2088508a7da9\",\"dweb:/ipfs/QmVgHKqzKZFKyKaStmkF31ffEvArkzpGj1xLAwrg13ytW9\"]},\"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/SafeCast.sol\":{\"keccak256\":\"0xfefa8c6b6aed0ac9df03ac0c4cce2a94da8d8815bb7f1459fef9f93ada8d316d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://27e49304575a12b5cf5cc02d5ce201a405e6f0ce6a84c00cd030bf16310a47a4\",\"dweb:/ipfs/QmS3YvT4cnQDKehJmEnrGzRvjEJhrphFKGuFfPNgZJCHW1\"]}},\"version\":1}",
+  "bytecode": "0x60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212205b58b4ad03f8f9668a57970ec9686a0a682f21e678bc467e8fed01210e7ee5a064736f6c63430007010033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212205b58b4ad03f8f9668a57970ec9686a0a682f21e678bc467e8fed01210e7ee5a064736f6c63430007010033",
+  "immutableReferences": {},
+  "sourceMap": "809:370:29:-:0;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "809:370:29:-:0;;;;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.7.0;\n\nimport \"../helpers/BalancerErrors.sol\";\n\n/**\n * @dev Wrappers over Solidity's uintXX/intXX casting operators with added overflow\n * checks.\n *\n * Downcasting from uint256/int256 in Solidity does not revert on overflow. This can\n * easily result in undesired exploitation or bugs, since developers usually\n * assume that overflows raise errors. `SafeCast` restores this intuition by\n * reverting the transaction when such an operation overflows.\n *\n * Using this library instead of the unchecked operations eliminates an entire\n * class of bugs, so it's recommended to use it always.\n *\n * Can be combined with {SafeMath} and {SignedSafeMath} to extend it to smaller types, by performing\n * all math on `uint256` and `int256` and then downcasting.\n */\nlibrary SafeCast {\n    /**\n     * @dev Converts an unsigned uint256 into a signed int256.\n     *\n     * Requirements:\n     *\n     * - input must be less than or equal to maxInt256.\n     */\n    function toInt256(uint256 value) internal pure returns (int256) {\n        _require(value < 2**255, Errors.SAFE_CAST_VALUE_CANT_FIT_INT256);\n        return int256(value);\n    }\n}\n",
+  "sourcePath": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/SafeCast.sol",
+  "ast": {
+    "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/SafeCast.sol",
+    "exportedSymbols": {
+      "SafeCast": [
+        7240
+      ]
+    },
+    "id": 7241,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 7213,
+        "literals": [
+          "solidity",
+          "^",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:23:29"
+      },
+      {
+        "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/helpers/BalancerErrors.sol",
+        "file": "../helpers/BalancerErrors.sol",
+        "id": 7214,
+        "nodeType": "ImportDirective",
+        "scope": 7241,
+        "sourceUnit": 2972,
+        "src": "58:39:29",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "library",
+        "documentation": {
+          "id": 7215,
+          "nodeType": "StructuredDocumentation",
+          "src": "99:709:29",
+          "text": " @dev Wrappers over Solidity's uintXX/intXX casting operators with added overflow\n checks.\n Downcasting from uint256/int256 in Solidity does not revert on overflow. This can\n easily result in undesired exploitation or bugs, since developers usually\n assume that overflows raise errors. `SafeCast` restores this intuition by\n reverting the transaction when such an operation overflows.\n Using this library instead of the unchecked operations eliminates an entire\n class of bugs, so it's recommended to use it always.\n Can be combined with {SafeMath} and {SignedSafeMath} to extend it to smaller types, by performing\n all math on `uint256` and `int256` and then downcasting."
+        },
+        "fullyImplemented": true,
+        "id": 7240,
+        "linearizedBaseContracts": [
+          7240
+        ],
+        "name": "SafeCast",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 7238,
+              "nodeType": "Block",
+              "src": "1066:111:29",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 7228,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "id": 7224,
+                          "name": "value",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 7218,
+                          "src": "1085:5:29",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "<",
+                        "rightExpression": {
+                          "commonType": {
+                            "typeIdentifier": "t_rational_57896044618658097711785492504343953926634992332820282019728792003956564819968_by_1",
+                            "typeString": "int_const 5789...(69 digits omitted)...9968"
+                          },
+                          "id": 7227,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "hexValue": "32",
+                            "id": 7225,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1093:1:29",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_2_by_1",
+                              "typeString": "int_const 2"
+                            },
+                            "value": "2"
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "**",
+                          "rightExpression": {
+                            "hexValue": "323535",
+                            "id": 7226,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1096:3:29",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_255_by_1",
+                              "typeString": "int_const 255"
+                            },
+                            "value": "255"
+                          },
+                          "src": "1093:6:29",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_57896044618658097711785492504343953926634992332820282019728792003956564819968_by_1",
+                            "typeString": "int_const 5789...(69 digits omitted)...9968"
+                          }
+                        },
+                        "src": "1085:14:29",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "expression": {
+                          "id": 7229,
+                          "name": "Errors",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 2971,
+                          "src": "1101:6:29",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_Errors_$2971_$",
+                            "typeString": "type(library Errors)"
+                          }
+                        },
+                        "id": 7230,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "SAFE_CAST_VALUE_CANT_FIT_INT256",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 2862,
+                        "src": "1101:38:29",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 7223,
+                      "name": "_require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2662,
+                      "src": "1076:8:29",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_bool_$_t_uint256_$returns$__$",
+                        "typeString": "function (bool,uint256) pure"
+                      }
+                    },
+                    "id": 7231,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1076:64:29",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 7232,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1076:64:29"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 7235,
+                        "name": "value",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7218,
+                        "src": "1164:5:29",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 7234,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "1157:6:29",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_int256_$",
+                        "typeString": "type(int256)"
+                      },
+                      "typeName": {
+                        "id": 7233,
+                        "name": "int256",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1157:6:29",
+                        "typeDescriptions": {}
+                      }
+                    },
+                    "id": 7236,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1157:13:29",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "functionReturnParameters": 7222,
+                  "id": 7237,
+                  "nodeType": "Return",
+                  "src": "1150:20:29"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 7216,
+              "nodeType": "StructuredDocumentation",
+              "src": "832:165:29",
+              "text": " @dev Converts an unsigned uint256 into a signed int256.\n Requirements:\n - input must be less than or equal to maxInt256."
+            },
+            "id": 7239,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "toInt256",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 7219,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7218,
+                  "mutability": "mutable",
+                  "name": "value",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7239,
+                  "src": "1020:13:29",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7217,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1020:7:29",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1019:15:29"
+            },
+            "returnParameters": {
+              "id": 7222,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7221,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7239,
+                  "src": "1058:6:29",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 7220,
+                    "name": "int256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1058:6:29",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1057:8:29"
+            },
+            "scope": 7240,
+            "src": "1002:175:29",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 7241,
+        "src": "809:370:29"
+      }
+    ],
+    "src": "33:1147:29"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/SafeCast.sol",
+      "exportedSymbols": {
+        "SafeCast": [
+          7240
+        ]
+      },
+      "license": "MIT"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.7",
+            ".0"
+          ]
+        },
+        "id": 7213,
+        "name": "PragmaDirective",
+        "src": "33:23:29"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 2972,
+          "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/helpers/BalancerErrors.sol",
+          "file": "../helpers/BalancerErrors.sol",
+          "scope": 7241,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 7214,
+        "name": "ImportDirective",
+        "src": "58:39:29"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "library",
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            7240
+          ],
+          "name": "SafeCast",
+          "scope": 7241
+        },
+        "children": [
+          {
+            "attributes": {
+              "text": " @dev Wrappers over Solidity's uintXX/intXX casting operators with added overflow\n checks.\n Downcasting from uint256/int256 in Solidity does not revert on overflow. This can\n easily result in undesired exploitation or bugs, since developers usually\n assume that overflows raise errors. `SafeCast` restores this intuition by\n reverting the transaction when such an operation overflows.\n Using this library instead of the unchecked operations eliminates an entire\n class of bugs, so it's recommended to use it always.\n Can be combined with {SafeMath} and {SignedSafeMath} to extend it to smaller types, by performing\n all math on `uint256` and `int256` and then downcasting."
+            },
+            "id": 7215,
+            "name": "StructuredDocumentation",
+            "src": "99:709:29"
+          },
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "toInt256",
+              "scope": 7240,
+              "stateMutability": "pure",
+              "virtual": false,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "text": " @dev Converts an unsigned uint256 into a signed int256.\n Requirements:\n - input must be less than or equal to maxInt256."
+                },
+                "id": 7216,
+                "name": "StructuredDocumentation",
+                "src": "832:165:29"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "value",
+                      "scope": 7239,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 7217,
+                        "name": "ElementaryTypeName",
+                        "src": "1020:7:29"
+                      }
+                    ],
+                    "id": 7218,
+                    "name": "VariableDeclaration",
+                    "src": "1020:13:29"
+                  }
+                ],
+                "id": 7219,
+                "name": "ParameterList",
+                "src": "1019:15:29"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "scope": 7239,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "int256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "int256",
+                          "type": "int256"
+                        },
+                        "id": 7220,
+                        "name": "ElementaryTypeName",
+                        "src": "1058:6:29"
+                      }
+                    ],
+                    "id": 7221,
+                    "name": "VariableDeclaration",
+                    "src": "1058:6:29"
+                  }
+                ],
+                "id": 7222,
+                "name": "ParameterList",
+                "src": "1057:8:29"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                },
+                                {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 2662,
+                              "type": "function (bool,uint256) pure",
+                              "value": "_require"
+                            },
+                            "id": 7223,
+                            "name": "Identifier",
+                            "src": "1076:8:29"
+                          },
+                          {
+                            "attributes": {
+                              "commonType": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "<",
+                              "type": "bool"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 7218,
+                                  "type": "uint256",
+                                  "value": "value"
+                                },
+                                "id": 7224,
+                                "name": "Identifier",
+                                "src": "1085:5:29"
+                              },
+                              {
+                                "attributes": {
+                                  "commonType": {
+                                    "typeIdentifier": "t_rational_57896044618658097711785492504343953926634992332820282019728792003956564819968_by_1",
+                                    "typeString": "int_const 5789...(69 digits omitted)...9968"
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "operator": "**",
+                                  "type": "int_const 5789...(69 digits omitted)...9968"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "hexvalue": "32",
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "token": "number",
+                                      "type": "int_const 2",
+                                      "value": "2"
+                                    },
+                                    "id": 7225,
+                                    "name": "Literal",
+                                    "src": "1093:1:29"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "hexvalue": "323535",
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "token": "number",
+                                      "type": "int_const 255",
+                                      "value": "255"
+                                    },
+                                    "id": 7226,
+                                    "name": "Literal",
+                                    "src": "1096:3:29"
+                                  }
+                                ],
+                                "id": 7227,
+                                "name": "BinaryOperation",
+                                "src": "1093:6:29"
+                              }
+                            ],
+                            "id": 7228,
+                            "name": "BinaryOperation",
+                            "src": "1085:14:29"
+                          },
+                          {
+                            "attributes": {
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "SAFE_CAST_VALUE_CANT_FIT_INT256",
+                              "referencedDeclaration": 2862,
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 2971,
+                                  "type": "type(library Errors)",
+                                  "value": "Errors"
+                                },
+                                "id": 7229,
+                                "name": "Identifier",
+                                "src": "1101:6:29"
+                              }
+                            ],
+                            "id": 7230,
+                            "name": "MemberAccess",
+                            "src": "1101:38:29"
+                          }
+                        ],
+                        "id": 7231,
+                        "name": "FunctionCall",
+                        "src": "1076:64:29"
+                      }
+                    ],
+                    "id": 7232,
+                    "name": "ExpressionStatement",
+                    "src": "1076:64:29"
+                  },
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 7222
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "int256",
+                          "type_conversion": true
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "type": "type(int256)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "name": "int256"
+                                },
+                                "id": 7233,
+                                "name": "ElementaryTypeName",
+                                "src": "1157:6:29"
+                              }
+                            ],
+                            "id": 7234,
+                            "name": "ElementaryTypeNameExpression",
+                            "src": "1157:6:29"
+                          },
+                          {
+                            "attributes": {
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 7218,
+                              "type": "uint256",
+                              "value": "value"
+                            },
+                            "id": 7235,
+                            "name": "Identifier",
+                            "src": "1164:5:29"
+                          }
+                        ],
+                        "id": 7236,
+                        "name": "FunctionCall",
+                        "src": "1157:13:29"
+                      }
+                    ],
+                    "id": 7237,
+                    "name": "Return",
+                    "src": "1150:20:29"
+                  }
+                ],
+                "id": 7238,
+                "name": "Block",
+                "src": "1066:111:29"
+              }
+            ],
+            "id": 7239,
+            "name": "FunctionDefinition",
+            "src": "1002:175:29"
+          }
+        ],
+        "id": 7240,
+        "name": "ContractDefinition",
+        "src": "809:370:29"
+      }
+    ],
+    "id": 7241,
+    "name": "SourceUnit",
+    "src": "33:1147:29"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.1+commit.f4a555be.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.2",
+  "updatedAt": "2021-08-19T22:46:59.507Z",
+  "devdoc": {
+    "details": "Wrappers over Solidity's uintXX/intXX casting operators with added overflow checks. Downcasting from uint256/int256 in Solidity does not revert on overflow. This can easily result in undesired exploitation or bugs, since developers usually assume that overflows raise errors. `SafeCast` restores this intuition by reverting the transaction when such an operation overflows. Using this library instead of the unchecked operations eliminates an entire class of bugs, so it's recommended to use it always. Can be combined with {SafeMath} and {SignedSafeMath} to extend it to smaller types, by performing all math on `uint256` and `int256` and then downcasting.",
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

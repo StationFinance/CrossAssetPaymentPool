@@ -1,0 +1,3778 @@
+{
+  "contractName": "Fees",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "contract IAuthorizer",
+          "name": "newAuthorizer",
+          "type": "address"
+        }
+      ],
+      "name": "AuthorizerChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "contract IERC20",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "ExternalBalanceTransfer",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "contract IFlashLoanRecipient",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "contract IERC20",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "feeAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "FlashLoan",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "contract IERC20",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "int256",
+          "name": "delta",
+          "type": "int256"
+        }
+      ],
+      "name": "InternalBalanceChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "paused",
+          "type": "bool"
+        }
+      ],
+      "name": "PausedStateChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "liquidityProvider",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "contract IERC20[]",
+          "name": "tokens",
+          "type": "address[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "int256[]",
+          "name": "deltas",
+          "type": "int256[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "protocolFeeAmounts",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "PoolBalanceChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "assetManager",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "contract IERC20",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "int256",
+          "name": "cashDelta",
+          "type": "int256"
+        },
+        {
+          "indexed": false,
+          "internalType": "int256",
+          "name": "managedDelta",
+          "type": "int256"
+        }
+      ],
+      "name": "PoolBalanceManaged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "poolAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum IVault.PoolSpecialization",
+          "name": "specialization",
+          "type": "uint8"
+        }
+      ],
+      "name": "PoolRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "relayer",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "approved",
+          "type": "bool"
+        }
+      ],
+      "name": "RelayerApprovalChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "contract IERC20",
+          "name": "tokenIn",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "contract IERC20",
+          "name": "tokenOut",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amountIn",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amountOut",
+          "type": "uint256"
+        }
+      ],
+      "name": "Swap",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "contract IERC20[]",
+          "name": "tokens",
+          "type": "address[]"
+        }
+      ],
+      "name": "TokensDeregistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "contract IERC20[]",
+          "name": "tokens",
+          "type": "address[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "address[]",
+          "name": "assetManagers",
+          "type": "address[]"
+        }
+      ],
+      "name": "TokensRegistered",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "WETH",
+      "outputs": [
+        {
+          "internalType": "contract IWETH",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum IVault.SwapKind",
+          "name": "kind",
+          "type": "uint8"
+        },
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "poolId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "assetInIndex",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "assetOutIndex",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "userData",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IVault.BatchSwapStep[]",
+          "name": "swaps",
+          "type": "tuple[]"
+        },
+        {
+          "internalType": "contract IAsset[]",
+          "name": "assets",
+          "type": "address[]"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "fromInternalBalance",
+              "type": "bool"
+            },
+            {
+              "internalType": "address payable",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "toInternalBalance",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct IVault.FundManagement",
+          "name": "funds",
+          "type": "tuple"
+        },
+        {
+          "internalType": "int256[]",
+          "name": "limits",
+          "type": "int256[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "deadline",
+          "type": "uint256"
+        }
+      ],
+      "name": "batchSwap",
+      "outputs": [
+        {
+          "internalType": "int256[]",
+          "name": "",
+          "type": "int256[]"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "contract IERC20[]",
+          "name": "tokens",
+          "type": "address[]"
+        }
+      ],
+      "name": "deregisterTokens",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "internalType": "address payable",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "components": [
+            {
+              "internalType": "contract IAsset[]",
+              "name": "assets",
+              "type": "address[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "minAmountsOut",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "bytes",
+              "name": "userData",
+              "type": "bytes"
+            },
+            {
+              "internalType": "bool",
+              "name": "toInternalBalance",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct IVault.ExitPoolRequest",
+          "name": "request",
+          "type": "tuple"
+        }
+      ],
+      "name": "exitPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IFlashLoanRecipient",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "contract IERC20[]",
+          "name": "tokens",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "amounts",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "bytes",
+          "name": "userData",
+          "type": "bytes"
+        }
+      ],
+      "name": "flashLoan",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAuthorizer",
+      "outputs": [
+        {
+          "internalType": "contract IAuthorizer",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getDomainSeparator",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "contract IERC20[]",
+          "name": "tokens",
+          "type": "address[]"
+        }
+      ],
+      "name": "getInternalBalance",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "getNextNonce",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPausedState",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "paused",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "pauseWindowEndTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "bufferPeriodEndTime",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getPool",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "enum IVault.PoolSpecialization",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "contract IERC20",
+          "name": "token",
+          "type": "address"
+        }
+      ],
+      "name": "getPoolTokenInfo",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "cash",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "managed",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "lastChangeBlock",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "assetManager",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getPoolTokens",
+      "outputs": [
+        {
+          "internalType": "contract IERC20[]",
+          "name": "tokens",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "balances",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "lastChangeBlock",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "relayer",
+          "type": "address"
+        }
+      ],
+      "name": "hasApprovedRelayer",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "components": [
+            {
+              "internalType": "contract IAsset[]",
+              "name": "assets",
+              "type": "address[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "maxAmountsIn",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "bytes",
+              "name": "userData",
+              "type": "bytes"
+            },
+            {
+              "internalType": "bool",
+              "name": "fromInternalBalance",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct IVault.JoinPoolRequest",
+          "name": "request",
+          "type": "tuple"
+        }
+      ],
+      "name": "joinPool",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "enum IVault.PoolBalanceOpKind",
+              "name": "kind",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "poolId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "contract IERC20",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IVault.PoolBalanceOp[]",
+          "name": "ops",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "managePoolBalance",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "enum IVault.UserBalanceOpKind",
+              "name": "kind",
+              "type": "uint8"
+            },
+            {
+              "internalType": "contract IAsset",
+              "name": "asset",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "internalType": "address payable",
+              "name": "recipient",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct IVault.UserBalanceOp[]",
+          "name": "ops",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "manageUserBalance",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum IVault.SwapKind",
+          "name": "kind",
+          "type": "uint8"
+        },
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "poolId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "assetInIndex",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "assetOutIndex",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "userData",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IVault.BatchSwapStep[]",
+          "name": "swaps",
+          "type": "tuple[]"
+        },
+        {
+          "internalType": "contract IAsset[]",
+          "name": "assets",
+          "type": "address[]"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "fromInternalBalance",
+              "type": "bool"
+            },
+            {
+              "internalType": "address payable",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "toInternalBalance",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct IVault.FundManagement",
+          "name": "funds",
+          "type": "tuple"
+        }
+      ],
+      "name": "queryBatchSwap",
+      "outputs": [
+        {
+          "internalType": "int256[]",
+          "name": "assetDeltas",
+          "type": "int256[]"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum IVault.PoolSpecialization",
+          "name": "specialization",
+          "type": "uint8"
+        }
+      ],
+      "name": "registerPool",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "contract IERC20[]",
+          "name": "tokens",
+          "type": "address[]"
+        },
+        {
+          "internalType": "address[]",
+          "name": "assetManagers",
+          "type": "address[]"
+        }
+      ],
+      "name": "registerTokens",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IAuthorizer",
+          "name": "newAuthorizer",
+          "type": "address"
+        }
+      ],
+      "name": "setAuthorizer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "paused",
+          "type": "bool"
+        }
+      ],
+      "name": "setPaused",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "relayer",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "approved",
+          "type": "bool"
+        }
+      ],
+      "name": "setRelayerApproval",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "poolId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "enum IVault.SwapKind",
+              "name": "kind",
+              "type": "uint8"
+            },
+            {
+              "internalType": "contract IAsset",
+              "name": "assetIn",
+              "type": "address"
+            },
+            {
+              "internalType": "contract IAsset",
+              "name": "assetOut",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "userData",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IVault.SingleSwap",
+          "name": "singleSwap",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "fromInternalBalance",
+              "type": "bool"
+            },
+            {
+              "internalType": "address payable",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "toInternalBalance",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct IVault.FundManagement",
+          "name": "funds",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "limit",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "deadline",
+          "type": "uint256"
+        }
+      ],
+      "name": "swap",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getProtocolFeesCollector",
+      "outputs": [
+        {
+          "internalType": "contract IProtocolFeesCollector",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.1+commit.f4a555be\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contract IAuthorizer\",\"name\":\"newAuthorizer\",\"type\":\"address\"}],\"name\":\"AuthorizerChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"ExternalBalanceTransfer\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contract IFlashLoanRecipient\",\"name\":\"recipient\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"feeAmount\",\"type\":\"uint256\"}],\"name\":\"FlashLoan\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"int256\",\"name\":\"delta\",\"type\":\"int256\"}],\"name\":\"InternalBalanceChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"paused\",\"type\":\"bool\"}],\"name\":\"PausedStateChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"liquidityProvider\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"contract IERC20[]\",\"name\":\"tokens\",\"type\":\"address[]\"},{\"indexed\":false,\"internalType\":\"int256[]\",\"name\":\"deltas\",\"type\":\"int256[]\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"protocolFeeAmounts\",\"type\":\"uint256[]\"}],\"name\":\"PoolBalanceChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"assetManager\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"int256\",\"name\":\"cashDelta\",\"type\":\"int256\"},{\"indexed\":false,\"internalType\":\"int256\",\"name\":\"managedDelta\",\"type\":\"int256\"}],\"name\":\"PoolBalanceManaged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"poolAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enum IVault.PoolSpecialization\",\"name\":\"specialization\",\"type\":\"uint8\"}],\"name\":\"PoolRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"RelayerApprovalChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"contract IERC20\",\"name\":\"tokenIn\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"contract IERC20\",\"name\":\"tokenOut\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amountIn\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amountOut\",\"type\":\"uint256\"}],\"name\":\"Swap\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"contract IERC20[]\",\"name\":\"tokens\",\"type\":\"address[]\"}],\"name\":\"TokensDeregistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"contract IERC20[]\",\"name\":\"tokens\",\"type\":\"address[]\"},{\"indexed\":false,\"internalType\":\"address[]\",\"name\":\"assetManagers\",\"type\":\"address[]\"}],\"name\":\"TokensRegistered\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"WETH\",\"outputs\":[{\"internalType\":\"contract IWETH\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"enum IVault.SwapKind\",\"name\":\"kind\",\"type\":\"uint8\"},{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"assetInIndex\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"assetOutIndex\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"userData\",\"type\":\"bytes\"}],\"internalType\":\"struct IVault.BatchSwapStep[]\",\"name\":\"swaps\",\"type\":\"tuple[]\"},{\"internalType\":\"contract IAsset[]\",\"name\":\"assets\",\"type\":\"address[]\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"fromInternalBalance\",\"type\":\"bool\"},{\"internalType\":\"address payable\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"toInternalBalance\",\"type\":\"bool\"}],\"internalType\":\"struct IVault.FundManagement\",\"name\":\"funds\",\"type\":\"tuple\"},{\"internalType\":\"int256[]\",\"name\":\"limits\",\"type\":\"int256[]\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"batchSwap\",\"outputs\":[{\"internalType\":\"int256[]\",\"name\":\"\",\"type\":\"int256[]\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"internalType\":\"contract IERC20[]\",\"name\":\"tokens\",\"type\":\"address[]\"}],\"name\":\"deregisterTokens\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"recipient\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"contract IAsset[]\",\"name\":\"assets\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"minAmountsOut\",\"type\":\"uint256[]\"},{\"internalType\":\"bytes\",\"name\":\"userData\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"toInternalBalance\",\"type\":\"bool\"}],\"internalType\":\"struct IVault.ExitPoolRequest\",\"name\":\"request\",\"type\":\"tuple\"}],\"name\":\"exitPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IFlashLoanRecipient\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"contract IERC20[]\",\"name\":\"tokens\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"},{\"internalType\":\"bytes\",\"name\":\"userData\",\"type\":\"bytes\"}],\"name\":\"flashLoan\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAuthorizer\",\"outputs\":[{\"internalType\":\"contract IAuthorizer\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getDomainSeparator\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"contract IERC20[]\",\"name\":\"tokens\",\"type\":\"address[]\"}],\"name\":\"getInternalBalance\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"getNextNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPausedState\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"paused\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"pauseWindowEndTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"bufferPeriodEndTime\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"}],\"name\":\"getPool\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"enum IVault.PoolSpecialization\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"getPoolTokenInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"cash\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"managed\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"lastChangeBlock\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"assetManager\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"}],\"name\":\"getPoolTokens\",\"outputs\":[{\"internalType\":\"contract IERC20[]\",\"name\":\"tokens\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"balances\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256\",\"name\":\"lastChangeBlock\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getProtocolFeesCollector\",\"outputs\":[{\"internalType\":\"contract IProtocolFeesCollector\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\"}],\"name\":\"hasApprovedRelayer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"contract IAsset[]\",\"name\":\"assets\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"maxAmountsIn\",\"type\":\"uint256[]\"},{\"internalType\":\"bytes\",\"name\":\"userData\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"fromInternalBalance\",\"type\":\"bool\"}],\"internalType\":\"struct IVault.JoinPoolRequest\",\"name\":\"request\",\"type\":\"tuple\"}],\"name\":\"joinPool\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"enum IVault.PoolBalanceOpKind\",\"name\":\"kind\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"internalType\":\"struct IVault.PoolBalanceOp[]\",\"name\":\"ops\",\"type\":\"tuple[]\"}],\"name\":\"managePoolBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"enum IVault.UserBalanceOpKind\",\"name\":\"kind\",\"type\":\"uint8\"},{\"internalType\":\"contract IAsset\",\"name\":\"asset\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"recipient\",\"type\":\"address\"}],\"internalType\":\"struct IVault.UserBalanceOp[]\",\"name\":\"ops\",\"type\":\"tuple[]\"}],\"name\":\"manageUserBalance\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"enum IVault.SwapKind\",\"name\":\"kind\",\"type\":\"uint8\"},{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"assetInIndex\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"assetOutIndex\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"userData\",\"type\":\"bytes\"}],\"internalType\":\"struct IVault.BatchSwapStep[]\",\"name\":\"swaps\",\"type\":\"tuple[]\"},{\"internalType\":\"contract IAsset[]\",\"name\":\"assets\",\"type\":\"address[]\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"fromInternalBalance\",\"type\":\"bool\"},{\"internalType\":\"address payable\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"toInternalBalance\",\"type\":\"bool\"}],\"internalType\":\"struct IVault.FundManagement\",\"name\":\"funds\",\"type\":\"tuple\"}],\"name\":\"queryBatchSwap\",\"outputs\":[{\"internalType\":\"int256[]\",\"name\":\"assetDeltas\",\"type\":\"int256[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"enum IVault.PoolSpecialization\",\"name\":\"specialization\",\"type\":\"uint8\"}],\"name\":\"registerPool\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"internalType\":\"contract IERC20[]\",\"name\":\"tokens\",\"type\":\"address[]\"},{\"internalType\":\"address[]\",\"name\":\"assetManagers\",\"type\":\"address[]\"}],\"name\":\"registerTokens\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IAuthorizer\",\"name\":\"newAuthorizer\",\"type\":\"address\"}],\"name\":\"setAuthorizer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"paused\",\"type\":\"bool\"}],\"name\":\"setPaused\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"setRelayerApproval\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"internalType\":\"enum IVault.SwapKind\",\"name\":\"kind\",\"type\":\"uint8\"},{\"internalType\":\"contract IAsset\",\"name\":\"assetIn\",\"type\":\"address\"},{\"internalType\":\"contract IAsset\",\"name\":\"assetOut\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"userData\",\"type\":\"bytes\"}],\"internalType\":\"struct IVault.SingleSwap\",\"name\":\"singleSwap\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"fromInternalBalance\",\"type\":\"bool\"},{\"internalType\":\"address payable\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"toInternalBalance\",\"type\":\"bool\"}],\"internalType\":\"struct IVault.FundManagement\",\"name\":\"funds\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"limit\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"swap\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"To reduce the bytecode size of the Vault, most of the protocol fee logic is not here, but in the ProtocolFeesCollector contract.\",\"kind\":\"dev\",\"methods\":{\"WETH()\":{\"details\":\"Returns the Vault's WETH instance.\"},\"batchSwap(uint8,(bytes32,uint256,uint256,uint256,bytes)[],address[],(address,bool,address,bool),int256[],uint256)\":{\"details\":\"Performs a series of swaps with one or multiple Pools. In each individual swap, the caller determines either the amount of tokens sent to or received from the Pool, depending on the `kind` value. Returns an array with the net Vault asset balance deltas. Positive amounts represent tokens (or ETH) sent to the Vault, and negative amounts represent tokens (or ETH) sent by the Vault. Each delta corresponds to the asset at the same index in the `assets` array. Swaps are executed sequentially, in the order specified by the `swaps` array. Each array element describes a Pool, the token to be sent to this Pool, the token to receive from it, and an amount that is either `amountIn` or `amountOut` depending on the swap kind. Multihop swaps can be executed by passing an `amount` value of zero for a swap. This will cause the amount in/out of the previous swap to be used as the amount in for the current one. In a 'given in' swap, 'tokenIn' must equal the previous swap's `tokenOut`. For a 'given out' swap, `tokenOut` must equal the previous swap's `tokenIn`. The `assets` array contains the addresses of all assets involved in the swaps. These are either token addresses, or the IAsset sentinel value for ETH (the zero address). Each entry in the `swaps` array specifies tokens in and out by referencing an index in `assets`. Note that Pools never interact with ETH directly: it will be wrapped to or unwrapped from WETH by the Vault. Internal Balance usage, sender, and recipient are determined by the `funds` struct. The `limits` array specifies the minimum or maximum amount of each token the vault is allowed to transfer. `batchSwap` can be used to make a single swap, like `swap` does, but doing so requires more gas than the equivalent `swap` call. Emits `Swap` events.\"},\"deregisterTokens(bytes32,address[])\":{\"details\":\"Deregisters `tokens` for the `poolId` Pool. Must be called by the Pool's contract. Only registered tokens (via `registerTokens`) can be deregistered. Additionally, they must have zero total balance. For Pools with the Two Token specialization, `tokens` must have a length of two, that is, both tokens must be deregistered in the same `deregisterTokens` call. A deregistered token can be re-registered later on, possibly with a different Asset Manager. Emits a `TokensDeregistered` event.\"},\"exitPool(bytes32,address,address,(address[],uint256[],bytes,bool))\":{\"details\":\"Called by users to exit a Pool, which transfers tokens from the Pool's balance to `recipient`. This will trigger custom Pool behavior, which will typically ask for something in return from `sender` - often tokenized Pool shares. The amount of tokens that can be withdrawn is limited by the Pool's `cash` balance (see `getPoolTokenInfo`). If the caller is not `sender`, it must be an authorized relayer for them. The `tokens` and `minAmountsOut` arrays must have the same length, and each entry in these indicates the minimum token amount to receive for each token contract. The amounts to send are decided by the Pool and not the Vault: it just enforces these minimums. If exiting a Pool that holds WETH, it is possible to receive ETH directly: the Vault will do the unwrapping. To enable this mechanism, the IAsset sentinel value (the zero address) must be passed in the `assets` array instead of the WETH address. Note that it is not possible to combine ETH and WETH in the same exit. `assets` must have the same length and order as the array returned by `getPoolTokens`. This prevents issues when interacting with Pools that register and deregister tokens frequently. If receiving ETH however, the array must be sorted *before* replacing the WETH address with the ETH sentinel value (the zero address), which means the final `assets` array might not be sorted. Pools with no registered tokens cannot be exited. If `toInternalBalance` is true, the tokens will be deposited to `recipient`'s Internal Balance. Otherwise, an ERC20 transfer will be performed. Note that ETH cannot be deposited to Internal Balance: attempting to do so will trigger a revert. `minAmountsOut` is the minimum amount of tokens the user expects to get out of the Pool, for each token in the `tokens` array. This array must match the Pool's registered tokens. This causes the Vault to call the `IBasePool.onExitPool` hook on the Pool's contract, where Pools implement their own custom logic. This typically requires additional information from the user (such as the expected number of Pool shares to return). This can be encoded in the `userData` argument, which is ignored by the Vault and passed directly to the Pool's contract. Emits a `PoolBalanceChanged` event.\"},\"flashLoan(address,address[],uint256[],bytes)\":{\"details\":\"Performs a 'flash loan', sending tokens to `recipient`, executing the `receiveFlashLoan` hook on it, and then reverting unless the tokens plus a proportional protocol fee have been returned. The `tokens` and `amounts` arrays must have the same length, and each entry in these indicates the loan amount for each token contract. `tokens` must be sorted in ascending order. The 'userData' field is ignored by the Vault, and forwarded as-is to `recipient` as part of the `receiveFlashLoan` call. Emits `FlashLoan` events.\"},\"getAuthorizer()\":{\"details\":\"Returns the Vault's Authorizer.\"},\"getDomainSeparator()\":{\"details\":\"Returns the EIP712 domain separator.\"},\"getInternalBalance(address,address[])\":{\"details\":\"Returns `user`'s Internal Balance for a set of tokens.\"},\"getNextNonce(address)\":{\"details\":\"Returns the next nonce used by an address to sign messages.\"},\"getPausedState()\":{\"details\":\"Returns the current paused state.\"},\"getPool(bytes32)\":{\"details\":\"Returns a Pool's contract address and specialization setting.\"},\"getPoolTokenInfo(bytes32,address)\":{\"details\":\"Returns detailed information for a Pool's registered token. `cash` is the number of tokens the Vault currently holds for the Pool. `managed` is the number of tokens withdrawn and held outside the Vault by the Pool's token Asset Manager. The Pool's total balance for `token` equals the sum of `cash` and `managed`. Internally, `cash` and `managed` are stored using 112 bits. No action can ever cause a Pool's token `cash`, `managed` or `total` balance to be greater than 2^112 - 1. `lastChangeBlock` is the number of the block in which `token`'s total balance was last modified (via either a join, exit, swap, or Asset Manager update). This value is useful to avoid so-called 'sandwich attacks', for example when developing price oracles. A change of zero (e.g. caused by a swap with amount zero) is considered a change for this purpose, and will update `lastChangeBlock`. `assetManager` is the Pool's token Asset Manager.\"},\"getPoolTokens(bytes32)\":{\"details\":\"Returns a Pool's registered tokens, the total balance for each, and the latest block when *any* of the tokens' `balances` changed. The order of the `tokens` array is the same order that will be used in `joinPool`, `exitPool`, as well as in all Pool hooks (where applicable). Calls to `registerTokens` and `deregisterTokens` may change this order. If a Pool only registers tokens once, and these are sorted in ascending order, they will be stored in the same order as passed to `registerTokens`. Total balances include both tokens held by the Vault and those withdrawn by the Pool's Asset Managers. These are the amounts used by joins, exits and swaps. For a detailed breakdown of token balances, use `getPoolTokenInfo` instead.\"},\"getProtocolFeesCollector()\":{\"details\":\"Returns the current protocol fee module.\"},\"hasApprovedRelayer(address,address)\":{\"details\":\"Returns true if `user` has approved `relayer` to act as a relayer for them.\"},\"joinPool(bytes32,address,address,(address[],uint256[],bytes,bool))\":{\"details\":\"Called by users to join a Pool, which transfers tokens from `sender` into the Pool's balance. This will trigger custom Pool behavior, which will typically grant something in return to `recipient` - often tokenized Pool shares. If the caller is not `sender`, it must be an authorized relayer for them. The `assets` and `maxAmountsIn` arrays must have the same length, and each entry indicates the maximum amount to send for each asset. The amounts to send are decided by the Pool and not the Vault: it just enforces these maximums. If joining a Pool that holds WETH, it is possible to send ETH directly: the Vault will do the wrapping. To enable this mechanism, the IAsset sentinel value (the zero address) must be passed in the `assets` array instead of the WETH address. Note that it is not possible to combine ETH and WETH in the same join. Any excess ETH will be sent back to the caller (not the sender, which is important for relayers). `assets` must have the same length and order as the array returned by `getPoolTokens`. This prevents issues when interacting with Pools that register and deregister tokens frequently. If sending ETH however, the array must be sorted *before* replacing the WETH address with the ETH sentinel value (the zero address), which means the final `assets` array might not be sorted. Pools with no registered tokens cannot be joined. If `fromInternalBalance` is true, the caller's Internal Balance will be preferred: ERC20 transfers will only be made for the difference between the requested amount and Internal Balance (if any). Note that ETH cannot be withdrawn from Internal Balance: attempting to do so will trigger a revert. This causes the Vault to call the `IBasePool.onJoinPool` hook on the Pool's contract, where Pools implement their own custom logic. This typically requires additional information from the user (such as the expected number of Pool shares). This can be encoded in the `userData` argument, which is ignored by the Vault and passed directly to the Pool's contract, as is `recipient`. Emits a `PoolBalanceChanged` event.\"},\"managePoolBalance((uint8,bytes32,address,uint256)[])\":{\"details\":\"Performs a set of Pool balance operations, which may be either withdrawals, deposits or updates. Pool Balance management features batching, which means a single contract call can be used to perform multiple operations of different kinds, with different Pools and tokens, at once. For each operation, the caller must be registered as the Asset Manager for `token` in `poolId`.\"},\"manageUserBalance((uint8,address,uint256,address,address)[])\":{\"details\":\"Performs a set of user balance operations, which involve Internal Balance (deposit, withdraw or transfer) and plain ERC20 transfers using the Vault's allowance. This last feature is particularly useful for relayers, as it lets integrators reuse a user's Vault allowance. For each operation, if the caller is not `sender`, it must be an authorized relayer for them.\"},\"queryBatchSwap(uint8,(bytes32,uint256,uint256,uint256,bytes)[],address[],(address,bool,address,bool))\":{\"details\":\"Simulates a call to `batchSwap`, returning an array of Vault asset deltas. Calls to `swap` cannot be simulated directly, but an equivalent `batchSwap` call can and will yield the exact same result. Each element in the array corresponds to the asset at the same index, and indicates the number of tokens (or ETH) the Vault would take from the sender (if positive) or send to the recipient (if negative). The arguments it receives are the same that an equivalent `batchSwap` call would receive. Unlike `batchSwap`, this function performs no checks on the sender or recipient field in the `funds` struct. This makes it suitable to be called by off-chain applications via eth_call without needing to hold tokens, approve them for the Vault, or even know a user's address. Note that this function is not 'view' (due to implementation details): the client code must explicitly execute eth_call instead of eth_sendTransaction.\"},\"registerPool(uint8)\":{\"details\":\"Registers the caller account as a Pool with a given specialization setting. Returns the Pool's ID, which is used in all Pool-related functions. Pools cannot be deregistered, nor can the Pool's specialization be changed. The caller is expected to be a smart contract that implements either `IGeneralPool` or `IMinimalSwapInfoPool`, depending on the chosen specialization setting. This contract is known as the Pool's contract. Note that the same contract may register itself as multiple Pools with unique Pool IDs, or in other words, multiple Pools may share the same contract. Emits a `PoolRegistered` event.\"},\"registerTokens(bytes32,address[],address[])\":{\"details\":\"Registers `tokens` for the `poolId` Pool. Must be called by the Pool's contract. Pools can only interact with tokens they have registered. Users join a Pool by transferring registered tokens, exit by receiving registered tokens, and can only swap registered tokens. Each token can only be registered once. For Pools with the Two Token specialization, `tokens` must have a length of two, that is, both tokens must be registered in the same `registerTokens` call, and they must be sorted in ascending order. The `tokens` and `assetManagers` arrays must have the same length, and each entry in these indicates the Asset Manager for the corresponding token. Asset Managers can manage a Pool's tokens via `managePoolBalance`, depositing and withdrawing them directly, and can even set their balance to arbitrary amounts. They are therefore expected to be highly secured smart contracts with sound design principles, and the decision to register an Asset Manager should not be made lightly. Pools can choose not to assign an Asset Manager to a given token by passing in the zero address. Once an Asset Manager is set, it cannot be changed except by deregistering the associated token and registering again with a different Asset Manager. Emits a `TokensRegistered` event.\"},\"setAuthorizer(address)\":{\"details\":\"Sets a new Authorizer for the Vault. The caller must be allowed by the current Authorizer to do this. Emits an `AuthorizerChanged` event.\"},\"setPaused(bool)\":{\"details\":\"Safety mechanism to pause most Vault operations in the event of an emergency - typically detection of an error in some part of the system. The Vault can only be paused during an initial time period, after which pausing is forever disabled. While the contract is paused, the following features are disabled: - depositing and transferring internal balance - transferring external balance (using the Vault's allowance) - swaps - joining Pools - Asset Manager interactions Internal Balance can still be withdrawn, and Pools exited.\"},\"setRelayerApproval(address,address,bool)\":{\"details\":\"Allows `relayer` to act as a relayer for `sender` if `approved` is true, and disallows it otherwise. Emits a `RelayerApprovalChanged` event.\"},\"swap((bytes32,uint8,address,address,uint256,bytes),(address,bool,address,bool),uint256,uint256)\":{\"details\":\"Performs a swap with a single Pool. If the swap is 'given in' (the number of tokens to send to the Pool is known), it returns the amount of tokens taken from the Pool, which must be greater than or equal to `limit`. If the swap is 'given out' (the number of tokens to take from the Pool is known), it returns the amount of tokens sent to the Pool, which must be less than or equal to `limit`. Internal Balance usage and the recipient are determined by the `funds` struct. Emits a `Swap` event.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/node_modules/@balancer-labs/v2-vault/contracts/Fees.sol\":\"Fees\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@balancer-labs/v2-solidity-utils/contracts/helpers/Authentication.sol\":{\"keccak256\":\"0xea892213ec2967f53e26a0dd833bde01e4d9b6e49dd91e6c59ff00044f83c28d\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://0bc36f6335254bef8a4515e898a7ce5b3f36350e4d7d1dd45a0aa3d1356fdae5\",\"dweb:/ipfs/QmRRatu77hTPReUnRidk3wjgEMyGYVgh9wDrkiMiKmtWtR\"]},\"@balancer-labs/v2-solidity-utils/contracts/helpers/BalancerErrors.sol\":{\"keccak256\":\"0x905bd095ec81b0ae31c85b234d0b6ef2b51c49b6ed8e3ae49f13466825e82d2a\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://caa51272d7427f1d0e3cc715c93e887c01b4d4b2d6177d0bae5c2088508a7da9\",\"dweb:/ipfs/QmVgHKqzKZFKyKaStmkF31ffEvArkzpGj1xLAwrg13ytW9\"]},\"@balancer-labs/v2-solidity-utils/contracts/helpers/IAuthentication.sol\":{\"keccak256\":\"0xfd687ced203d2c6da8189792e1719a5182faf45956129388b231ee76740b99a6\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://581aa664e84e950cd9bb747bf6022867db63c64f67d9556a86b5f04f871c2c5d\",\"dweb:/ipfs/QmRa6EEV3LXJaHzymztiLqyeAzmE4jAgBEEi3mi8R5cfFa\"]},\"@balancer-labs/v2-solidity-utils/contracts/helpers/ISignaturesValidator.sol\":{\"keccak256\":\"0x2fe46b13b7c8bfc6f5c539c0b73d6325813f383f551b71fb6bca8dafd06964e1\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://8e651ae7a3a3652c8bb7aaa42c2cce5924310df62a923d9ec50ddb9c850d2995\",\"dweb:/ipfs/QmTHz9y18L5FD7v9GcvxGWSLJuin2KCUEYoARTgz8njce8\"]},\"@balancer-labs/v2-solidity-utils/contracts/helpers/ITemporarilyPausable.sol\":{\"keccak256\":\"0xb3e5b7c63f80b80ef3f0138eac56c397a439bf6b667fc06d5061aa869828b562\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://978d66fba0721a1a67e29a32eaddab8d1f92ab2fb2d611724ea8d0d3c9b0e95b\",\"dweb:/ipfs/QmfG4foZvx3NDZao7d4VvGzL4Uxtk8VWNJXvgo9fiAJxZv\"]},\"@balancer-labs/v2-solidity-utils/contracts/helpers/InputHelpers.sol\":{\"keccak256\":\"0x1a0eb88d81d02911d68209c4ebc010cae6f6364747a8489b2ddae42bdff663a1\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://6d98ec3a958d35e544e9fd46913f0074d7cd62ab500fa7ffdf851eb55d28a83c\",\"dweb:/ipfs/Qmf6i1N1pFKGEHdXSEztmonZBQCWzpZGCsgLeLsmw8dV5X\"]},\"@balancer-labs/v2-solidity-utils/contracts/helpers/SignaturesValidator.sol\":{\"keccak256\":\"0x1b370c5532ea1439d3c2d66ab993cc4851921d9aa38f0639a81a2d04113077dd\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://5d7fe92b224f90cb49204f04db3e71103eeea885df8562a9e886a73f6acbeea9\",\"dweb:/ipfs/QmXb4NEm8DAjUecZ3qKn9QY2vencdpdEE6ytfmLi4egT3u\"]},\"@balancer-labs/v2-solidity-utils/contracts/helpers/TemporarilyPausable.sol\":{\"keccak256\":\"0xd20f7cbc60072fc73aa137ce644777195de3143bc6ce910c43501647f3ce6c60\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://b3c5a3589b0d85a051977e77e1fe1e9b41c4d005a8a4ac3156995e9fddd9d926\",\"dweb:/ipfs/QmZwwhQQFL9tK1vNBTKB4E5ZGBdwfgGrgv2fjHgBaZTENi\"]},\"@balancer-labs/v2-solidity-utils/contracts/math/FixedPoint.sol\":{\"keccak256\":\"0x38720507bb6c838df83953d1ffa88b97d0e06baefa0e3e387303cb8a090a49f5\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://fd74d7d2f8881dcc5a3aa4ce732f84b2cbb15de117e1fc4735a3d58a4062524a\",\"dweb:/ipfs/QmSYxuM8HhMn3oPxZ66PbukDikGPkHs3FLD7miFbky2EfW\"]},\"@balancer-labs/v2-solidity-utils/contracts/math/LogExpMath.sol\":{\"keccak256\":\"0x66c6a4efc58bcc18d11fdc3236ec53f6044944918e86116f3aa3deee1daac8ef\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c5deeae731108f0d2fed1ae8c6bcb2796b5a93f6c260019306d175bd3baa2988\",\"dweb:/ipfs/QmexvLdJbGMSrmaAVrZDaHVfCaAzQpV2ZybQMnfX4zXsPU\"]},\"@balancer-labs/v2-solidity-utils/contracts/misc/IWETH.sol\":{\"keccak256\":\"0x19a0628bedbe48178a4c90509a40d750d5039677b964ec533a24361a8d97274b\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://c55887c89f152f00e5d65389061de28fada0e73eb5f41ebd16a3b8e65846cb1a\",\"dweb:/ipfs/QmNbVtaA44BGvKnKiCT4bEtjZu1ZD5ZJ6XrgBDh5qVEGcP\"]},\"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/EIP712.sol\":{\"keccak256\":\"0x0cf3ec5d6130aac057e69df14b1ff87baf9c6c2cb13bc545952def004e629ac0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://446419367266d271bf6953e4ae0423356a5cc4717f7b9a5a0532436de4be2d70\",\"dweb:/ipfs/QmPV56wHs1Mqif6et6TYrhZ2QYPNmiVTmXWvQMhqWfKLk9\"]},\"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/IERC20.sol\":{\"keccak256\":\"0xd828a935a72a6d182912abba290e4debb8c684c36fd756088f7acb30e0b2bb76\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1e6ac013b95e9622917c5ad388dc73f0a389a76341597731746e54547aa9de8a\",\"dweb:/ipfs/QmPB8qWcRPZaDsASgQpf5a6i2YrZ4TDV3Ebi25Mn9EAdf4\"]},\"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/ReentrancyGuard.sol\":{\"keccak256\":\"0xfe6da463cd5a6df10b49020a69b0978a4ef65d029e747c515062ec4a3359c464\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://203824853ae4896a6216d53aa537a6941c9992d528c9aa4dd385114dac0f169c\",\"dweb:/ipfs/Qmdb6pN9EVQVHFkxfdMoWUKmRMx7BtVzqcXUqGJh8Xotgy\"]},\"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/SafeERC20.sol\":{\"keccak256\":\"0x16d3e14c841b54a0f59fac0b899c4fa2f7b15d8d24f562a91edaf5aa140d57f5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://75a09ab520f733adcd1830075e2024610e10a5fa7da418393feb6a4563eeae62\",\"dweb:/ipfs/QmRUb62Q8i6wX1xw66TWhNRH6Nv247B6QeC75riBUEqHLy\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/Fees.sol\":{\"keccak256\":\"0xd920f5ea4f93bb43023c380f586920f3091a4f29d2a012ea63df691231e8bdc3\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://43569e0643e1917d667283542d4439fd251239d8391adaa604b5f3b0be2df4d0\",\"dweb:/ipfs/Qmd7zzXNzd2qtUwsmnjQ31BhKbytQiVnD8R59jb9ubP2kE\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/ProtocolFeesCollector.sol\":{\"keccak256\":\"0x1a87182b17969c31769474513819f0c94c45b567b41d87e82a81ba330c3134d7\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://1a7b6b0af578efcdc1bcb2ab945b2977a5d078bd6d4f21a6eacddc664ed12c1f\",\"dweb:/ipfs/QmfJKcS1Doo899FD5R4h1eoMyx5KWahkL1SRpaDGVWqdwj\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/VaultAuthorization.sol\":{\"keccak256\":\"0x6aa476e089693e9997c3fb2edfe75cd7e2cf627e5cdad28482723a9d9a77cbbb\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://b5e4fe9896325b5ab2465f2f04c4fe2545356d5f12a29ae5651211e936c1239b\",\"dweb:/ipfs/Qmai9rYaduJ6QAZjmG1WPP4Te4R3uCSVCBQe2YCj4S7Q9k\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IAsset.sol\":{\"keccak256\":\"0x70ecf1d48c285d78718bd2e159345677038ed8a81c74444bedd6a5c61af9aff6\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://8c7c210e449ea5d284abeaaed82e3bb3c203b57d8b3e5dfb6daedf76eaae31d1\",\"dweb:/ipfs/QmfJWLPhCG6PcHNJMLNDbAM6nd2ZVFCexCXvJ9qQmRaNbn\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IAuthorizer.sol\":{\"keccak256\":\"0x792871e208bba1dad291f8d1cffad86f4afa5e2360816bd9c43481f7297155f5\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://af8ab65258e294c8ba0a5feee91208789f641181d225364b02123d38d9eec7d0\",\"dweb:/ipfs/Qmb5HUXRaSrHJafwK1H8XRjcCTnAZMShTvBNhr1ovA1j2m\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IFlashLoanRecipient.sol\":{\"keccak256\":\"0x5ceb7a9b209c01659b25898622a2415414e12a7200559e57283fd511fe96c92a\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://35a6ee6cb389f2675c1b64f9813862d3503524ee05067ba88172c9298d4f5e3c\",\"dweb:/ipfs/QmZGPUaoKfRigdo2U9U3695j9wX97GRSzgiK8c6zhVjjFY\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IProtocolFeesCollector.sol\":{\"keccak256\":\"0xacad6dfbdf2395aeb8b793b3cb5d9ee2702d8d5f667084ff7bfa248f64700f47\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://b8a27ce7efd29cb653529a2e2c6a828f5bd973b286dc166d12a8f81426bca68a\",\"dweb:/ipfs/QmPFuddzXwjK58qDG4z1n9S9Yff865yCToAStRbdfWMo1D\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IVault.sol\":{\"keccak256\":\"0x8a0904cb11d6571fdc0051b2de6b675d0e1cf8af45c1a5467d047812f1086223\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://e428d19d1bd18504c5c8a797b0a80515072f4d7fc278df73b9fec0ab8efe155d\",\"dweb:/ipfs/QmYeJPPQKAckBVvuhU9XXiZR4aSrVNu3WcfTmSsXJJYey3\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: GPL-3.0-or-later\n// This program is free software: you can redistribute it and/or modify\n// it under the terms of the GNU General Public License as published by\n// the Free Software Foundation, either version 3 of the License, or\n// (at your option) any later version.\n\n// This program is distributed in the hope that it will be useful,\n// but WITHOUT ANY WARRANTY; without even the implied warranty of\n// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n// GNU General Public License for more details.\n\n// You should have received a copy of the GNU General Public License\n// along with this program.  If not, see <http://www.gnu.org/licenses/>.\n\npragma solidity ^0.7.0;\npragma experimental ABIEncoderV2;\n\nimport \"@balancer-labs/v2-solidity-utils/contracts/math/FixedPoint.sol\";\nimport \"@balancer-labs/v2-solidity-utils/contracts/helpers/BalancerErrors.sol\";\nimport \"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/IERC20.sol\";\nimport \"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/ReentrancyGuard.sol\";\nimport \"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/SafeERC20.sol\";\n\nimport \"./ProtocolFeesCollector.sol\";\nimport \"./VaultAuthorization.sol\";\nimport \"./interfaces/IVault.sol\";\n\n/**\n * @dev To reduce the bytecode size of the Vault, most of the protocol fee logic is not here, but in the\n * ProtocolFeesCollector contract.\n */\nabstract contract Fees is IVault {\n    using SafeERC20 for IERC20;\n\n    ProtocolFeesCollector private immutable _protocolFeesCollector;\n\n    constructor() {\n        _protocolFeesCollector = new ProtocolFeesCollector(IVault(this));\n    }\n\n    function getProtocolFeesCollector() public view override returns (IProtocolFeesCollector) {\n        return _protocolFeesCollector;\n    }\n\n    /**\n     * @dev Returns the protocol swap fee percentage.\n     */\n    function _getProtocolSwapFeePercentage() internal view returns (uint256) {\n        return getProtocolFeesCollector().getSwapFeePercentage();\n    }\n\n    /**\n     * @dev Returns the protocol fee amount to charge for a flash loan of `amount`.\n     */\n    function _calculateFlashLoanFeeAmount(uint256 amount) internal view returns (uint256) {\n        // Fixed point multiplication introduces error: we round up, which means in certain scenarios the charged\n        // percentage can be slightly higher than intended.\n        uint256 percentage = getProtocolFeesCollector().getFlashLoanFeePercentage();\n        return FixedPoint.mulUp(amount, percentage);\n    }\n\n    function _payFeeAmount(IERC20 token, uint256 amount) internal {\n        if (amount > 0) {\n            token.safeTransfer(address(getProtocolFeesCollector()), amount);\n        }\n    }\n}\n",
+  "sourcePath": "/home/tatsu/Station/CrossAssetPaymentPool/node_modules/@balancer-labs/v2-vault/contracts/Fees.sol",
+  "ast": {
+    "absolutePath": "project:/node_modules/@balancer-labs/v2-vault/contracts/Fees.sol",
+    "exportedSymbols": {
+      "Fees": [
+        13154
+      ]
+    },
+    "id": 13155,
+    "license": "GPL-3.0-or-later",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 13056,
+        "literals": [
+          "solidity",
+          "^",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "688:23:59"
+      },
+      {
+        "id": 13057,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "712:33:59"
+      },
+      {
+        "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/math/FixedPoint.sol",
+        "file": "@balancer-labs/v2-solidity-utils/contracts/math/FixedPoint.sol",
+        "id": 13058,
+        "nodeType": "ImportDirective",
+        "scope": 13155,
+        "sourceUnit": 3905,
+        "src": "747:72:59",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/helpers/BalancerErrors.sol",
+        "file": "@balancer-labs/v2-solidity-utils/contracts/helpers/BalancerErrors.sol",
+        "id": 13059,
+        "nodeType": "ImportDirective",
+        "scope": 13155,
+        "sourceUnit": 2972,
+        "src": "820:79:59",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/IERC20.sol",
+        "file": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/IERC20.sol",
+        "id": 13060,
+        "nodeType": "ImportDirective",
+        "scope": 13155,
+        "sourceUnit": 7120,
+        "src": "900:76:59",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/ReentrancyGuard.sol",
+        "file": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/ReentrancyGuard.sol",
+        "id": 13061,
+        "nodeType": "ImportDirective",
+        "scope": 13155,
+        "sourceUnit": 7212,
+        "src": "977:85:59",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/SafeERC20.sol",
+        "file": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/SafeERC20.sol",
+        "id": 13062,
+        "nodeType": "ImportDirective",
+        "scope": 13155,
+        "sourceUnit": 7336,
+        "src": "1063:79:59",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "project:/node_modules/@balancer-labs/v2-vault/contracts/ProtocolFeesCollector.sol",
+        "file": "./ProtocolFeesCollector.sol",
+        "id": 13063,
+        "nodeType": "ImportDirective",
+        "scope": 13155,
+        "sourceUnit": 15082,
+        "src": "1144:37:59",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "project:/node_modules/@balancer-labs/v2-vault/contracts/VaultAuthorization.sol",
+        "file": "./VaultAuthorization.sol",
+        "id": 13064,
+        "nodeType": "ImportDirective",
+        "scope": 13155,
+        "sourceUnit": 17222,
+        "src": "1182:34:59",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IVault.sol",
+        "file": "./interfaces/IVault.sol",
+        "id": 13065,
+        "nodeType": "ImportDirective",
+        "scope": 13155,
+        "sourceUnit": 20135,
+        "src": "1217:33:59",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 13067,
+              "name": "IVault",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 20134,
+              "src": "1426:6:59",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IVault_$20134",
+                "typeString": "contract IVault"
+              }
+            },
+            "id": 13068,
+            "nodeType": "InheritanceSpecifier",
+            "src": "1426:6:59"
+          }
+        ],
+        "contractDependencies": [
+          3000,
+          3019,
+          15081,
+          20134
+        ],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 13066,
+          "nodeType": "StructuredDocumentation",
+          "src": "1252:147:59",
+          "text": " @dev To reduce the bytecode size of the Vault, most of the protocol fee logic is not here, but in the\n ProtocolFeesCollector contract."
+        },
+        "fullyImplemented": false,
+        "id": 13154,
+        "linearizedBaseContracts": [
+          13154,
+          20134,
+          3019,
+          3000
+        ],
+        "name": "Fees",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 13071,
+            "libraryName": {
+              "id": 13069,
+              "name": "SafeERC20",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 7335,
+              "src": "1445:9:59",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SafeERC20_$7335",
+                "typeString": "library SafeERC20"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "1439:27:59",
+            "typeName": {
+              "id": 13070,
+              "name": "IERC20",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 7119,
+              "src": "1459:6:59",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IERC20_$7119",
+                "typeString": "contract IERC20"
+              }
+            }
+          },
+          {
+            "constant": false,
+            "id": 13073,
+            "mutability": "immutable",
+            "name": "_protocolFeesCollector",
+            "nodeType": "VariableDeclaration",
+            "scope": 13154,
+            "src": "1472:62:59",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_ProtocolFeesCollector_$15081",
+              "typeString": "contract ProtocolFeesCollector"
+            },
+            "typeName": {
+              "id": 13072,
+              "name": "ProtocolFeesCollector",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 15081,
+              "src": "1472:21:59",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ProtocolFeesCollector_$15081",
+                "typeString": "contract ProtocolFeesCollector"
+              }
+            },
+            "visibility": "private"
+          },
+          {
+            "body": {
+              "id": 13085,
+              "nodeType": "Block",
+              "src": "1555:81:59",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 13083,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 13076,
+                      "name": "_protocolFeesCollector",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 13073,
+                      "src": "1565:22:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ProtocolFeesCollector_$15081",
+                        "typeString": "contract ProtocolFeesCollector"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "arguments": [
+                            {
+                              "id": 13080,
+                              "name": "this",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": -28,
+                              "src": "1623:4:59",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_Fees_$13154",
+                                "typeString": "contract Fees"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_contract$_Fees_$13154",
+                                "typeString": "contract Fees"
+                              }
+                            ],
+                            "id": 13079,
+                            "name": "IVault",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20134,
+                            "src": "1616:6:59",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_contract$_IVault_$20134_$",
+                              "typeString": "type(contract IVault)"
+                            }
+                          },
+                          "id": 13081,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1616:12:59",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_IVault_$20134",
+                            "typeString": "contract IVault"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_contract$_IVault_$20134",
+                            "typeString": "contract IVault"
+                          }
+                        ],
+                        "id": 13078,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "NewExpression",
+                        "src": "1590:25:59",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_creation_nonpayable$_t_contract$_IVault_$20134_$returns$_t_contract$_ProtocolFeesCollector_$15081_$",
+                          "typeString": "function (contract IVault) returns (contract ProtocolFeesCollector)"
+                        },
+                        "typeName": {
+                          "id": 13077,
+                          "name": "ProtocolFeesCollector",
+                          "nodeType": "UserDefinedTypeName",
+                          "referencedDeclaration": 15081,
+                          "src": "1594:21:59",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_ProtocolFeesCollector_$15081",
+                            "typeString": "contract ProtocolFeesCollector"
+                          }
+                        }
+                      },
+                      "id": 13082,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1590:39:59",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ProtocolFeesCollector_$15081",
+                        "typeString": "contract ProtocolFeesCollector"
+                      }
+                    },
+                    "src": "1565:64:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ProtocolFeesCollector_$15081",
+                      "typeString": "contract ProtocolFeesCollector"
+                    }
+                  },
+                  "id": 13084,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1565:64:59"
+                }
+              ]
+            },
+            "id": 13086,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13074,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1552:2:59"
+            },
+            "returnParameters": {
+              "id": 13075,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1555:0:59"
+            },
+            "scope": 13154,
+            "src": "1541:95:59",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "baseFunctions": [
+              20121
+            ],
+            "body": {
+              "id": 13094,
+              "nodeType": "Block",
+              "src": "1732:46:59",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 13092,
+                    "name": "_protocolFeesCollector",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 13073,
+                    "src": "1749:22:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ProtocolFeesCollector_$15081",
+                      "typeString": "contract ProtocolFeesCollector"
+                    }
+                  },
+                  "functionReturnParameters": 13091,
+                  "id": 13093,
+                  "nodeType": "Return",
+                  "src": "1742:29:59"
+                }
+              ]
+            },
+            "functionSelector": "d2946c2b",
+            "id": 13095,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getProtocolFeesCollector",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 13088,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1690:8:59"
+            },
+            "parameters": {
+              "id": 13087,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1675:2:59"
+            },
+            "returnParameters": {
+              "id": 13091,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13090,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13095,
+                  "src": "1708:22:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IProtocolFeesCollector_$19672",
+                    "typeString": "contract IProtocolFeesCollector"
+                  },
+                  "typeName": {
+                    "id": 13089,
+                    "name": "IProtocolFeesCollector",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 19672,
+                    "src": "1708:22:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IProtocolFeesCollector_$19672",
+                      "typeString": "contract IProtocolFeesCollector"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1707:24:59"
+            },
+            "scope": 13154,
+            "src": "1642:136:59",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 13106,
+              "nodeType": "Block",
+              "src": "1927:73:59",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "id": 13101,
+                          "name": "getProtocolFeesCollector",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 13095,
+                          "src": "1944:24:59",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$__$returns$_t_contract$_IProtocolFeesCollector_$19672_$",
+                            "typeString": "function () view returns (contract IProtocolFeesCollector)"
+                          }
+                        },
+                        "id": 13102,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1944:26:59",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IProtocolFeesCollector_$19672",
+                          "typeString": "contract IProtocolFeesCollector"
+                        }
+                      },
+                      "id": 13103,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "getSwapFeePercentage",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 19647,
+                      "src": "1944:47:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$__$returns$_t_uint256_$",
+                        "typeString": "function () view external returns (uint256)"
+                      }
+                    },
+                    "id": 13104,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1944:49:59",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 13100,
+                  "id": 13105,
+                  "nodeType": "Return",
+                  "src": "1937:56:59"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 13096,
+              "nodeType": "StructuredDocumentation",
+              "src": "1784:65:59",
+              "text": " @dev Returns the protocol swap fee percentage."
+            },
+            "id": 13107,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_getProtocolSwapFeePercentage",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13097,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1892:2:59"
+            },
+            "returnParameters": {
+              "id": 13100,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13099,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13107,
+                  "src": "1918:7:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13098,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1918:7:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1917:9:59"
+            },
+            "scope": 13154,
+            "src": "1854:146:59",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 13128,
+              "nodeType": "Block",
+              "src": "2192:319:59",
+              "statements": [
+                {
+                  "assignments": [
+                    13116
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 13116,
+                      "mutability": "mutable",
+                      "name": "percentage",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 13128,
+                      "src": "2376:18:59",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 13115,
+                        "name": "uint256",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "2376:7:59",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 13121,
+                  "initialValue": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "id": 13117,
+                          "name": "getProtocolFeesCollector",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 13095,
+                          "src": "2397:24:59",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$__$returns$_t_contract$_IProtocolFeesCollector_$19672_$",
+                            "typeString": "function () view returns (contract IProtocolFeesCollector)"
+                          }
+                        },
+                        "id": 13118,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2397:26:59",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IProtocolFeesCollector_$19672",
+                          "typeString": "contract IProtocolFeesCollector"
+                        }
+                      },
+                      "id": 13119,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "getFlashLoanFeePercentage",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 19652,
+                      "src": "2397:52:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$__$returns$_t_uint256_$",
+                        "typeString": "function () view external returns (uint256)"
+                      }
+                    },
+                    "id": 13120,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2397:54:59",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2376:75:59"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 13124,
+                        "name": "amount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 13110,
+                        "src": "2485:6:59",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "id": 13125,
+                        "name": "percentage",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 13116,
+                        "src": "2493:10:59",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "id": 13122,
+                        "name": "FixedPoint",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3904,
+                        "src": "2468:10:59",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_FixedPoint_$3904_$",
+                          "typeString": "type(library FixedPoint)"
+                        }
+                      },
+                      "id": 13123,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "mulUp",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3709,
+                      "src": "2468:16:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$",
+                        "typeString": "function (uint256,uint256) pure returns (uint256)"
+                      }
+                    },
+                    "id": 13126,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2468:36:59",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 13114,
+                  "id": 13127,
+                  "nodeType": "Return",
+                  "src": "2461:43:59"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 13108,
+              "nodeType": "StructuredDocumentation",
+              "src": "2006:95:59",
+              "text": " @dev Returns the protocol fee amount to charge for a flash loan of `amount`."
+            },
+            "id": 13129,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_calculateFlashLoanFeeAmount",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13111,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13110,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13129,
+                  "src": "2144:14:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13109,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2144:7:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2143:16:59"
+            },
+            "returnParameters": {
+              "id": 13114,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13113,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13129,
+                  "src": "2183:7:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13112,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2183:7:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2182:9:59"
+            },
+            "scope": 13154,
+            "src": "2106:405:59",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 13152,
+              "nodeType": "Block",
+              "src": "2579:120:59",
+              "statements": [
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 13138,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 13136,
+                      "name": "amount",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 13133,
+                      "src": "2593:6:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": ">",
+                    "rightExpression": {
+                      "hexValue": "30",
+                      "id": 13137,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "2602:1:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    },
+                    "src": "2593:10:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 13151,
+                  "nodeType": "IfStatement",
+                  "src": "2589:104:59",
+                  "trueBody": {
+                    "id": 13150,
+                    "nodeType": "Block",
+                    "src": "2605:88:59",
+                    "statements": [
+                      {
+                        "expression": {
+                          "arguments": [
+                            {
+                              "arguments": [
+                                {
+                                  "arguments": [],
+                                  "expression": {
+                                    "argumentTypes": [],
+                                    "id": 13144,
+                                    "name": "getProtocolFeesCollector",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 13095,
+                                    "src": "2646:24:59",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_function_internal_view$__$returns$_t_contract$_IProtocolFeesCollector_$19672_$",
+                                      "typeString": "function () view returns (contract IProtocolFeesCollector)"
+                                    }
+                                  },
+                                  "id": 13145,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "kind": "functionCall",
+                                  "lValueRequested": false,
+                                  "names": [],
+                                  "nodeType": "FunctionCall",
+                                  "src": "2646:26:59",
+                                  "tryCall": false,
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_contract$_IProtocolFeesCollector_$19672",
+                                    "typeString": "contract IProtocolFeesCollector"
+                                  }
+                                }
+                              ],
+                              "expression": {
+                                "argumentTypes": [
+                                  {
+                                    "typeIdentifier": "t_contract$_IProtocolFeesCollector_$19672",
+                                    "typeString": "contract IProtocolFeesCollector"
+                                  }
+                                ],
+                                "id": 13143,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": true,
+                                "lValueRequested": false,
+                                "nodeType": "ElementaryTypeNameExpression",
+                                "src": "2638:7:59",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_type$_t_address_$",
+                                  "typeString": "type(address)"
+                                },
+                                "typeName": {
+                                  "id": 13142,
+                                  "name": "address",
+                                  "nodeType": "ElementaryTypeName",
+                                  "src": "2638:7:59",
+                                  "typeDescriptions": {}
+                                }
+                              },
+                              "id": 13146,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "kind": "typeConversion",
+                              "lValueRequested": false,
+                              "names": [],
+                              "nodeType": "FunctionCall",
+                              "src": "2638:35:59",
+                              "tryCall": false,
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            },
+                            {
+                              "id": 13147,
+                              "name": "amount",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 13133,
+                              "src": "2675:6:59",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            ],
+                            "expression": {
+                              "id": 13139,
+                              "name": "token",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 13131,
+                              "src": "2619:5:59",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_IERC20_$7119",
+                                "typeString": "contract IERC20"
+                              }
+                            },
+                            "id": 13141,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "safeTransfer",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 7270,
+                            "src": "2619:18:59",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_nonpayable$_t_contract$_IERC20_$7119_$_t_address_$_t_uint256_$returns$__$bound_to$_t_contract$_IERC20_$7119_$",
+                              "typeString": "function (contract IERC20,address,uint256)"
+                            }
+                          },
+                          "id": 13148,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2619:63:59",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 13149,
+                        "nodeType": "ExpressionStatement",
+                        "src": "2619:63:59"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "id": 13153,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_payFeeAmount",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13134,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13131,
+                  "mutability": "mutable",
+                  "name": "token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13153,
+                  "src": "2540:12:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$7119",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "id": 13130,
+                    "name": "IERC20",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 7119,
+                    "src": "2540:6:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$7119",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13133,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13153,
+                  "src": "2554:14:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13132,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2554:7:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2539:30:59"
+            },
+            "returnParameters": {
+              "id": 13135,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2579:0:59"
+            },
+            "scope": 13154,
+            "src": "2517:182:59",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 13155,
+        "src": "1400:1301:59"
+      }
+    ],
+    "src": "688:2014:59"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/node_modules/@balancer-labs/v2-vault/contracts/Fees.sol",
+      "exportedSymbols": {
+        "Fees": [
+          13154
+        ]
+      },
+      "license": "GPL-3.0-or-later"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.7",
+            ".0"
+          ]
+        },
+        "id": 13056,
+        "name": "PragmaDirective",
+        "src": "688:23:59"
+      },
+      {
+        "attributes": {
+          "literals": [
+            "experimental",
+            "ABIEncoderV2"
+          ]
+        },
+        "id": 13057,
+        "name": "PragmaDirective",
+        "src": "712:33:59"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 3905,
+          "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/math/FixedPoint.sol",
+          "file": "@balancer-labs/v2-solidity-utils/contracts/math/FixedPoint.sol",
+          "scope": 13155,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 13058,
+        "name": "ImportDirective",
+        "src": "747:72:59"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 2972,
+          "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/helpers/BalancerErrors.sol",
+          "file": "@balancer-labs/v2-solidity-utils/contracts/helpers/BalancerErrors.sol",
+          "scope": 13155,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 13059,
+        "name": "ImportDirective",
+        "src": "820:79:59"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 7120,
+          "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/IERC20.sol",
+          "file": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/IERC20.sol",
+          "scope": 13155,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 13060,
+        "name": "ImportDirective",
+        "src": "900:76:59"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 7212,
+          "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/ReentrancyGuard.sol",
+          "file": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/ReentrancyGuard.sol",
+          "scope": 13155,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 13061,
+        "name": "ImportDirective",
+        "src": "977:85:59"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 7336,
+          "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/SafeERC20.sol",
+          "file": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/SafeERC20.sol",
+          "scope": 13155,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 13062,
+        "name": "ImportDirective",
+        "src": "1063:79:59"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 15082,
+          "absolutePath": "project:/node_modules/@balancer-labs/v2-vault/contracts/ProtocolFeesCollector.sol",
+          "file": "./ProtocolFeesCollector.sol",
+          "scope": 13155,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 13063,
+        "name": "ImportDirective",
+        "src": "1144:37:59"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 17222,
+          "absolutePath": "project:/node_modules/@balancer-labs/v2-vault/contracts/VaultAuthorization.sol",
+          "file": "./VaultAuthorization.sol",
+          "scope": 13155,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 13064,
+        "name": "ImportDirective",
+        "src": "1182:34:59"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 20135,
+          "absolutePath": "project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IVault.sol",
+          "file": "./interfaces/IVault.sol",
+          "scope": 13155,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 13065,
+        "name": "ImportDirective",
+        "src": "1217:33:59"
+      },
+      {
+        "attributes": {
+          "abstract": true,
+          "contractDependencies": [
+            3000,
+            3019,
+            15081,
+            20134
+          ],
+          "contractKind": "contract",
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            13154,
+            20134,
+            3019,
+            3000
+          ],
+          "name": "Fees",
+          "scope": 13155
+        },
+        "children": [
+          {
+            "attributes": {
+              "text": " @dev To reduce the bytecode size of the Vault, most of the protocol fee logic is not here, but in the\n ProtocolFeesCollector contract."
+            },
+            "id": 13066,
+            "name": "StructuredDocumentation",
+            "src": "1252:147:59"
+          },
+          {
+            "attributes": {},
+            "children": [
+              {
+                "attributes": {
+                  "name": "IVault",
+                  "referencedDeclaration": 20134,
+                  "type": "contract IVault"
+                },
+                "id": 13067,
+                "name": "UserDefinedTypeName",
+                "src": "1426:6:59"
+              }
+            ],
+            "id": 13068,
+            "name": "InheritanceSpecifier",
+            "src": "1426:6:59"
+          },
+          {
+            "children": [
+              {
+                "attributes": {
+                  "name": "SafeERC20",
+                  "referencedDeclaration": 7335,
+                  "type": "library SafeERC20"
+                },
+                "id": 13069,
+                "name": "UserDefinedTypeName",
+                "src": "1445:9:59"
+              },
+              {
+                "attributes": {
+                  "name": "IERC20",
+                  "referencedDeclaration": 7119,
+                  "type": "contract IERC20"
+                },
+                "id": 13070,
+                "name": "UserDefinedTypeName",
+                "src": "1459:6:59"
+              }
+            ],
+            "id": 13071,
+            "name": "UsingForDirective",
+            "src": "1439:27:59"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "mutability": "immutable",
+              "name": "_protocolFeesCollector",
+              "scope": 13154,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "contract ProtocolFeesCollector",
+              "visibility": "private"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "ProtocolFeesCollector",
+                  "referencedDeclaration": 15081,
+                  "type": "contract ProtocolFeesCollector"
+                },
+                "id": 13072,
+                "name": "UserDefinedTypeName",
+                "src": "1472:21:59"
+              }
+            ],
+            "id": 13073,
+            "name": "VariableDeclaration",
+            "src": "1472:62:59"
+          },
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": true,
+              "kind": "constructor",
+              "modifiers": [
+                null
+              ],
+              "name": "",
+              "scope": 13154,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 13074,
+                "name": "ParameterList",
+                "src": "1552:2:59"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 13075,
+                "name": "ParameterList",
+                "src": "1555:0:59"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "contract ProtocolFeesCollector"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 13073,
+                              "type": "contract ProtocolFeesCollector",
+                              "value": "_protocolFeesCollector"
+                            },
+                            "id": 13076,
+                            "name": "Identifier",
+                            "src": "1565:22:59"
+                          },
+                          {
+                            "attributes": {
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "tryCall": false,
+                              "type": "contract ProtocolFeesCollector",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_contract$_IVault_$20134",
+                                      "typeString": "contract IVault"
+                                    }
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "function (contract IVault) returns (contract ProtocolFeesCollector)"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "name": "ProtocolFeesCollector",
+                                      "referencedDeclaration": 15081,
+                                      "type": "contract ProtocolFeesCollector"
+                                    },
+                                    "id": 13077,
+                                    "name": "UserDefinedTypeName",
+                                    "src": "1594:21:59"
+                                  }
+                                ],
+                                "id": 13078,
+                                "name": "NewExpression",
+                                "src": "1590:25:59"
+                              },
+                              {
+                                "attributes": {
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "tryCall": false,
+                                  "type": "contract IVault",
+                                  "type_conversion": true
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        {
+                                          "typeIdentifier": "t_contract$_Fees_$13154",
+                                          "typeString": "contract Fees"
+                                        }
+                                      ],
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 20134,
+                                      "type": "type(contract IVault)",
+                                      "value": "IVault"
+                                    },
+                                    "id": 13079,
+                                    "name": "Identifier",
+                                    "src": "1616:6:59"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": -28,
+                                      "type": "contract Fees",
+                                      "value": "this"
+                                    },
+                                    "id": 13080,
+                                    "name": "Identifier",
+                                    "src": "1623:4:59"
+                                  }
+                                ],
+                                "id": 13081,
+                                "name": "FunctionCall",
+                                "src": "1616:12:59"
+                              }
+                            ],
+                            "id": 13082,
+                            "name": "FunctionCall",
+                            "src": "1590:39:59"
+                          }
+                        ],
+                        "id": 13083,
+                        "name": "Assignment",
+                        "src": "1565:64:59"
+                      }
+                    ],
+                    "id": 13084,
+                    "name": "ExpressionStatement",
+                    "src": "1565:64:59"
+                  }
+                ],
+                "id": 13085,
+                "name": "Block",
+                "src": "1555:81:59"
+              }
+            ],
+            "id": 13086,
+            "name": "FunctionDefinition",
+            "src": "1541:95:59"
+          },
+          {
+            "attributes": {
+              "baseFunctions": [
+                20121
+              ],
+              "functionSelector": "d2946c2b",
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "getProtocolFeesCollector",
+              "scope": 13154,
+              "stateMutability": "view",
+              "virtual": false,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "overrides": [
+                    null
+                  ]
+                },
+                "id": 13088,
+                "name": "OverrideSpecifier",
+                "src": "1690:8:59"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 13087,
+                "name": "ParameterList",
+                "src": "1675:2:59"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "scope": 13095,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "contract IProtocolFeesCollector",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "IProtocolFeesCollector",
+                          "referencedDeclaration": 19672,
+                          "type": "contract IProtocolFeesCollector"
+                        },
+                        "id": 13089,
+                        "name": "UserDefinedTypeName",
+                        "src": "1708:22:59"
+                      }
+                    ],
+                    "id": 13090,
+                    "name": "VariableDeclaration",
+                    "src": "1708:22:59"
+                  }
+                ],
+                "id": 13091,
+                "name": "ParameterList",
+                "src": "1707:24:59"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 13091
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "overloadedDeclarations": [
+                            null
+                          ],
+                          "referencedDeclaration": 13073,
+                          "type": "contract ProtocolFeesCollector",
+                          "value": "_protocolFeesCollector"
+                        },
+                        "id": 13092,
+                        "name": "Identifier",
+                        "src": "1749:22:59"
+                      }
+                    ],
+                    "id": 13093,
+                    "name": "Return",
+                    "src": "1742:29:59"
+                  }
+                ],
+                "id": 13094,
+                "name": "Block",
+                "src": "1732:46:59"
+              }
+            ],
+            "id": 13095,
+            "name": "FunctionDefinition",
+            "src": "1642:136:59"
+          },
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "_getProtocolSwapFeePercentage",
+              "scope": 13154,
+              "stateMutability": "view",
+              "virtual": false,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "text": " @dev Returns the protocol swap fee percentage."
+                },
+                "id": 13096,
+                "name": "StructuredDocumentation",
+                "src": "1784:65:59"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 13097,
+                "name": "ParameterList",
+                "src": "1892:2:59"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "scope": 13107,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 13098,
+                        "name": "ElementaryTypeName",
+                        "src": "1918:7:59"
+                      }
+                    ],
+                    "id": 13099,
+                    "name": "VariableDeclaration",
+                    "src": "1918:7:59"
+                  }
+                ],
+                "id": 13100,
+                "name": "ParameterList",
+                "src": "1917:9:59"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 13100
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "arguments": [
+                            null
+                          ],
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "uint256",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                null
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "getSwapFeePercentage",
+                              "referencedDeclaration": 19647,
+                              "type": "function () view external returns (uint256)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "arguments": [
+                                    null
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "tryCall": false,
+                                  "type": "contract IProtocolFeesCollector",
+                                  "type_conversion": false
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        null
+                                      ],
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 13095,
+                                      "type": "function () view returns (contract IProtocolFeesCollector)",
+                                      "value": "getProtocolFeesCollector"
+                                    },
+                                    "id": 13101,
+                                    "name": "Identifier",
+                                    "src": "1944:24:59"
+                                  }
+                                ],
+                                "id": 13102,
+                                "name": "FunctionCall",
+                                "src": "1944:26:59"
+                              }
+                            ],
+                            "id": 13103,
+                            "name": "MemberAccess",
+                            "src": "1944:47:59"
+                          }
+                        ],
+                        "id": 13104,
+                        "name": "FunctionCall",
+                        "src": "1944:49:59"
+                      }
+                    ],
+                    "id": 13105,
+                    "name": "Return",
+                    "src": "1937:56:59"
+                  }
+                ],
+                "id": 13106,
+                "name": "Block",
+                "src": "1927:73:59"
+              }
+            ],
+            "id": 13107,
+            "name": "FunctionDefinition",
+            "src": "1854:146:59"
+          },
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "_calculateFlashLoanFeeAmount",
+              "scope": 13154,
+              "stateMutability": "view",
+              "virtual": false,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "text": " @dev Returns the protocol fee amount to charge for a flash loan of `amount`."
+                },
+                "id": 13108,
+                "name": "StructuredDocumentation",
+                "src": "2006:95:59"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "amount",
+                      "scope": 13129,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 13109,
+                        "name": "ElementaryTypeName",
+                        "src": "2144:7:59"
+                      }
+                    ],
+                    "id": 13110,
+                    "name": "VariableDeclaration",
+                    "src": "2144:14:59"
+                  }
+                ],
+                "id": 13111,
+                "name": "ParameterList",
+                "src": "2143:16:59"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "scope": 13129,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 13112,
+                        "name": "ElementaryTypeName",
+                        "src": "2183:7:59"
+                      }
+                    ],
+                    "id": 13113,
+                    "name": "VariableDeclaration",
+                    "src": "2183:7:59"
+                  }
+                ],
+                "id": 13114,
+                "name": "ParameterList",
+                "src": "2182:9:59"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "assignments": [
+                        13116
+                      ]
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "constant": false,
+                          "mutability": "mutable",
+                          "name": "percentage",
+                          "scope": 13128,
+                          "stateVariable": false,
+                          "storageLocation": "default",
+                          "type": "uint256",
+                          "visibility": "internal"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "name": "uint256",
+                              "type": "uint256"
+                            },
+                            "id": 13115,
+                            "name": "ElementaryTypeName",
+                            "src": "2376:7:59"
+                          }
+                        ],
+                        "id": 13116,
+                        "name": "VariableDeclaration",
+                        "src": "2376:18:59"
+                      },
+                      {
+                        "attributes": {
+                          "arguments": [
+                            null
+                          ],
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "uint256",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                null
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "getFlashLoanFeePercentage",
+                              "referencedDeclaration": 19652,
+                              "type": "function () view external returns (uint256)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "arguments": [
+                                    null
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "tryCall": false,
+                                  "type": "contract IProtocolFeesCollector",
+                                  "type_conversion": false
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        null
+                                      ],
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 13095,
+                                      "type": "function () view returns (contract IProtocolFeesCollector)",
+                                      "value": "getProtocolFeesCollector"
+                                    },
+                                    "id": 13117,
+                                    "name": "Identifier",
+                                    "src": "2397:24:59"
+                                  }
+                                ],
+                                "id": 13118,
+                                "name": "FunctionCall",
+                                "src": "2397:26:59"
+                              }
+                            ],
+                            "id": 13119,
+                            "name": "MemberAccess",
+                            "src": "2397:52:59"
+                          }
+                        ],
+                        "id": 13120,
+                        "name": "FunctionCall",
+                        "src": "2397:54:59"
+                      }
+                    ],
+                    "id": 13121,
+                    "name": "VariableDeclarationStatement",
+                    "src": "2376:75:59"
+                  },
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 13114
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "uint256",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                },
+                                {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "mulUp",
+                              "referencedDeclaration": 3709,
+                              "type": "function (uint256,uint256) pure returns (uint256)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 3904,
+                                  "type": "type(library FixedPoint)",
+                                  "value": "FixedPoint"
+                                },
+                                "id": 13122,
+                                "name": "Identifier",
+                                "src": "2468:10:59"
+                              }
+                            ],
+                            "id": 13123,
+                            "name": "MemberAccess",
+                            "src": "2468:16:59"
+                          },
+                          {
+                            "attributes": {
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 13110,
+                              "type": "uint256",
+                              "value": "amount"
+                            },
+                            "id": 13124,
+                            "name": "Identifier",
+                            "src": "2485:6:59"
+                          },
+                          {
+                            "attributes": {
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 13116,
+                              "type": "uint256",
+                              "value": "percentage"
+                            },
+                            "id": 13125,
+                            "name": "Identifier",
+                            "src": "2493:10:59"
+                          }
+                        ],
+                        "id": 13126,
+                        "name": "FunctionCall",
+                        "src": "2468:36:59"
+                      }
+                    ],
+                    "id": 13127,
+                    "name": "Return",
+                    "src": "2461:43:59"
+                  }
+                ],
+                "id": 13128,
+                "name": "Block",
+                "src": "2192:319:59"
+              }
+            ],
+            "id": 13129,
+            "name": "FunctionDefinition",
+            "src": "2106:405:59"
+          },
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "_payFeeAmount",
+              "scope": 13154,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "token",
+                      "scope": 13153,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "contract IERC20",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "IERC20",
+                          "referencedDeclaration": 7119,
+                          "type": "contract IERC20"
+                        },
+                        "id": 13130,
+                        "name": "UserDefinedTypeName",
+                        "src": "2540:6:59"
+                      }
+                    ],
+                    "id": 13131,
+                    "name": "VariableDeclaration",
+                    "src": "2540:12:59"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "amount",
+                      "scope": 13153,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 13132,
+                        "name": "ElementaryTypeName",
+                        "src": "2554:7:59"
+                      }
+                    ],
+                    "id": 13133,
+                    "name": "VariableDeclaration",
+                    "src": "2554:14:59"
+                  }
+                ],
+                "id": 13134,
+                "name": "ParameterList",
+                "src": "2539:30:59"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 13135,
+                "name": "ParameterList",
+                "src": "2579:0:59"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {},
+                    "children": [
+                      {
+                        "attributes": {
+                          "commonType": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": ">",
+                          "type": "bool"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 13133,
+                              "type": "uint256",
+                              "value": "amount"
+                            },
+                            "id": 13136,
+                            "name": "Identifier",
+                            "src": "2593:6:59"
+                          },
+                          {
+                            "attributes": {
+                              "hexvalue": "30",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "token": "number",
+                              "type": "int_const 0",
+                              "value": "0"
+                            },
+                            "id": 13137,
+                            "name": "Literal",
+                            "src": "2602:1:59"
+                          }
+                        ],
+                        "id": 13138,
+                        "name": "BinaryOperation",
+                        "src": "2593:10:59"
+                      },
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "attributes": {
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "tryCall": false,
+                                  "type": "tuple()",
+                                  "type_conversion": false
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        {
+                                          "typeIdentifier": "t_address",
+                                          "typeString": "address"
+                                        },
+                                        {
+                                          "typeIdentifier": "t_uint256",
+                                          "typeString": "uint256"
+                                        }
+                                      ],
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "member_name": "safeTransfer",
+                                      "referencedDeclaration": 7270,
+                                      "type": "function (contract IERC20,address,uint256)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 13131,
+                                          "type": "contract IERC20",
+                                          "value": "token"
+                                        },
+                                        "id": 13139,
+                                        "name": "Identifier",
+                                        "src": "2619:5:59"
+                                      }
+                                    ],
+                                    "id": 13141,
+                                    "name": "MemberAccess",
+                                    "src": "2619:18:59"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "isStructConstructorCall": false,
+                                      "lValueRequested": false,
+                                      "names": [
+                                        null
+                                      ],
+                                      "tryCall": false,
+                                      "type": "address",
+                                      "type_conversion": true
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": [
+                                            {
+                                              "typeIdentifier": "t_contract$_IProtocolFeesCollector_$19672",
+                                              "typeString": "contract IProtocolFeesCollector"
+                                            }
+                                          ],
+                                          "isConstant": false,
+                                          "isLValue": false,
+                                          "isPure": true,
+                                          "lValueRequested": false,
+                                          "type": "type(address)"
+                                        },
+                                        "children": [
+                                          {
+                                            "attributes": {
+                                              "name": "address"
+                                            },
+                                            "id": 13142,
+                                            "name": "ElementaryTypeName",
+                                            "src": "2638:7:59"
+                                          }
+                                        ],
+                                        "id": 13143,
+                                        "name": "ElementaryTypeNameExpression",
+                                        "src": "2638:7:59"
+                                      },
+                                      {
+                                        "attributes": {
+                                          "arguments": [
+                                            null
+                                          ],
+                                          "isConstant": false,
+                                          "isLValue": false,
+                                          "isPure": false,
+                                          "isStructConstructorCall": false,
+                                          "lValueRequested": false,
+                                          "names": [
+                                            null
+                                          ],
+                                          "tryCall": false,
+                                          "type": "contract IProtocolFeesCollector",
+                                          "type_conversion": false
+                                        },
+                                        "children": [
+                                          {
+                                            "attributes": {
+                                              "argumentTypes": [
+                                                null
+                                              ],
+                                              "overloadedDeclarations": [
+                                                null
+                                              ],
+                                              "referencedDeclaration": 13095,
+                                              "type": "function () view returns (contract IProtocolFeesCollector)",
+                                              "value": "getProtocolFeesCollector"
+                                            },
+                                            "id": 13144,
+                                            "name": "Identifier",
+                                            "src": "2646:24:59"
+                                          }
+                                        ],
+                                        "id": 13145,
+                                        "name": "FunctionCall",
+                                        "src": "2646:26:59"
+                                      }
+                                    ],
+                                    "id": 13146,
+                                    "name": "FunctionCall",
+                                    "src": "2638:35:59"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 13133,
+                                      "type": "uint256",
+                                      "value": "amount"
+                                    },
+                                    "id": 13147,
+                                    "name": "Identifier",
+                                    "src": "2675:6:59"
+                                  }
+                                ],
+                                "id": 13148,
+                                "name": "FunctionCall",
+                                "src": "2619:63:59"
+                              }
+                            ],
+                            "id": 13149,
+                            "name": "ExpressionStatement",
+                            "src": "2619:63:59"
+                          }
+                        ],
+                        "id": 13150,
+                        "name": "Block",
+                        "src": "2605:88:59"
+                      }
+                    ],
+                    "id": 13151,
+                    "name": "IfStatement",
+                    "src": "2589:104:59"
+                  }
+                ],
+                "id": 13152,
+                "name": "Block",
+                "src": "2579:120:59"
+              }
+            ],
+            "id": 13153,
+            "name": "FunctionDefinition",
+            "src": "2517:182:59"
+          }
+        ],
+        "id": 13154,
+        "name": "ContractDefinition",
+        "src": "1400:1301:59"
+      }
+    ],
+    "id": 13155,
+    "name": "SourceUnit",
+    "src": "688:2014:59"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.1+commit.f4a555be.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.2",
+  "updatedAt": "2021-08-19T22:46:59.552Z",
+  "devdoc": {
+    "details": "To reduce the bytecode size of the Vault, most of the protocol fee logic is not here, but in the ProtocolFeesCollector contract.",
+    "kind": "dev",
+    "methods": {
+      "WETH()": {
+        "details": "Returns the Vault's WETH instance."
+      },
+      "batchSwap(uint8,(bytes32,uint256,uint256,uint256,bytes)[],address[],(address,bool,address,bool),int256[],uint256)": {
+        "details": "Performs a series of swaps with one or multiple Pools. In each individual swap, the caller determines either the amount of tokens sent to or received from the Pool, depending on the `kind` value. Returns an array with the net Vault asset balance deltas. Positive amounts represent tokens (or ETH) sent to the Vault, and negative amounts represent tokens (or ETH) sent by the Vault. Each delta corresponds to the asset at the same index in the `assets` array. Swaps are executed sequentially, in the order specified by the `swaps` array. Each array element describes a Pool, the token to be sent to this Pool, the token to receive from it, and an amount that is either `amountIn` or `amountOut` depending on the swap kind. Multihop swaps can be executed by passing an `amount` value of zero for a swap. This will cause the amount in/out of the previous swap to be used as the amount in for the current one. In a 'given in' swap, 'tokenIn' must equal the previous swap's `tokenOut`. For a 'given out' swap, `tokenOut` must equal the previous swap's `tokenIn`. The `assets` array contains the addresses of all assets involved in the swaps. These are either token addresses, or the IAsset sentinel value for ETH (the zero address). Each entry in the `swaps` array specifies tokens in and out by referencing an index in `assets`. Note that Pools never interact with ETH directly: it will be wrapped to or unwrapped from WETH by the Vault. Internal Balance usage, sender, and recipient are determined by the `funds` struct. The `limits` array specifies the minimum or maximum amount of each token the vault is allowed to transfer. `batchSwap` can be used to make a single swap, like `swap` does, but doing so requires more gas than the equivalent `swap` call. Emits `Swap` events."
+      },
+      "deregisterTokens(bytes32,address[])": {
+        "details": "Deregisters `tokens` for the `poolId` Pool. Must be called by the Pool's contract. Only registered tokens (via `registerTokens`) can be deregistered. Additionally, they must have zero total balance. For Pools with the Two Token specialization, `tokens` must have a length of two, that is, both tokens must be deregistered in the same `deregisterTokens` call. A deregistered token can be re-registered later on, possibly with a different Asset Manager. Emits a `TokensDeregistered` event."
+      },
+      "exitPool(bytes32,address,address,(address[],uint256[],bytes,bool))": {
+        "details": "Called by users to exit a Pool, which transfers tokens from the Pool's balance to `recipient`. This will trigger custom Pool behavior, which will typically ask for something in return from `sender` - often tokenized Pool shares. The amount of tokens that can be withdrawn is limited by the Pool's `cash` balance (see `getPoolTokenInfo`). If the caller is not `sender`, it must be an authorized relayer for them. The `tokens` and `minAmountsOut` arrays must have the same length, and each entry in these indicates the minimum token amount to receive for each token contract. The amounts to send are decided by the Pool and not the Vault: it just enforces these minimums. If exiting a Pool that holds WETH, it is possible to receive ETH directly: the Vault will do the unwrapping. To enable this mechanism, the IAsset sentinel value (the zero address) must be passed in the `assets` array instead of the WETH address. Note that it is not possible to combine ETH and WETH in the same exit. `assets` must have the same length and order as the array returned by `getPoolTokens`. This prevents issues when interacting with Pools that register and deregister tokens frequently. If receiving ETH however, the array must be sorted *before* replacing the WETH address with the ETH sentinel value (the zero address), which means the final `assets` array might not be sorted. Pools with no registered tokens cannot be exited. If `toInternalBalance` is true, the tokens will be deposited to `recipient`'s Internal Balance. Otherwise, an ERC20 transfer will be performed. Note that ETH cannot be deposited to Internal Balance: attempting to do so will trigger a revert. `minAmountsOut` is the minimum amount of tokens the user expects to get out of the Pool, for each token in the `tokens` array. This array must match the Pool's registered tokens. This causes the Vault to call the `IBasePool.onExitPool` hook on the Pool's contract, where Pools implement their own custom logic. This typically requires additional information from the user (such as the expected number of Pool shares to return). This can be encoded in the `userData` argument, which is ignored by the Vault and passed directly to the Pool's contract. Emits a `PoolBalanceChanged` event."
+      },
+      "flashLoan(address,address[],uint256[],bytes)": {
+        "details": "Performs a 'flash loan', sending tokens to `recipient`, executing the `receiveFlashLoan` hook on it, and then reverting unless the tokens plus a proportional protocol fee have been returned. The `tokens` and `amounts` arrays must have the same length, and each entry in these indicates the loan amount for each token contract. `tokens` must be sorted in ascending order. The 'userData' field is ignored by the Vault, and forwarded as-is to `recipient` as part of the `receiveFlashLoan` call. Emits `FlashLoan` events."
+      },
+      "getAuthorizer()": {
+        "details": "Returns the Vault's Authorizer."
+      },
+      "getDomainSeparator()": {
+        "details": "Returns the EIP712 domain separator."
+      },
+      "getInternalBalance(address,address[])": {
+        "details": "Returns `user`'s Internal Balance for a set of tokens."
+      },
+      "getNextNonce(address)": {
+        "details": "Returns the next nonce used by an address to sign messages."
+      },
+      "getPausedState()": {
+        "details": "Returns the current paused state."
+      },
+      "getPool(bytes32)": {
+        "details": "Returns a Pool's contract address and specialization setting."
+      },
+      "getPoolTokenInfo(bytes32,address)": {
+        "details": "Returns detailed information for a Pool's registered token. `cash` is the number of tokens the Vault currently holds for the Pool. `managed` is the number of tokens withdrawn and held outside the Vault by the Pool's token Asset Manager. The Pool's total balance for `token` equals the sum of `cash` and `managed`. Internally, `cash` and `managed` are stored using 112 bits. No action can ever cause a Pool's token `cash`, `managed` or `total` balance to be greater than 2^112 - 1. `lastChangeBlock` is the number of the block in which `token`'s total balance was last modified (via either a join, exit, swap, or Asset Manager update). This value is useful to avoid so-called 'sandwich attacks', for example when developing price oracles. A change of zero (e.g. caused by a swap with amount zero) is considered a change for this purpose, and will update `lastChangeBlock`. `assetManager` is the Pool's token Asset Manager."
+      },
+      "getPoolTokens(bytes32)": {
+        "details": "Returns a Pool's registered tokens, the total balance for each, and the latest block when *any* of the tokens' `balances` changed. The order of the `tokens` array is the same order that will be used in `joinPool`, `exitPool`, as well as in all Pool hooks (where applicable). Calls to `registerTokens` and `deregisterTokens` may change this order. If a Pool only registers tokens once, and these are sorted in ascending order, they will be stored in the same order as passed to `registerTokens`. Total balances include both tokens held by the Vault and those withdrawn by the Pool's Asset Managers. These are the amounts used by joins, exits and swaps. For a detailed breakdown of token balances, use `getPoolTokenInfo` instead."
+      },
+      "getProtocolFeesCollector()": {
+        "details": "Returns the current protocol fee module."
+      },
+      "hasApprovedRelayer(address,address)": {
+        "details": "Returns true if `user` has approved `relayer` to act as a relayer for them."
+      },
+      "joinPool(bytes32,address,address,(address[],uint256[],bytes,bool))": {
+        "details": "Called by users to join a Pool, which transfers tokens from `sender` into the Pool's balance. This will trigger custom Pool behavior, which will typically grant something in return to `recipient` - often tokenized Pool shares. If the caller is not `sender`, it must be an authorized relayer for them. The `assets` and `maxAmountsIn` arrays must have the same length, and each entry indicates the maximum amount to send for each asset. The amounts to send are decided by the Pool and not the Vault: it just enforces these maximums. If joining a Pool that holds WETH, it is possible to send ETH directly: the Vault will do the wrapping. To enable this mechanism, the IAsset sentinel value (the zero address) must be passed in the `assets` array instead of the WETH address. Note that it is not possible to combine ETH and WETH in the same join. Any excess ETH will be sent back to the caller (not the sender, which is important for relayers). `assets` must have the same length and order as the array returned by `getPoolTokens`. This prevents issues when interacting with Pools that register and deregister tokens frequently. If sending ETH however, the array must be sorted *before* replacing the WETH address with the ETH sentinel value (the zero address), which means the final `assets` array might not be sorted. Pools with no registered tokens cannot be joined. If `fromInternalBalance` is true, the caller's Internal Balance will be preferred: ERC20 transfers will only be made for the difference between the requested amount and Internal Balance (if any). Note that ETH cannot be withdrawn from Internal Balance: attempting to do so will trigger a revert. This causes the Vault to call the `IBasePool.onJoinPool` hook on the Pool's contract, where Pools implement their own custom logic. This typically requires additional information from the user (such as the expected number of Pool shares). This can be encoded in the `userData` argument, which is ignored by the Vault and passed directly to the Pool's contract, as is `recipient`. Emits a `PoolBalanceChanged` event."
+      },
+      "managePoolBalance((uint8,bytes32,address,uint256)[])": {
+        "details": "Performs a set of Pool balance operations, which may be either withdrawals, deposits or updates. Pool Balance management features batching, which means a single contract call can be used to perform multiple operations of different kinds, with different Pools and tokens, at once. For each operation, the caller must be registered as the Asset Manager for `token` in `poolId`."
+      },
+      "manageUserBalance((uint8,address,uint256,address,address)[])": {
+        "details": "Performs a set of user balance operations, which involve Internal Balance (deposit, withdraw or transfer) and plain ERC20 transfers using the Vault's allowance. This last feature is particularly useful for relayers, as it lets integrators reuse a user's Vault allowance. For each operation, if the caller is not `sender`, it must be an authorized relayer for them."
+      },
+      "queryBatchSwap(uint8,(bytes32,uint256,uint256,uint256,bytes)[],address[],(address,bool,address,bool))": {
+        "details": "Simulates a call to `batchSwap`, returning an array of Vault asset deltas. Calls to `swap` cannot be simulated directly, but an equivalent `batchSwap` call can and will yield the exact same result. Each element in the array corresponds to the asset at the same index, and indicates the number of tokens (or ETH) the Vault would take from the sender (if positive) or send to the recipient (if negative). The arguments it receives are the same that an equivalent `batchSwap` call would receive. Unlike `batchSwap`, this function performs no checks on the sender or recipient field in the `funds` struct. This makes it suitable to be called by off-chain applications via eth_call without needing to hold tokens, approve them for the Vault, or even know a user's address. Note that this function is not 'view' (due to implementation details): the client code must explicitly execute eth_call instead of eth_sendTransaction."
+      },
+      "registerPool(uint8)": {
+        "details": "Registers the caller account as a Pool with a given specialization setting. Returns the Pool's ID, which is used in all Pool-related functions. Pools cannot be deregistered, nor can the Pool's specialization be changed. The caller is expected to be a smart contract that implements either `IGeneralPool` or `IMinimalSwapInfoPool`, depending on the chosen specialization setting. This contract is known as the Pool's contract. Note that the same contract may register itself as multiple Pools with unique Pool IDs, or in other words, multiple Pools may share the same contract. Emits a `PoolRegistered` event."
+      },
+      "registerTokens(bytes32,address[],address[])": {
+        "details": "Registers `tokens` for the `poolId` Pool. Must be called by the Pool's contract. Pools can only interact with tokens they have registered. Users join a Pool by transferring registered tokens, exit by receiving registered tokens, and can only swap registered tokens. Each token can only be registered once. For Pools with the Two Token specialization, `tokens` must have a length of two, that is, both tokens must be registered in the same `registerTokens` call, and they must be sorted in ascending order. The `tokens` and `assetManagers` arrays must have the same length, and each entry in these indicates the Asset Manager for the corresponding token. Asset Managers can manage a Pool's tokens via `managePoolBalance`, depositing and withdrawing them directly, and can even set their balance to arbitrary amounts. They are therefore expected to be highly secured smart contracts with sound design principles, and the decision to register an Asset Manager should not be made lightly. Pools can choose not to assign an Asset Manager to a given token by passing in the zero address. Once an Asset Manager is set, it cannot be changed except by deregistering the associated token and registering again with a different Asset Manager. Emits a `TokensRegistered` event."
+      },
+      "setAuthorizer(address)": {
+        "details": "Sets a new Authorizer for the Vault. The caller must be allowed by the current Authorizer to do this. Emits an `AuthorizerChanged` event."
+      },
+      "setPaused(bool)": {
+        "details": "Safety mechanism to pause most Vault operations in the event of an emergency - typically detection of an error in some part of the system. The Vault can only be paused during an initial time period, after which pausing is forever disabled. While the contract is paused, the following features are disabled: - depositing and transferring internal balance - transferring external balance (using the Vault's allowance) - swaps - joining Pools - Asset Manager interactions Internal Balance can still be withdrawn, and Pools exited."
+      },
+      "setRelayerApproval(address,address,bool)": {
+        "details": "Allows `relayer` to act as a relayer for `sender` if `approved` is true, and disallows it otherwise. Emits a `RelayerApprovalChanged` event."
+      },
+      "swap((bytes32,uint8,address,address,uint256,bytes),(address,bool,address,bool),uint256,uint256)": {
+        "details": "Performs a swap with a single Pool. If the swap is 'given in' (the number of tokens to send to the Pool is known), it returns the amount of tokens taken from the Pool, which must be greater than or equal to `limit`. If the swap is 'given out' (the number of tokens to take from the Pool is known), it returns the amount of tokens sent to the Pool, which must be less than or equal to `limit`. Internal Balance usage and the recipient are determined by the `funds` struct. Emits a `Swap` event."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

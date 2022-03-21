@@ -1,0 +1,3569 @@
+{
+  "contractName": "StationPoolUserDataHelpers",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.1+commit.f4a555be\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/StationPoolUserDataHelpers.sol\":\"StationPoolUserDataHelpers\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@balancer-labs/v2-asset-manager-utils/contracts/IAssetManager.sol\":{\"keccak256\":\"0x37e359b9683fe88b1e7ba7b3522212c836dc93a0de8e76492f5ac7a1665c3fc9\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://1531e5c3844f8438bbdcbb987955163f6baca6e0ebd3a75f165cbaf95065a00f\",\"dweb:/ipfs/Qmbe6z6Q6jydV7G17Y36ccrWxBsdPyNz6B9W14wgGWBFRj\"]},\"@balancer-labs/v2-pool-utils/contracts/BalancerPoolToken.sol\":{\"keccak256\":\"0xc11c633af4a677f55956b8c009a147bdfeb3649f4bd56fda242d0b4c7d878c2c\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://624b751d0e7cbd2a4d26b03466ff9662ba9b7157f49f47817b245e5f4cba654f\",\"dweb:/ipfs/QmTSJx97RjBSii5caaeVzUTLyDVscCMdMcaxUX8VjoB5JR\"]},\"@balancer-labs/v2-pool-utils/contracts/BaseMinimalSwapInfoPool.sol\":{\"keccak256\":\"0x81aee00f4dab154f219264a70b59e1fc0294e914fdf23be58639883f427035aa\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://169dbec507736ba906bf0987fbbcac6b622ce25374f05c3396c04efdc67203db\",\"dweb:/ipfs/QmUr45XiHyMopPrKPBut4DDHniovZC9jsnUgE7ssugQUHW\"]},\"@balancer-labs/v2-pool-utils/contracts/BasePool.sol\":{\"keccak256\":\"0x345e1b465b0e6f2253f1cb51140b3095b56444db7fd9d1b393ef9e92b4e56379\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://f2ddde4f646d553ad611518b3e422e69890d443de099e179633767209eb547c8\",\"dweb:/ipfs/QmeepsLmoifDJY1U4GJoDo9XGYaNzeZ5MvZmKrEPYsZBQj\"]},\"@balancer-labs/v2-pool-utils/contracts/BasePoolAuthorization.sol\":{\"keccak256\":\"0x835122b807159fb2e6f0ff2bac11569a102ccb25618d42ec8f80a4b411a4e443\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://3160d94f06a4efa9f30117af53b502b63a49c862df504a997b7e88a3d4e0cb87\",\"dweb:/ipfs/QmPCwbPVXu29f59Y382P6yFc2ZNdDobJL8HV43L8xsvsnm\"]},\"@balancer-labs/v2-solidity-utils/contracts/helpers/Authentication.sol\":{\"keccak256\":\"0xea892213ec2967f53e26a0dd833bde01e4d9b6e49dd91e6c59ff00044f83c28d\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://0bc36f6335254bef8a4515e898a7ce5b3f36350e4d7d1dd45a0aa3d1356fdae5\",\"dweb:/ipfs/QmRRatu77hTPReUnRidk3wjgEMyGYVgh9wDrkiMiKmtWtR\"]},\"@balancer-labs/v2-solidity-utils/contracts/helpers/BalancerErrors.sol\":{\"keccak256\":\"0x905bd095ec81b0ae31c85b234d0b6ef2b51c49b6ed8e3ae49f13466825e82d2a\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://caa51272d7427f1d0e3cc715c93e887c01b4d4b2d6177d0bae5c2088508a7da9\",\"dweb:/ipfs/QmVgHKqzKZFKyKaStmkF31ffEvArkzpGj1xLAwrg13ytW9\"]},\"@balancer-labs/v2-solidity-utils/contracts/helpers/IAuthentication.sol\":{\"keccak256\":\"0xfd687ced203d2c6da8189792e1719a5182faf45956129388b231ee76740b99a6\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://581aa664e84e950cd9bb747bf6022867db63c64f67d9556a86b5f04f871c2c5d\",\"dweb:/ipfs/QmRa6EEV3LXJaHzymztiLqyeAzmE4jAgBEEi3mi8R5cfFa\"]},\"@balancer-labs/v2-solidity-utils/contracts/helpers/ISignaturesValidator.sol\":{\"keccak256\":\"0x2fe46b13b7c8bfc6f5c539c0b73d6325813f383f551b71fb6bca8dafd06964e1\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://8e651ae7a3a3652c8bb7aaa42c2cce5924310df62a923d9ec50ddb9c850d2995\",\"dweb:/ipfs/QmTHz9y18L5FD7v9GcvxGWSLJuin2KCUEYoARTgz8njce8\"]},\"@balancer-labs/v2-solidity-utils/contracts/helpers/ITemporarilyPausable.sol\":{\"keccak256\":\"0xb3e5b7c63f80b80ef3f0138eac56c397a439bf6b667fc06d5061aa869828b562\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://978d66fba0721a1a67e29a32eaddab8d1f92ab2fb2d611724ea8d0d3c9b0e95b\",\"dweb:/ipfs/QmfG4foZvx3NDZao7d4VvGzL4Uxtk8VWNJXvgo9fiAJxZv\"]},\"@balancer-labs/v2-solidity-utils/contracts/helpers/InputHelpers.sol\":{\"keccak256\":\"0x1a0eb88d81d02911d68209c4ebc010cae6f6364747a8489b2ddae42bdff663a1\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://6d98ec3a958d35e544e9fd46913f0074d7cd62ab500fa7ffdf851eb55d28a83c\",\"dweb:/ipfs/Qmf6i1N1pFKGEHdXSEztmonZBQCWzpZGCsgLeLsmw8dV5X\"]},\"@balancer-labs/v2-solidity-utils/contracts/helpers/TemporarilyPausable.sol\":{\"keccak256\":\"0xd20f7cbc60072fc73aa137ce644777195de3143bc6ce910c43501647f3ce6c60\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://b3c5a3589b0d85a051977e77e1fe1e9b41c4d005a8a4ac3156995e9fddd9d926\",\"dweb:/ipfs/QmZwwhQQFL9tK1vNBTKB4E5ZGBdwfgGrgv2fjHgBaZTENi\"]},\"@balancer-labs/v2-solidity-utils/contracts/math/FixedPoint.sol\":{\"keccak256\":\"0x38720507bb6c838df83953d1ffa88b97d0e06baefa0e3e387303cb8a090a49f5\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://fd74d7d2f8881dcc5a3aa4ce732f84b2cbb15de117e1fc4735a3d58a4062524a\",\"dweb:/ipfs/QmSYxuM8HhMn3oPxZ66PbukDikGPkHs3FLD7miFbky2EfW\"]},\"@balancer-labs/v2-solidity-utils/contracts/math/LogExpMath.sol\":{\"keccak256\":\"0x66c6a4efc58bcc18d11fdc3236ec53f6044944918e86116f3aa3deee1daac8ef\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c5deeae731108f0d2fed1ae8c6bcb2796b5a93f6c260019306d175bd3baa2988\",\"dweb:/ipfs/QmexvLdJbGMSrmaAVrZDaHVfCaAzQpV2ZybQMnfX4zXsPU\"]},\"@balancer-labs/v2-solidity-utils/contracts/math/Math.sol\":{\"keccak256\":\"0x98cf5d1e9b91be5a4315c1aa7bf6480e097113c5f9a9200c92d123bc4ece9ec4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9617a16524a7e9b82f6962f76ef2d8a47d14285c001d4bb5e88574cb33e0ebe3\",\"dweb:/ipfs/QmRBvV1X5FEsyxDAfMPZ4GNp7HvfK5gaKaLpp6o1EYwfFF\"]},\"@balancer-labs/v2-solidity-utils/contracts/misc/IWETH.sol\":{\"keccak256\":\"0x19a0628bedbe48178a4c90509a40d750d5039677b964ec533a24361a8d97274b\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://c55887c89f152f00e5d65389061de28fada0e73eb5f41ebd16a3b8e65846cb1a\",\"dweb:/ipfs/QmNbVtaA44BGvKnKiCT4bEtjZu1ZD5ZJ6XrgBDh5qVEGcP\"]},\"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/EIP712.sol\":{\"keccak256\":\"0x0cf3ec5d6130aac057e69df14b1ff87baf9c6c2cb13bc545952def004e629ac0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://446419367266d271bf6953e4ae0423356a5cc4717f7b9a5a0532436de4be2d70\",\"dweb:/ipfs/QmPV56wHs1Mqif6et6TYrhZ2QYPNmiVTmXWvQMhqWfKLk9\"]},\"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/ERC20.sol\":{\"keccak256\":\"0x10a0774f23f09b8617c9c62afe230829175c20be368ff327a7d529e4f7348bcb\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d126631fd60ce377ae605e7c2aab275dc7b72aac074940f6e3b36206ed1955ce\",\"dweb:/ipfs/QmP23AyhL4xzHSDikcgpAKuCHoiFKr5qQfCkDAdSsz4peU\"]},\"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/IERC20.sol\":{\"keccak256\":\"0xd828a935a72a6d182912abba290e4debb8c684c36fd756088f7acb30e0b2bb76\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1e6ac013b95e9622917c5ad388dc73f0a389a76341597731746e54547aa9de8a\",\"dweb:/ipfs/QmPB8qWcRPZaDsASgQpf5a6i2YrZ4TDV3Ebi25Mn9EAdf4\"]},\"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/IERC20Permit.sol\":{\"keccak256\":\"0xffe929ce55ef0cbdcc60eee8bc9375c295757ad13afe3d757646538aa0429ff5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://90091ad3a860b0baa930d9b4083b503eb9ce2d222f738ce3b009d434271a27ae\",\"dweb:/ipfs/QmeQxy2YHbeumMXxKqEnXF7pGw2Ke43cHzttG59WYHibVV\"]},\"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/SafeMath.sol\":{\"keccak256\":\"0xafe0542eb14932a66ce6280fbe9991130ead5bbcb7836d0a822fc4a59810c100\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://140c69f688c58bbf08f7b1b6f76dd89d72f9c84a3aab8ad1194679ee0acaa6e6\",\"dweb:/ipfs/QmUCub3NpdGK1U4xjSwsCHNZnRokcM9NMhRtC2kLefYef8\"]},\"@balancer-labs/v2-vault/contracts/interfaces/IAsset.sol\":{\"keccak256\":\"0x70ecf1d48c285d78718bd2e159345677038ed8a81c74444bedd6a5c61af9aff6\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://8c7c210e449ea5d284abeaaed82e3bb3c203b57d8b3e5dfb6daedf76eaae31d1\",\"dweb:/ipfs/QmfJWLPhCG6PcHNJMLNDbAM6nd2ZVFCexCXvJ9qQmRaNbn\"]},\"@balancer-labs/v2-vault/contracts/interfaces/IAuthorizer.sol\":{\"keccak256\":\"0x792871e208bba1dad291f8d1cffad86f4afa5e2360816bd9c43481f7297155f5\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://af8ab65258e294c8ba0a5feee91208789f641181d225364b02123d38d9eec7d0\",\"dweb:/ipfs/Qmb5HUXRaSrHJafwK1H8XRjcCTnAZMShTvBNhr1ovA1j2m\"]},\"@balancer-labs/v2-vault/contracts/interfaces/IBasePool.sol\":{\"keccak256\":\"0x1fdce4de26cad355f4ad93e4a5b66d5a5692c4cd2f0b6c2bb2c3aef3ee49422f\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://fde5dea4a8a65dd019813530ecb4cc857484ff104e80cf18c12d196b0ec74973\",\"dweb:/ipfs/QmPyVrmus8pqbPKofTonEgtWCCsn3j4MXFPsy481f8jav8\"]},\"@balancer-labs/v2-vault/contracts/interfaces/IFlashLoanRecipient.sol\":{\"keccak256\":\"0x5ceb7a9b209c01659b25898622a2415414e12a7200559e57283fd511fe96c92a\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://35a6ee6cb389f2675c1b64f9813862d3503524ee05067ba88172c9298d4f5e3c\",\"dweb:/ipfs/QmZGPUaoKfRigdo2U9U3695j9wX97GRSzgiK8c6zhVjjFY\"]},\"@balancer-labs/v2-vault/contracts/interfaces/IMinimalSwapInfoPool.sol\":{\"keccak256\":\"0x7469919e147c0db8b4f290d310ca3816dec5d3c6cc6b258cf6e0df820a20a179\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://ad47775f388a985c265ef4ca1d1531e4bffa97ef51a03fea9273a2ce8f1ab667\",\"dweb:/ipfs/QmZ4mMm2rPPZ4eLHHUY82vxLLRyKXb5ekchgGvDReryiTS\"]},\"@balancer-labs/v2-vault/contracts/interfaces/IPoolSwapStructs.sol\":{\"keccak256\":\"0x618519301dfd8c123981fef84161e3068988bc2a231cd41785c304ba45135af3\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://58313981bc5fc28df617f798df77cab1813251d37be42cecee623617b29bf8c5\",\"dweb:/ipfs/QmREMv5117SFpM6GBYgvY1zf4xYXeMQknVi12TqfJ1KPxp\"]},\"@balancer-labs/v2-vault/contracts/interfaces/IProtocolFeesCollector.sol\":{\"keccak256\":\"0xacad6dfbdf2395aeb8b793b3cb5d9ee2702d8d5f667084ff7bfa248f64700f47\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://b8a27ce7efd29cb653529a2e2c6a828f5bd973b286dc166d12a8f81426bca68a\",\"dweb:/ipfs/QmPFuddzXwjK58qDG4z1n9S9Yff865yCToAStRbdfWMo1D\"]},\"@balancer-labs/v2-vault/contracts/interfaces/IVault.sol\":{\"keccak256\":\"0x8a0904cb11d6571fdc0051b2de6b675d0e1cf8af45c1a5467d047812f1086223\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://e428d19d1bd18504c5c8a797b0a80515072f4d7fc278df73b9fec0ab8efe155d\",\"dweb:/ipfs/QmYeJPPQKAckBVvuhU9XXiZR4aSrVNu3WcfTmSsXJJYey3\"]},\"project:/contracts/BaseStationPool.sol\":{\"keccak256\":\"0x08410e9925217a8c9f1d64e302c6f7f0f211dcade0676211c7b54a385c13b5c8\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://c7166c0d454b0cbcf392ce790bff7153505d2f5f8d70f18d7a73c221f7477a59\",\"dweb:/ipfs/QmVpQp4BHBcY1AbjqGLKUaa9XnzmZ4t2C5qntLhrkM5CdQ\"]},\"project:/contracts/StationMath.sol\":{\"keccak256\":\"0xc8f96adc8ff3f0bab1ce4db21118a6c36474189d86e5346456f41cd57c8c105b\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://8774920ac80bdd1da1a2afbc06ab6fe3f3abc5e53f3249f261e4a9552fed071b\",\"dweb:/ipfs/QmacbPLy4QzrZUhU6syJhHnqnP9Y98dtGBedbvojjGhs9e\"]},\"project:/contracts/StationPoolUserDataHelpers.sol\":{\"keccak256\":\"0xfe41057209848becda13b7faf418ba59319e64504a6b7148ad4909d61f7f615b\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://e4d60ac855a971aa5c3112b31431c3733338a019971dffe12e3cbffe604925f5\",\"dweb:/ipfs/QmUWTDcYnCN86rP5HqmQtaofAa3qbT5MCtLahXKFo8QaDX\"]},\"project:/contracts/test/MockOracle.sol\":{\"keccak256\":\"0xb0616263593be3b0832ae66b236e1fcb51e8288aeeffe40b6e1e34b4b4cba65a\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://1d231f854e2f2616079513caec2827cd8eb4ffba6f4defbfa5d063da5edb6526\",\"dweb:/ipfs/QmNtSQ1Ug3hodyzhM7Z6eF1da5yk2KuZFg8JdutzYoLXQC\"]}},\"version\":1}",
+  "bytecode": "0x60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220f831452c53d144b50ce34de2282f2f4b566a19166e85f6521457d6d3cce8570364736f6c63430007010033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220f831452c53d144b50ce34de2282f2f4b566a19166e85f6521457d6d3cce8570364736f6c63430007010033",
+  "immutableReferences": {},
+  "sourceMap": "824:1315:47:-:0;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "824:1315:47:-:0;;;;;;;;",
+  "source": "// SPDX-License-Identifier: GPL-3.0-or-later\n// This program is free software: you can redistribute it and/or modify\n// it under the terms of the GNU General Public License as published by\n// the Free Software Foundation, either version 3 of the License, or\n// (at your option) any later version.\n\n// This program is distributed in the hope that it will be useful,\n// but WITHOUT ANY WARRANTY; without even the implied warranty of\n// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n// GNU General Public License for more details.\n\n// You should have received a copy of the GNU General Public License\n// along with this program.  If not, see <http://www.gnu.org/licenses/>.\n\npragma solidity ^0.7.1;\n\nimport \"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/IERC20.sol\";\n\nimport \"./BaseStationPool.sol\";\n\nlibrary StationPoolUserDataHelpers {\n\n    function joinKind(bytes memory self) internal pure returns (BaseStationPool.JoinKind) {\n        return abi.decode(self, (BaseStationPool.JoinKind));\n    }\n\n    function exitKind(bytes memory self) internal pure returns (BaseStationPool.ExitKind) {\n        return abi.decode(self, (BaseStationPool.ExitKind));\n    }\n\n    // Joins\n\n    function initialAmountsIn(bytes memory self) internal pure returns (uint256[] memory amountsIn) {\n        (, amountsIn) = abi.decode(self, (BaseStationPool.JoinKind, uint256[]));\n    }\n\n    function exactTokensInForBptOut(bytes memory self)\n        internal\n        pure\n        returns (uint256[] memory amountsIn, uint256 minBPTAmountOut)\n    {\n        (, amountsIn, minBPTAmountOut) = abi.decode(self, (BaseStationPool.JoinKind, uint256[], uint256));\n    }\n\n    // Exits\n    function exactBptInForTokensOut(bytes memory self) internal pure returns (uint256 bptAmountIn) {\n        (, bptAmountIn) = abi.decode(self, (BaseStationPool.ExitKind, uint256));\n    }\n\n    function bptInForExactTokensOut(bytes memory self)\n        internal\n        pure\n        returns (uint256[] memory amountsOut, uint256 maxBPTAmountIn)\n    {\n        (, amountsOut, maxBPTAmountIn) = abi.decode(self, (BaseStationPool.ExitKind, uint256[], uint256));\n    }\n\n}",
+  "sourcePath": "/home/tatsu/Station/CrossAssetPaymentPool/contracts/StationPoolUserDataHelpers.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/StationPoolUserDataHelpers.sol",
+    "exportedSymbols": {
+      "StationPoolUserDataHelpers": [
+        11286
+      ]
+    },
+    "id": 11287,
+    "license": "GPL-3.0-or-later",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 11151,
+        "literals": [
+          "solidity",
+          "^",
+          "0.7",
+          ".1"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "688:23:47"
+      },
+      {
+        "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/IERC20.sol",
+        "file": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/IERC20.sol",
+        "id": 11152,
+        "nodeType": "ImportDirective",
+        "scope": 11287,
+        "sourceUnit": 7120,
+        "src": "713:76:47",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "project:/contracts/BaseStationPool.sol",
+        "file": "./BaseStationPool.sol",
+        "id": 11153,
+        "nodeType": "ImportDirective",
+        "scope": 11287,
+        "sourceUnit": 8844,
+        "src": "791:31:47",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "library",
+        "fullyImplemented": true,
+        "id": 11286,
+        "linearizedBaseContracts": [
+          11286
+        ],
+        "name": "StationPoolUserDataHelpers",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 11168,
+              "nodeType": "Block",
+              "src": "952:68:47",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 11162,
+                        "name": "self",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11155,
+                        "src": "980:4:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      },
+                      {
+                        "components": [
+                          {
+                            "expression": {
+                              "id": 11163,
+                              "name": "BaseStationPool",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 8843,
+                              "src": "987:15:47",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_contract$_BaseStationPool_$8843_$",
+                                "typeString": "type(contract BaseStationPool)"
+                              }
+                            },
+                            "id": 11164,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "JoinKind",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 8123,
+                            "src": "987:24:47",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_enum$_JoinKind_$8123_$",
+                              "typeString": "type(enum BaseStationPool.JoinKind)"
+                            }
+                          }
+                        ],
+                        "id": 11165,
+                        "isConstant": false,
+                        "isInlineArray": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "TupleExpression",
+                        "src": "986:26:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_enum$_JoinKind_$8123_$",
+                          "typeString": "type(enum BaseStationPool.JoinKind)"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        },
+                        {
+                          "typeIdentifier": "t_type$_t_enum$_JoinKind_$8123_$",
+                          "typeString": "type(enum BaseStationPool.JoinKind)"
+                        }
+                      ],
+                      "expression": {
+                        "id": 11160,
+                        "name": "abi",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": -1,
+                        "src": "969:3:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_abi",
+                          "typeString": "abi"
+                        }
+                      },
+                      "id": 11161,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberName": "decode",
+                      "nodeType": "MemberAccess",
+                      "src": "969:10:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_abidecode_pure$__$returns$__$",
+                        "typeString": "function () pure"
+                      }
+                    },
+                    "id": 11166,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "969:44:47",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_JoinKind_$8123",
+                      "typeString": "enum BaseStationPool.JoinKind"
+                    }
+                  },
+                  "functionReturnParameters": 11159,
+                  "id": 11167,
+                  "nodeType": "Return",
+                  "src": "962:51:47"
+                }
+              ]
+            },
+            "id": 11169,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "joinKind",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11156,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11155,
+                  "mutability": "mutable",
+                  "name": "self",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11169,
+                  "src": "884:17:47",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 11154,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "884:5:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "883:19:47"
+            },
+            "returnParameters": {
+              "id": 11159,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11158,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11169,
+                  "src": "926:24:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_JoinKind_$8123",
+                    "typeString": "enum BaseStationPool.JoinKind"
+                  },
+                  "typeName": {
+                    "id": 11157,
+                    "name": "BaseStationPool.JoinKind",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 8123,
+                    "src": "926:24:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_JoinKind_$8123",
+                      "typeString": "enum BaseStationPool.JoinKind"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "925:26:47"
+            },
+            "scope": 11286,
+            "src": "866:154:47",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 11184,
+              "nodeType": "Block",
+              "src": "1112:68:47",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 11178,
+                        "name": "self",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11171,
+                        "src": "1140:4:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      },
+                      {
+                        "components": [
+                          {
+                            "expression": {
+                              "id": 11179,
+                              "name": "BaseStationPool",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 8843,
+                              "src": "1147:15:47",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_contract$_BaseStationPool_$8843_$",
+                                "typeString": "type(contract BaseStationPool)"
+                              }
+                            },
+                            "id": 11180,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "ExitKind",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 8127,
+                            "src": "1147:24:47",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_enum$_ExitKind_$8127_$",
+                              "typeString": "type(enum BaseStationPool.ExitKind)"
+                            }
+                          }
+                        ],
+                        "id": 11181,
+                        "isConstant": false,
+                        "isInlineArray": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "TupleExpression",
+                        "src": "1146:26:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_enum$_ExitKind_$8127_$",
+                          "typeString": "type(enum BaseStationPool.ExitKind)"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        },
+                        {
+                          "typeIdentifier": "t_type$_t_enum$_ExitKind_$8127_$",
+                          "typeString": "type(enum BaseStationPool.ExitKind)"
+                        }
+                      ],
+                      "expression": {
+                        "id": 11176,
+                        "name": "abi",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": -1,
+                        "src": "1129:3:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_abi",
+                          "typeString": "abi"
+                        }
+                      },
+                      "id": 11177,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberName": "decode",
+                      "nodeType": "MemberAccess",
+                      "src": "1129:10:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_abidecode_pure$__$returns$__$",
+                        "typeString": "function () pure"
+                      }
+                    },
+                    "id": 11182,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1129:44:47",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_ExitKind_$8127",
+                      "typeString": "enum BaseStationPool.ExitKind"
+                    }
+                  },
+                  "functionReturnParameters": 11175,
+                  "id": 11183,
+                  "nodeType": "Return",
+                  "src": "1122:51:47"
+                }
+              ]
+            },
+            "id": 11185,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "exitKind",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11172,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11171,
+                  "mutability": "mutable",
+                  "name": "self",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11185,
+                  "src": "1044:17:47",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 11170,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1044:5:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1043:19:47"
+            },
+            "returnParameters": {
+              "id": 11175,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11174,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11185,
+                  "src": "1086:24:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_ExitKind_$8127",
+                    "typeString": "enum BaseStationPool.ExitKind"
+                  },
+                  "typeName": {
+                    "id": 11173,
+                    "name": "BaseStationPool.ExitKind",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 8127,
+                    "src": "1086:24:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_ExitKind_$8127",
+                      "typeString": "enum BaseStationPool.ExitKind"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1085:26:47"
+            },
+            "scope": 11286,
+            "src": "1026:154:47",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 11207,
+              "nodeType": "Block",
+              "src": "1296:88:47",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 11205,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "components": [
+                        null,
+                        {
+                          "id": 11193,
+                          "name": "amountsIn",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11191,
+                          "src": "1309:9:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                            "typeString": "uint256[] memory"
+                          }
+                        }
+                      ],
+                      "id": 11194,
+                      "isConstant": false,
+                      "isInlineArray": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "TupleExpression",
+                      "src": "1306:13:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_tuple$__$_t_array$_t_uint256_$dyn_memory_ptr_$",
+                        "typeString": "tuple(,uint256[] memory)"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "id": 11197,
+                          "name": "self",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11187,
+                          "src": "1333:4:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes_memory_ptr",
+                            "typeString": "bytes memory"
+                          }
+                        },
+                        {
+                          "components": [
+                            {
+                              "expression": {
+                                "id": 11198,
+                                "name": "BaseStationPool",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 8843,
+                                "src": "1340:15:47",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_type$_t_contract$_BaseStationPool_$8843_$",
+                                  "typeString": "type(contract BaseStationPool)"
+                                }
+                              },
+                              "id": 11199,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "JoinKind",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 8123,
+                              "src": "1340:24:47",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_enum$_JoinKind_$8123_$",
+                                "typeString": "type(enum BaseStationPool.JoinKind)"
+                              }
+                            },
+                            {
+                              "baseExpression": {
+                                "id": 11201,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": true,
+                                "lValueRequested": false,
+                                "nodeType": "ElementaryTypeNameExpression",
+                                "src": "1366:7:47",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_type$_t_uint256_$",
+                                  "typeString": "type(uint256)"
+                                },
+                                "typeName": {
+                                  "id": 11200,
+                                  "name": "uint256",
+                                  "nodeType": "ElementaryTypeName",
+                                  "src": "1366:7:47",
+                                  "typeDescriptions": {}
+                                }
+                              },
+                              "id": 11202,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "IndexAccess",
+                              "src": "1366:9:47",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_array$_t_uint256_$dyn_memory_ptr_$",
+                                "typeString": "type(uint256[] memory)"
+                              }
+                            }
+                          ],
+                          "id": 11203,
+                          "isConstant": false,
+                          "isInlineArray": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "TupleExpression",
+                          "src": "1339:37:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$_t_type$_t_enum$_JoinKind_$8123_$_$_t_type$_t_array$_t_uint256_$dyn_memory_ptr_$_$",
+                            "typeString": "tuple(type(enum BaseStationPool.JoinKind),type(uint256[] memory))"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_bytes_memory_ptr",
+                            "typeString": "bytes memory"
+                          },
+                          {
+                            "typeIdentifier": "t_tuple$_t_type$_t_enum$_JoinKind_$8123_$_$_t_type$_t_array$_t_uint256_$dyn_memory_ptr_$_$",
+                            "typeString": "tuple(type(enum BaseStationPool.JoinKind),type(uint256[] memory))"
+                          }
+                        ],
+                        "expression": {
+                          "id": 11195,
+                          "name": "abi",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -1,
+                          "src": "1322:3:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_abi",
+                            "typeString": "abi"
+                          }
+                        },
+                        "id": 11196,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "memberName": "decode",
+                        "nodeType": "MemberAccess",
+                        "src": "1322:10:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_abidecode_pure$__$returns$__$",
+                          "typeString": "function () pure"
+                        }
+                      },
+                      "id": 11204,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1322:55:47",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_tuple$_t_enum$_JoinKind_$8123_$_t_array$_t_uint256_$dyn_memory_ptr_$",
+                        "typeString": "tuple(enum BaseStationPool.JoinKind,uint256[] memory)"
+                      }
+                    },
+                    "src": "1306:71:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 11206,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1306:71:47"
+                }
+              ]
+            },
+            "id": 11208,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "initialAmountsIn",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11188,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11187,
+                  "mutability": "mutable",
+                  "name": "self",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11208,
+                  "src": "1226:17:47",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 11186,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1226:5:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1225:19:47"
+            },
+            "returnParameters": {
+              "id": 11192,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11191,
+                  "mutability": "mutable",
+                  "name": "amountsIn",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11208,
+                  "src": "1268:26:47",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 11189,
+                      "name": "uint256",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1268:7:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 11190,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1268:9:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1267:28:47"
+            },
+            "scope": 11286,
+            "src": "1200:184:47",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 11235,
+              "nodeType": "Block",
+              "src": "1545:114:47",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 11233,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "components": [
+                        null,
+                        {
+                          "id": 11218,
+                          "name": "amountsIn",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11214,
+                          "src": "1558:9:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                            "typeString": "uint256[] memory"
+                          }
+                        },
+                        {
+                          "id": 11219,
+                          "name": "minBPTAmountOut",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11216,
+                          "src": "1569:15:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "id": 11220,
+                      "isConstant": false,
+                      "isInlineArray": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "TupleExpression",
+                      "src": "1555:30:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_tuple$__$_t_array$_t_uint256_$dyn_memory_ptr_$_t_uint256_$",
+                        "typeString": "tuple(,uint256[] memory,uint256)"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "id": 11223,
+                          "name": "self",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11210,
+                          "src": "1599:4:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes_memory_ptr",
+                            "typeString": "bytes memory"
+                          }
+                        },
+                        {
+                          "components": [
+                            {
+                              "expression": {
+                                "id": 11224,
+                                "name": "BaseStationPool",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 8843,
+                                "src": "1606:15:47",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_type$_t_contract$_BaseStationPool_$8843_$",
+                                  "typeString": "type(contract BaseStationPool)"
+                                }
+                              },
+                              "id": 11225,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "JoinKind",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 8123,
+                              "src": "1606:24:47",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_enum$_JoinKind_$8123_$",
+                                "typeString": "type(enum BaseStationPool.JoinKind)"
+                              }
+                            },
+                            {
+                              "baseExpression": {
+                                "id": 11227,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": true,
+                                "lValueRequested": false,
+                                "nodeType": "ElementaryTypeNameExpression",
+                                "src": "1632:7:47",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_type$_t_uint256_$",
+                                  "typeString": "type(uint256)"
+                                },
+                                "typeName": {
+                                  "id": 11226,
+                                  "name": "uint256",
+                                  "nodeType": "ElementaryTypeName",
+                                  "src": "1632:7:47",
+                                  "typeDescriptions": {}
+                                }
+                              },
+                              "id": 11228,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "IndexAccess",
+                              "src": "1632:9:47",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_array$_t_uint256_$dyn_memory_ptr_$",
+                                "typeString": "type(uint256[] memory)"
+                              }
+                            },
+                            {
+                              "id": 11230,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "1643:7:47",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_uint256_$",
+                                "typeString": "type(uint256)"
+                              },
+                              "typeName": {
+                                "id": 11229,
+                                "name": "uint256",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "1643:7:47",
+                                "typeDescriptions": {}
+                              }
+                            }
+                          ],
+                          "id": 11231,
+                          "isConstant": false,
+                          "isInlineArray": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "TupleExpression",
+                          "src": "1605:46:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$_t_type$_t_enum$_JoinKind_$8123_$_$_t_type$_t_array$_t_uint256_$dyn_memory_ptr_$_$_t_type$_t_uint256_$_$",
+                            "typeString": "tuple(type(enum BaseStationPool.JoinKind),type(uint256[] memory),type(uint256))"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_bytes_memory_ptr",
+                            "typeString": "bytes memory"
+                          },
+                          {
+                            "typeIdentifier": "t_tuple$_t_type$_t_enum$_JoinKind_$8123_$_$_t_type$_t_array$_t_uint256_$dyn_memory_ptr_$_$_t_type$_t_uint256_$_$",
+                            "typeString": "tuple(type(enum BaseStationPool.JoinKind),type(uint256[] memory),type(uint256))"
+                          }
+                        ],
+                        "expression": {
+                          "id": 11221,
+                          "name": "abi",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -1,
+                          "src": "1588:3:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_abi",
+                            "typeString": "abi"
+                          }
+                        },
+                        "id": 11222,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "memberName": "decode",
+                        "nodeType": "MemberAccess",
+                        "src": "1588:10:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_abidecode_pure$__$returns$__$",
+                          "typeString": "function () pure"
+                        }
+                      },
+                      "id": 11232,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1588:64:47",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_tuple$_t_enum$_JoinKind_$8123_$_t_array$_t_uint256_$dyn_memory_ptr_$_t_uint256_$",
+                        "typeString": "tuple(enum BaseStationPool.JoinKind,uint256[] memory,uint256)"
+                      }
+                    },
+                    "src": "1555:97:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 11234,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1555:97:47"
+                }
+              ]
+            },
+            "id": 11236,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "exactTokensInForBptOut",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11211,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11210,
+                  "mutability": "mutable",
+                  "name": "self",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11236,
+                  "src": "1422:17:47",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 11209,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1422:5:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1421:19:47"
+            },
+            "returnParameters": {
+              "id": 11217,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11214,
+                  "mutability": "mutable",
+                  "name": "amountsIn",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11236,
+                  "src": "1488:26:47",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 11212,
+                      "name": "uint256",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1488:7:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 11213,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1488:9:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11216,
+                  "mutability": "mutable",
+                  "name": "minBPTAmountOut",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11236,
+                  "src": "1516:23:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11215,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1516:7:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1487:53:47"
+            },
+            "scope": 11286,
+            "src": "1390:269:47",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 11256,
+              "nodeType": "Block",
+              "src": "1773:88:47",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 11254,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "components": [
+                        null,
+                        {
+                          "id": 11243,
+                          "name": "bptAmountIn",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11241,
+                          "src": "1786:11:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "id": 11244,
+                      "isConstant": false,
+                      "isInlineArray": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "TupleExpression",
+                      "src": "1783:15:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_tuple$__$_t_uint256_$",
+                        "typeString": "tuple(,uint256)"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "id": 11247,
+                          "name": "self",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11238,
+                          "src": "1812:4:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes_memory_ptr",
+                            "typeString": "bytes memory"
+                          }
+                        },
+                        {
+                          "components": [
+                            {
+                              "expression": {
+                                "id": 11248,
+                                "name": "BaseStationPool",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 8843,
+                                "src": "1819:15:47",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_type$_t_contract$_BaseStationPool_$8843_$",
+                                  "typeString": "type(contract BaseStationPool)"
+                                }
+                              },
+                              "id": 11249,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "ExitKind",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 8127,
+                              "src": "1819:24:47",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_enum$_ExitKind_$8127_$",
+                                "typeString": "type(enum BaseStationPool.ExitKind)"
+                              }
+                            },
+                            {
+                              "id": 11251,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "1845:7:47",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_uint256_$",
+                                "typeString": "type(uint256)"
+                              },
+                              "typeName": {
+                                "id": 11250,
+                                "name": "uint256",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "1845:7:47",
+                                "typeDescriptions": {}
+                              }
+                            }
+                          ],
+                          "id": 11252,
+                          "isConstant": false,
+                          "isInlineArray": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "TupleExpression",
+                          "src": "1818:35:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$_t_type$_t_enum$_ExitKind_$8127_$_$_t_type$_t_uint256_$_$",
+                            "typeString": "tuple(type(enum BaseStationPool.ExitKind),type(uint256))"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_bytes_memory_ptr",
+                            "typeString": "bytes memory"
+                          },
+                          {
+                            "typeIdentifier": "t_tuple$_t_type$_t_enum$_ExitKind_$8127_$_$_t_type$_t_uint256_$_$",
+                            "typeString": "tuple(type(enum BaseStationPool.ExitKind),type(uint256))"
+                          }
+                        ],
+                        "expression": {
+                          "id": 11245,
+                          "name": "abi",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -1,
+                          "src": "1801:3:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_abi",
+                            "typeString": "abi"
+                          }
+                        },
+                        "id": 11246,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "memberName": "decode",
+                        "nodeType": "MemberAccess",
+                        "src": "1801:10:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_abidecode_pure$__$returns$__$",
+                          "typeString": "function () pure"
+                        }
+                      },
+                      "id": 11253,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1801:53:47",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_tuple$_t_enum$_ExitKind_$8127_$_t_uint256_$",
+                        "typeString": "tuple(enum BaseStationPool.ExitKind,uint256)"
+                      }
+                    },
+                    "src": "1783:71:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 11255,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1783:71:47"
+                }
+              ]
+            },
+            "id": 11257,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "exactBptInForTokensOut",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11239,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11238,
+                  "mutability": "mutable",
+                  "name": "self",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11257,
+                  "src": "1710:17:47",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 11237,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1710:5:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1709:19:47"
+            },
+            "returnParameters": {
+              "id": 11242,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11241,
+                  "mutability": "mutable",
+                  "name": "bptAmountIn",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11257,
+                  "src": "1752:19:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11240,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1752:7:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1751:21:47"
+            },
+            "scope": 11286,
+            "src": "1678:183:47",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 11284,
+              "nodeType": "Block",
+              "src": "2022:114:47",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 11282,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "components": [
+                        null,
+                        {
+                          "id": 11267,
+                          "name": "amountsOut",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11263,
+                          "src": "2035:10:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                            "typeString": "uint256[] memory"
+                          }
+                        },
+                        {
+                          "id": 11268,
+                          "name": "maxBPTAmountIn",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11265,
+                          "src": "2047:14:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "id": 11269,
+                      "isConstant": false,
+                      "isInlineArray": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "TupleExpression",
+                      "src": "2032:30:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_tuple$__$_t_array$_t_uint256_$dyn_memory_ptr_$_t_uint256_$",
+                        "typeString": "tuple(,uint256[] memory,uint256)"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "id": 11272,
+                          "name": "self",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11259,
+                          "src": "2076:4:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes_memory_ptr",
+                            "typeString": "bytes memory"
+                          }
+                        },
+                        {
+                          "components": [
+                            {
+                              "expression": {
+                                "id": 11273,
+                                "name": "BaseStationPool",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 8843,
+                                "src": "2083:15:47",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_type$_t_contract$_BaseStationPool_$8843_$",
+                                  "typeString": "type(contract BaseStationPool)"
+                                }
+                              },
+                              "id": 11274,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "ExitKind",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 8127,
+                              "src": "2083:24:47",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_enum$_ExitKind_$8127_$",
+                                "typeString": "type(enum BaseStationPool.ExitKind)"
+                              }
+                            },
+                            {
+                              "baseExpression": {
+                                "id": 11276,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": true,
+                                "lValueRequested": false,
+                                "nodeType": "ElementaryTypeNameExpression",
+                                "src": "2109:7:47",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_type$_t_uint256_$",
+                                  "typeString": "type(uint256)"
+                                },
+                                "typeName": {
+                                  "id": 11275,
+                                  "name": "uint256",
+                                  "nodeType": "ElementaryTypeName",
+                                  "src": "2109:7:47",
+                                  "typeDescriptions": {}
+                                }
+                              },
+                              "id": 11277,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "IndexAccess",
+                              "src": "2109:9:47",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_array$_t_uint256_$dyn_memory_ptr_$",
+                                "typeString": "type(uint256[] memory)"
+                              }
+                            },
+                            {
+                              "id": 11279,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "2120:7:47",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_uint256_$",
+                                "typeString": "type(uint256)"
+                              },
+                              "typeName": {
+                                "id": 11278,
+                                "name": "uint256",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "2120:7:47",
+                                "typeDescriptions": {}
+                              }
+                            }
+                          ],
+                          "id": 11280,
+                          "isConstant": false,
+                          "isInlineArray": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "TupleExpression",
+                          "src": "2082:46:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$_t_type$_t_enum$_ExitKind_$8127_$_$_t_type$_t_array$_t_uint256_$dyn_memory_ptr_$_$_t_type$_t_uint256_$_$",
+                            "typeString": "tuple(type(enum BaseStationPool.ExitKind),type(uint256[] memory),type(uint256))"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_bytes_memory_ptr",
+                            "typeString": "bytes memory"
+                          },
+                          {
+                            "typeIdentifier": "t_tuple$_t_type$_t_enum$_ExitKind_$8127_$_$_t_type$_t_array$_t_uint256_$dyn_memory_ptr_$_$_t_type$_t_uint256_$_$",
+                            "typeString": "tuple(type(enum BaseStationPool.ExitKind),type(uint256[] memory),type(uint256))"
+                          }
+                        ],
+                        "expression": {
+                          "id": 11270,
+                          "name": "abi",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -1,
+                          "src": "2065:3:47",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_abi",
+                            "typeString": "abi"
+                          }
+                        },
+                        "id": 11271,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "memberName": "decode",
+                        "nodeType": "MemberAccess",
+                        "src": "2065:10:47",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_abidecode_pure$__$returns$__$",
+                          "typeString": "function () pure"
+                        }
+                      },
+                      "id": 11281,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2065:64:47",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_tuple$_t_enum$_ExitKind_$8127_$_t_array$_t_uint256_$dyn_memory_ptr_$_t_uint256_$",
+                        "typeString": "tuple(enum BaseStationPool.ExitKind,uint256[] memory,uint256)"
+                      }
+                    },
+                    "src": "2032:97:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 11283,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2032:97:47"
+                }
+              ]
+            },
+            "id": 11285,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "bptInForExactTokensOut",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11260,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11259,
+                  "mutability": "mutable",
+                  "name": "self",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11285,
+                  "src": "1899:17:47",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 11258,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1899:5:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1898:19:47"
+            },
+            "returnParameters": {
+              "id": 11266,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11263,
+                  "mutability": "mutable",
+                  "name": "amountsOut",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11285,
+                  "src": "1965:27:47",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 11261,
+                      "name": "uint256",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1965:7:47",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 11262,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1965:9:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11265,
+                  "mutability": "mutable",
+                  "name": "maxBPTAmountIn",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11285,
+                  "src": "1994:22:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 11264,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1994:7:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1964:53:47"
+            },
+            "scope": 11286,
+            "src": "1867:269:47",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 11287,
+        "src": "824:1315:47"
+      }
+    ],
+    "src": "688:1451:47"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/StationPoolUserDataHelpers.sol",
+      "exportedSymbols": {
+        "StationPoolUserDataHelpers": [
+          11286
+        ]
+      },
+      "license": "GPL-3.0-or-later"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.7",
+            ".1"
+          ]
+        },
+        "id": 11151,
+        "name": "PragmaDirective",
+        "src": "688:23:47"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 7120,
+          "absolutePath": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/IERC20.sol",
+          "file": "@balancer-labs/v2-solidity-utils/contracts/openzeppelin/IERC20.sol",
+          "scope": 11287,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 11152,
+        "name": "ImportDirective",
+        "src": "713:76:47"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 8844,
+          "absolutePath": "project:/contracts/BaseStationPool.sol",
+          "file": "./BaseStationPool.sol",
+          "scope": 11287,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 11153,
+        "name": "ImportDirective",
+        "src": "791:31:47"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "library",
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            11286
+          ],
+          "name": "StationPoolUserDataHelpers",
+          "scope": 11287
+        },
+        "children": [
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "joinKind",
+              "scope": 11286,
+              "stateMutability": "pure",
+              "virtual": false,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "self",
+                      "scope": 11169,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "bytes",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes",
+                          "type": "bytes"
+                        },
+                        "id": 11154,
+                        "name": "ElementaryTypeName",
+                        "src": "884:5:47"
+                      }
+                    ],
+                    "id": 11155,
+                    "name": "VariableDeclaration",
+                    "src": "884:17:47"
+                  }
+                ],
+                "id": 11156,
+                "name": "ParameterList",
+                "src": "883:19:47"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "scope": 11169,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "enum BaseStationPool.JoinKind",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "BaseStationPool.JoinKind",
+                          "referencedDeclaration": 8123,
+                          "type": "enum BaseStationPool.JoinKind"
+                        },
+                        "id": 11157,
+                        "name": "UserDefinedTypeName",
+                        "src": "926:24:47"
+                      }
+                    ],
+                    "id": 11158,
+                    "name": "VariableDeclaration",
+                    "src": "926:24:47"
+                  }
+                ],
+                "id": 11159,
+                "name": "ParameterList",
+                "src": "925:26:47"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 11159
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "enum BaseStationPool.JoinKind",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bytes_memory_ptr",
+                                  "typeString": "bytes memory"
+                                },
+                                {
+                                  "typeIdentifier": "t_type$_t_enum$_JoinKind_$8123_$",
+                                  "typeString": "type(enum BaseStationPool.JoinKind)"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "member_name": "decode",
+                              "type": "function () pure"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": -1,
+                                  "type": "abi",
+                                  "value": "abi"
+                                },
+                                "id": 11160,
+                                "name": "Identifier",
+                                "src": "969:3:47"
+                              }
+                            ],
+                            "id": 11161,
+                            "name": "MemberAccess",
+                            "src": "969:10:47"
+                          },
+                          {
+                            "attributes": {
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 11155,
+                              "type": "bytes memory",
+                              "value": "self"
+                            },
+                            "id": 11162,
+                            "name": "Identifier",
+                            "src": "980:4:47"
+                          },
+                          {
+                            "attributes": {
+                              "isConstant": false,
+                              "isInlineArray": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "type": "type(enum BaseStationPool.JoinKind)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "member_name": "JoinKind",
+                                  "referencedDeclaration": 8123,
+                                  "type": "type(enum BaseStationPool.JoinKind)"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 8843,
+                                      "type": "type(contract BaseStationPool)",
+                                      "value": "BaseStationPool"
+                                    },
+                                    "id": 11163,
+                                    "name": "Identifier",
+                                    "src": "987:15:47"
+                                  }
+                                ],
+                                "id": 11164,
+                                "name": "MemberAccess",
+                                "src": "987:24:47"
+                              }
+                            ],
+                            "id": 11165,
+                            "name": "TupleExpression",
+                            "src": "986:26:47"
+                          }
+                        ],
+                        "id": 11166,
+                        "name": "FunctionCall",
+                        "src": "969:44:47"
+                      }
+                    ],
+                    "id": 11167,
+                    "name": "Return",
+                    "src": "962:51:47"
+                  }
+                ],
+                "id": 11168,
+                "name": "Block",
+                "src": "952:68:47"
+              }
+            ],
+            "id": 11169,
+            "name": "FunctionDefinition",
+            "src": "866:154:47"
+          },
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "exitKind",
+              "scope": 11286,
+              "stateMutability": "pure",
+              "virtual": false,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "self",
+                      "scope": 11185,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "bytes",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes",
+                          "type": "bytes"
+                        },
+                        "id": 11170,
+                        "name": "ElementaryTypeName",
+                        "src": "1044:5:47"
+                      }
+                    ],
+                    "id": 11171,
+                    "name": "VariableDeclaration",
+                    "src": "1044:17:47"
+                  }
+                ],
+                "id": 11172,
+                "name": "ParameterList",
+                "src": "1043:19:47"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "scope": 11185,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "enum BaseStationPool.ExitKind",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "BaseStationPool.ExitKind",
+                          "referencedDeclaration": 8127,
+                          "type": "enum BaseStationPool.ExitKind"
+                        },
+                        "id": 11173,
+                        "name": "UserDefinedTypeName",
+                        "src": "1086:24:47"
+                      }
+                    ],
+                    "id": 11174,
+                    "name": "VariableDeclaration",
+                    "src": "1086:24:47"
+                  }
+                ],
+                "id": 11175,
+                "name": "ParameterList",
+                "src": "1085:26:47"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 11175
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "enum BaseStationPool.ExitKind",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bytes_memory_ptr",
+                                  "typeString": "bytes memory"
+                                },
+                                {
+                                  "typeIdentifier": "t_type$_t_enum$_ExitKind_$8127_$",
+                                  "typeString": "type(enum BaseStationPool.ExitKind)"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "member_name": "decode",
+                              "type": "function () pure"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": -1,
+                                  "type": "abi",
+                                  "value": "abi"
+                                },
+                                "id": 11176,
+                                "name": "Identifier",
+                                "src": "1129:3:47"
+                              }
+                            ],
+                            "id": 11177,
+                            "name": "MemberAccess",
+                            "src": "1129:10:47"
+                          },
+                          {
+                            "attributes": {
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 11171,
+                              "type": "bytes memory",
+                              "value": "self"
+                            },
+                            "id": 11178,
+                            "name": "Identifier",
+                            "src": "1140:4:47"
+                          },
+                          {
+                            "attributes": {
+                              "isConstant": false,
+                              "isInlineArray": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "type": "type(enum BaseStationPool.ExitKind)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "member_name": "ExitKind",
+                                  "referencedDeclaration": 8127,
+                                  "type": "type(enum BaseStationPool.ExitKind)"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 8843,
+                                      "type": "type(contract BaseStationPool)",
+                                      "value": "BaseStationPool"
+                                    },
+                                    "id": 11179,
+                                    "name": "Identifier",
+                                    "src": "1147:15:47"
+                                  }
+                                ],
+                                "id": 11180,
+                                "name": "MemberAccess",
+                                "src": "1147:24:47"
+                              }
+                            ],
+                            "id": 11181,
+                            "name": "TupleExpression",
+                            "src": "1146:26:47"
+                          }
+                        ],
+                        "id": 11182,
+                        "name": "FunctionCall",
+                        "src": "1129:44:47"
+                      }
+                    ],
+                    "id": 11183,
+                    "name": "Return",
+                    "src": "1122:51:47"
+                  }
+                ],
+                "id": 11184,
+                "name": "Block",
+                "src": "1112:68:47"
+              }
+            ],
+            "id": 11185,
+            "name": "FunctionDefinition",
+            "src": "1026:154:47"
+          },
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "initialAmountsIn",
+              "scope": 11286,
+              "stateMutability": "pure",
+              "virtual": false,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "self",
+                      "scope": 11208,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "bytes",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes",
+                          "type": "bytes"
+                        },
+                        "id": 11186,
+                        "name": "ElementaryTypeName",
+                        "src": "1226:5:47"
+                      }
+                    ],
+                    "id": 11187,
+                    "name": "VariableDeclaration",
+                    "src": "1226:17:47"
+                  }
+                ],
+                "id": 11188,
+                "name": "ParameterList",
+                "src": "1225:19:47"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "amountsIn",
+                      "scope": 11208,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "uint256[]",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "type": "uint256[]"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "name": "uint256",
+                              "type": "uint256"
+                            },
+                            "id": 11189,
+                            "name": "ElementaryTypeName",
+                            "src": "1268:7:47"
+                          }
+                        ],
+                        "id": 11190,
+                        "name": "ArrayTypeName",
+                        "src": "1268:9:47"
+                      }
+                    ],
+                    "id": 11191,
+                    "name": "VariableDeclaration",
+                    "src": "1268:26:47"
+                  }
+                ],
+                "id": 11192,
+                "name": "ParameterList",
+                "src": "1267:28:47"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "tuple()"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "components": [
+                                null,
+                                {
+                                  "attributes": {
+                                    "overloadedDeclarations": [
+                                      null
+                                    ],
+                                    "referencedDeclaration": 11191,
+                                    "type": "uint256[] memory",
+                                    "value": "amountsIn"
+                                  },
+                                  "id": 11193,
+                                  "name": "Identifier",
+                                  "src": "1309:9:47"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isInlineArray": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "type": "tuple(,uint256[] memory)"
+                            },
+                            "id": 11194,
+                            "name": "TupleExpression",
+                            "src": "1306:13:47"
+                          },
+                          {
+                            "attributes": {
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "tryCall": false,
+                              "type": "tuple(enum BaseStationPool.JoinKind,uint256[] memory)",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_bytes_memory_ptr",
+                                      "typeString": "bytes memory"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_tuple$_t_type$_t_enum$_JoinKind_$8123_$_$_t_type$_t_array$_t_uint256_$dyn_memory_ptr_$_$",
+                                      "typeString": "tuple(type(enum BaseStationPool.JoinKind),type(uint256[] memory))"
+                                    }
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "member_name": "decode",
+                                  "type": "function () pure"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": -1,
+                                      "type": "abi",
+                                      "value": "abi"
+                                    },
+                                    "id": 11195,
+                                    "name": "Identifier",
+                                    "src": "1322:3:47"
+                                  }
+                                ],
+                                "id": 11196,
+                                "name": "MemberAccess",
+                                "src": "1322:10:47"
+                              },
+                              {
+                                "attributes": {
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 11187,
+                                  "type": "bytes memory",
+                                  "value": "self"
+                                },
+                                "id": 11197,
+                                "name": "Identifier",
+                                "src": "1333:4:47"
+                              },
+                              {
+                                "attributes": {
+                                  "isConstant": false,
+                                  "isInlineArray": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "tuple(type(enum BaseStationPool.JoinKind),type(uint256[] memory))"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "member_name": "JoinKind",
+                                      "referencedDeclaration": 8123,
+                                      "type": "type(enum BaseStationPool.JoinKind)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 8843,
+                                          "type": "type(contract BaseStationPool)",
+                                          "value": "BaseStationPool"
+                                        },
+                                        "id": 11198,
+                                        "name": "Identifier",
+                                        "src": "1340:15:47"
+                                      }
+                                    ],
+                                    "id": 11199,
+                                    "name": "MemberAccess",
+                                    "src": "1340:24:47"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "type": "type(uint256[] memory)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "isConstant": false,
+                                          "isLValue": false,
+                                          "isPure": true,
+                                          "lValueRequested": false,
+                                          "type": "type(uint256)"
+                                        },
+                                        "children": [
+                                          {
+                                            "attributes": {
+                                              "name": "uint256"
+                                            },
+                                            "id": 11200,
+                                            "name": "ElementaryTypeName",
+                                            "src": "1366:7:47"
+                                          }
+                                        ],
+                                        "id": 11201,
+                                        "name": "ElementaryTypeNameExpression",
+                                        "src": "1366:7:47"
+                                      }
+                                    ],
+                                    "id": 11202,
+                                    "name": "IndexAccess",
+                                    "src": "1366:9:47"
+                                  }
+                                ],
+                                "id": 11203,
+                                "name": "TupleExpression",
+                                "src": "1339:37:47"
+                              }
+                            ],
+                            "id": 11204,
+                            "name": "FunctionCall",
+                            "src": "1322:55:47"
+                          }
+                        ],
+                        "id": 11205,
+                        "name": "Assignment",
+                        "src": "1306:71:47"
+                      }
+                    ],
+                    "id": 11206,
+                    "name": "ExpressionStatement",
+                    "src": "1306:71:47"
+                  }
+                ],
+                "id": 11207,
+                "name": "Block",
+                "src": "1296:88:47"
+              }
+            ],
+            "id": 11208,
+            "name": "FunctionDefinition",
+            "src": "1200:184:47"
+          },
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "exactTokensInForBptOut",
+              "scope": 11286,
+              "stateMutability": "pure",
+              "virtual": false,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "self",
+                      "scope": 11236,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "bytes",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes",
+                          "type": "bytes"
+                        },
+                        "id": 11209,
+                        "name": "ElementaryTypeName",
+                        "src": "1422:5:47"
+                      }
+                    ],
+                    "id": 11210,
+                    "name": "VariableDeclaration",
+                    "src": "1422:17:47"
+                  }
+                ],
+                "id": 11211,
+                "name": "ParameterList",
+                "src": "1421:19:47"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "amountsIn",
+                      "scope": 11236,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "uint256[]",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "type": "uint256[]"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "name": "uint256",
+                              "type": "uint256"
+                            },
+                            "id": 11212,
+                            "name": "ElementaryTypeName",
+                            "src": "1488:7:47"
+                          }
+                        ],
+                        "id": 11213,
+                        "name": "ArrayTypeName",
+                        "src": "1488:9:47"
+                      }
+                    ],
+                    "id": 11214,
+                    "name": "VariableDeclaration",
+                    "src": "1488:26:47"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "minBPTAmountOut",
+                      "scope": 11236,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 11215,
+                        "name": "ElementaryTypeName",
+                        "src": "1516:7:47"
+                      }
+                    ],
+                    "id": 11216,
+                    "name": "VariableDeclaration",
+                    "src": "1516:23:47"
+                  }
+                ],
+                "id": 11217,
+                "name": "ParameterList",
+                "src": "1487:53:47"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "tuple()"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "components": [
+                                null,
+                                {
+                                  "attributes": {
+                                    "overloadedDeclarations": [
+                                      null
+                                    ],
+                                    "referencedDeclaration": 11214,
+                                    "type": "uint256[] memory",
+                                    "value": "amountsIn"
+                                  },
+                                  "id": 11218,
+                                  "name": "Identifier",
+                                  "src": "1558:9:47"
+                                },
+                                {
+                                  "attributes": {
+                                    "overloadedDeclarations": [
+                                      null
+                                    ],
+                                    "referencedDeclaration": 11216,
+                                    "type": "uint256",
+                                    "value": "minBPTAmountOut"
+                                  },
+                                  "id": 11219,
+                                  "name": "Identifier",
+                                  "src": "1569:15:47"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isInlineArray": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "type": "tuple(,uint256[] memory,uint256)"
+                            },
+                            "id": 11220,
+                            "name": "TupleExpression",
+                            "src": "1555:30:47"
+                          },
+                          {
+                            "attributes": {
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "tryCall": false,
+                              "type": "tuple(enum BaseStationPool.JoinKind,uint256[] memory,uint256)",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_bytes_memory_ptr",
+                                      "typeString": "bytes memory"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_tuple$_t_type$_t_enum$_JoinKind_$8123_$_$_t_type$_t_array$_t_uint256_$dyn_memory_ptr_$_$_t_type$_t_uint256_$_$",
+                                      "typeString": "tuple(type(enum BaseStationPool.JoinKind),type(uint256[] memory),type(uint256))"
+                                    }
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "member_name": "decode",
+                                  "type": "function () pure"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": -1,
+                                      "type": "abi",
+                                      "value": "abi"
+                                    },
+                                    "id": 11221,
+                                    "name": "Identifier",
+                                    "src": "1588:3:47"
+                                  }
+                                ],
+                                "id": 11222,
+                                "name": "MemberAccess",
+                                "src": "1588:10:47"
+                              },
+                              {
+                                "attributes": {
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 11210,
+                                  "type": "bytes memory",
+                                  "value": "self"
+                                },
+                                "id": 11223,
+                                "name": "Identifier",
+                                "src": "1599:4:47"
+                              },
+                              {
+                                "attributes": {
+                                  "isConstant": false,
+                                  "isInlineArray": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "tuple(type(enum BaseStationPool.JoinKind),type(uint256[] memory),type(uint256))"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "member_name": "JoinKind",
+                                      "referencedDeclaration": 8123,
+                                      "type": "type(enum BaseStationPool.JoinKind)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 8843,
+                                          "type": "type(contract BaseStationPool)",
+                                          "value": "BaseStationPool"
+                                        },
+                                        "id": 11224,
+                                        "name": "Identifier",
+                                        "src": "1606:15:47"
+                                      }
+                                    ],
+                                    "id": 11225,
+                                    "name": "MemberAccess",
+                                    "src": "1606:24:47"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "type": "type(uint256[] memory)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "isConstant": false,
+                                          "isLValue": false,
+                                          "isPure": true,
+                                          "lValueRequested": false,
+                                          "type": "type(uint256)"
+                                        },
+                                        "children": [
+                                          {
+                                            "attributes": {
+                                              "name": "uint256"
+                                            },
+                                            "id": 11226,
+                                            "name": "ElementaryTypeName",
+                                            "src": "1632:7:47"
+                                          }
+                                        ],
+                                        "id": 11227,
+                                        "name": "ElementaryTypeNameExpression",
+                                        "src": "1632:7:47"
+                                      }
+                                    ],
+                                    "id": 11228,
+                                    "name": "IndexAccess",
+                                    "src": "1632:9:47"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "type": "type(uint256)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "name": "uint256"
+                                        },
+                                        "id": 11229,
+                                        "name": "ElementaryTypeName",
+                                        "src": "1643:7:47"
+                                      }
+                                    ],
+                                    "id": 11230,
+                                    "name": "ElementaryTypeNameExpression",
+                                    "src": "1643:7:47"
+                                  }
+                                ],
+                                "id": 11231,
+                                "name": "TupleExpression",
+                                "src": "1605:46:47"
+                              }
+                            ],
+                            "id": 11232,
+                            "name": "FunctionCall",
+                            "src": "1588:64:47"
+                          }
+                        ],
+                        "id": 11233,
+                        "name": "Assignment",
+                        "src": "1555:97:47"
+                      }
+                    ],
+                    "id": 11234,
+                    "name": "ExpressionStatement",
+                    "src": "1555:97:47"
+                  }
+                ],
+                "id": 11235,
+                "name": "Block",
+                "src": "1545:114:47"
+              }
+            ],
+            "id": 11236,
+            "name": "FunctionDefinition",
+            "src": "1390:269:47"
+          },
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "exactBptInForTokensOut",
+              "scope": 11286,
+              "stateMutability": "pure",
+              "virtual": false,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "self",
+                      "scope": 11257,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "bytes",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes",
+                          "type": "bytes"
+                        },
+                        "id": 11237,
+                        "name": "ElementaryTypeName",
+                        "src": "1710:5:47"
+                      }
+                    ],
+                    "id": 11238,
+                    "name": "VariableDeclaration",
+                    "src": "1710:17:47"
+                  }
+                ],
+                "id": 11239,
+                "name": "ParameterList",
+                "src": "1709:19:47"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "bptAmountIn",
+                      "scope": 11257,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 11240,
+                        "name": "ElementaryTypeName",
+                        "src": "1752:7:47"
+                      }
+                    ],
+                    "id": 11241,
+                    "name": "VariableDeclaration",
+                    "src": "1752:19:47"
+                  }
+                ],
+                "id": 11242,
+                "name": "ParameterList",
+                "src": "1751:21:47"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "tuple()"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "components": [
+                                null,
+                                {
+                                  "attributes": {
+                                    "overloadedDeclarations": [
+                                      null
+                                    ],
+                                    "referencedDeclaration": 11241,
+                                    "type": "uint256",
+                                    "value": "bptAmountIn"
+                                  },
+                                  "id": 11243,
+                                  "name": "Identifier",
+                                  "src": "1786:11:47"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isInlineArray": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "type": "tuple(,uint256)"
+                            },
+                            "id": 11244,
+                            "name": "TupleExpression",
+                            "src": "1783:15:47"
+                          },
+                          {
+                            "attributes": {
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "tryCall": false,
+                              "type": "tuple(enum BaseStationPool.ExitKind,uint256)",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_bytes_memory_ptr",
+                                      "typeString": "bytes memory"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_tuple$_t_type$_t_enum$_ExitKind_$8127_$_$_t_type$_t_uint256_$_$",
+                                      "typeString": "tuple(type(enum BaseStationPool.ExitKind),type(uint256))"
+                                    }
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "member_name": "decode",
+                                  "type": "function () pure"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": -1,
+                                      "type": "abi",
+                                      "value": "abi"
+                                    },
+                                    "id": 11245,
+                                    "name": "Identifier",
+                                    "src": "1801:3:47"
+                                  }
+                                ],
+                                "id": 11246,
+                                "name": "MemberAccess",
+                                "src": "1801:10:47"
+                              },
+                              {
+                                "attributes": {
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 11238,
+                                  "type": "bytes memory",
+                                  "value": "self"
+                                },
+                                "id": 11247,
+                                "name": "Identifier",
+                                "src": "1812:4:47"
+                              },
+                              {
+                                "attributes": {
+                                  "isConstant": false,
+                                  "isInlineArray": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "tuple(type(enum BaseStationPool.ExitKind),type(uint256))"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "member_name": "ExitKind",
+                                      "referencedDeclaration": 8127,
+                                      "type": "type(enum BaseStationPool.ExitKind)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 8843,
+                                          "type": "type(contract BaseStationPool)",
+                                          "value": "BaseStationPool"
+                                        },
+                                        "id": 11248,
+                                        "name": "Identifier",
+                                        "src": "1819:15:47"
+                                      }
+                                    ],
+                                    "id": 11249,
+                                    "name": "MemberAccess",
+                                    "src": "1819:24:47"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "type": "type(uint256)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "name": "uint256"
+                                        },
+                                        "id": 11250,
+                                        "name": "ElementaryTypeName",
+                                        "src": "1845:7:47"
+                                      }
+                                    ],
+                                    "id": 11251,
+                                    "name": "ElementaryTypeNameExpression",
+                                    "src": "1845:7:47"
+                                  }
+                                ],
+                                "id": 11252,
+                                "name": "TupleExpression",
+                                "src": "1818:35:47"
+                              }
+                            ],
+                            "id": 11253,
+                            "name": "FunctionCall",
+                            "src": "1801:53:47"
+                          }
+                        ],
+                        "id": 11254,
+                        "name": "Assignment",
+                        "src": "1783:71:47"
+                      }
+                    ],
+                    "id": 11255,
+                    "name": "ExpressionStatement",
+                    "src": "1783:71:47"
+                  }
+                ],
+                "id": 11256,
+                "name": "Block",
+                "src": "1773:88:47"
+              }
+            ],
+            "id": 11257,
+            "name": "FunctionDefinition",
+            "src": "1678:183:47"
+          },
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "bptInForExactTokensOut",
+              "scope": 11286,
+              "stateMutability": "pure",
+              "virtual": false,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "self",
+                      "scope": 11285,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "bytes",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes",
+                          "type": "bytes"
+                        },
+                        "id": 11258,
+                        "name": "ElementaryTypeName",
+                        "src": "1899:5:47"
+                      }
+                    ],
+                    "id": 11259,
+                    "name": "VariableDeclaration",
+                    "src": "1899:17:47"
+                  }
+                ],
+                "id": 11260,
+                "name": "ParameterList",
+                "src": "1898:19:47"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "amountsOut",
+                      "scope": 11285,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "uint256[]",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "type": "uint256[]"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "name": "uint256",
+                              "type": "uint256"
+                            },
+                            "id": 11261,
+                            "name": "ElementaryTypeName",
+                            "src": "1965:7:47"
+                          }
+                        ],
+                        "id": 11262,
+                        "name": "ArrayTypeName",
+                        "src": "1965:9:47"
+                      }
+                    ],
+                    "id": 11263,
+                    "name": "VariableDeclaration",
+                    "src": "1965:27:47"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "maxBPTAmountIn",
+                      "scope": 11285,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 11264,
+                        "name": "ElementaryTypeName",
+                        "src": "1994:7:47"
+                      }
+                    ],
+                    "id": 11265,
+                    "name": "VariableDeclaration",
+                    "src": "1994:22:47"
+                  }
+                ],
+                "id": 11266,
+                "name": "ParameterList",
+                "src": "1964:53:47"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "tuple()"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "components": [
+                                null,
+                                {
+                                  "attributes": {
+                                    "overloadedDeclarations": [
+                                      null
+                                    ],
+                                    "referencedDeclaration": 11263,
+                                    "type": "uint256[] memory",
+                                    "value": "amountsOut"
+                                  },
+                                  "id": 11267,
+                                  "name": "Identifier",
+                                  "src": "2035:10:47"
+                                },
+                                {
+                                  "attributes": {
+                                    "overloadedDeclarations": [
+                                      null
+                                    ],
+                                    "referencedDeclaration": 11265,
+                                    "type": "uint256",
+                                    "value": "maxBPTAmountIn"
+                                  },
+                                  "id": 11268,
+                                  "name": "Identifier",
+                                  "src": "2047:14:47"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isInlineArray": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "type": "tuple(,uint256[] memory,uint256)"
+                            },
+                            "id": 11269,
+                            "name": "TupleExpression",
+                            "src": "2032:30:47"
+                          },
+                          {
+                            "attributes": {
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "tryCall": false,
+                              "type": "tuple(enum BaseStationPool.ExitKind,uint256[] memory,uint256)",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_bytes_memory_ptr",
+                                      "typeString": "bytes memory"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_tuple$_t_type$_t_enum$_ExitKind_$8127_$_$_t_type$_t_array$_t_uint256_$dyn_memory_ptr_$_$_t_type$_t_uint256_$_$",
+                                      "typeString": "tuple(type(enum BaseStationPool.ExitKind),type(uint256[] memory),type(uint256))"
+                                    }
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "member_name": "decode",
+                                  "type": "function () pure"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": -1,
+                                      "type": "abi",
+                                      "value": "abi"
+                                    },
+                                    "id": 11270,
+                                    "name": "Identifier",
+                                    "src": "2065:3:47"
+                                  }
+                                ],
+                                "id": 11271,
+                                "name": "MemberAccess",
+                                "src": "2065:10:47"
+                              },
+                              {
+                                "attributes": {
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 11259,
+                                  "type": "bytes memory",
+                                  "value": "self"
+                                },
+                                "id": 11272,
+                                "name": "Identifier",
+                                "src": "2076:4:47"
+                              },
+                              {
+                                "attributes": {
+                                  "isConstant": false,
+                                  "isInlineArray": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "tuple(type(enum BaseStationPool.ExitKind),type(uint256[] memory),type(uint256))"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "member_name": "ExitKind",
+                                      "referencedDeclaration": 8127,
+                                      "type": "type(enum BaseStationPool.ExitKind)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 8843,
+                                          "type": "type(contract BaseStationPool)",
+                                          "value": "BaseStationPool"
+                                        },
+                                        "id": 11273,
+                                        "name": "Identifier",
+                                        "src": "2083:15:47"
+                                      }
+                                    ],
+                                    "id": 11274,
+                                    "name": "MemberAccess",
+                                    "src": "2083:24:47"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "type": "type(uint256[] memory)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "isConstant": false,
+                                          "isLValue": false,
+                                          "isPure": true,
+                                          "lValueRequested": false,
+                                          "type": "type(uint256)"
+                                        },
+                                        "children": [
+                                          {
+                                            "attributes": {
+                                              "name": "uint256"
+                                            },
+                                            "id": 11275,
+                                            "name": "ElementaryTypeName",
+                                            "src": "2109:7:47"
+                                          }
+                                        ],
+                                        "id": 11276,
+                                        "name": "ElementaryTypeNameExpression",
+                                        "src": "2109:7:47"
+                                      }
+                                    ],
+                                    "id": 11277,
+                                    "name": "IndexAccess",
+                                    "src": "2109:9:47"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "type": "type(uint256)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "name": "uint256"
+                                        },
+                                        "id": 11278,
+                                        "name": "ElementaryTypeName",
+                                        "src": "2120:7:47"
+                                      }
+                                    ],
+                                    "id": 11279,
+                                    "name": "ElementaryTypeNameExpression",
+                                    "src": "2120:7:47"
+                                  }
+                                ],
+                                "id": 11280,
+                                "name": "TupleExpression",
+                                "src": "2082:46:47"
+                              }
+                            ],
+                            "id": 11281,
+                            "name": "FunctionCall",
+                            "src": "2065:64:47"
+                          }
+                        ],
+                        "id": 11282,
+                        "name": "Assignment",
+                        "src": "2032:97:47"
+                      }
+                    ],
+                    "id": 11283,
+                    "name": "ExpressionStatement",
+                    "src": "2032:97:47"
+                  }
+                ],
+                "id": 11284,
+                "name": "Block",
+                "src": "2022:114:47"
+              }
+            ],
+            "id": 11285,
+            "name": "FunctionDefinition",
+            "src": "1867:269:47"
+          }
+        ],
+        "id": 11286,
+        "name": "ContractDefinition",
+        "src": "824:1315:47"
+      }
+    ],
+    "id": 11287,
+    "name": "SourceUnit",
+    "src": "688:1451:47"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.1+commit.f4a555be.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.2",
+  "updatedAt": "2021-08-19T22:46:59.539Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

@@ -1,0 +1,689 @@
+{
+  "contractName": "IMinimalSwapInfoPool",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "balances",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "lastChangeBlock",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "protocolSwapFeePercentage",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "userData",
+          "type": "bytes"
+        }
+      ],
+      "name": "onExitPool",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "amountsOut",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "dueProtocolFeeAmounts",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "balances",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "lastChangeBlock",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "protocolSwapFeePercentage",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "userData",
+          "type": "bytes"
+        }
+      ],
+      "name": "onJoinPool",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "amountsIn",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "dueProtocolFeeAmounts",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "enum IVault.SwapKind",
+              "name": "kind",
+              "type": "uint8"
+            },
+            {
+              "internalType": "contract IERC20",
+              "name": "tokenIn",
+              "type": "address"
+            },
+            {
+              "internalType": "contract IERC20",
+              "name": "tokenOut",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "poolId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "lastChangeBlock",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "userData",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IPoolSwapStructs.SwapRequest",
+          "name": "swapRequest",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "currentBalanceTokenIn",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "currentBalanceTokenOut",
+          "type": "uint256"
+        }
+      ],
+      "name": "onSwap",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.1+commit.f4a555be\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"balances\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256\",\"name\":\"lastChangeBlock\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"protocolSwapFeePercentage\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"userData\",\"type\":\"bytes\"}],\"name\":\"onExitPool\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"amountsOut\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"dueProtocolFeeAmounts\",\"type\":\"uint256[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"balances\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256\",\"name\":\"lastChangeBlock\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"protocolSwapFeePercentage\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"userData\",\"type\":\"bytes\"}],\"name\":\"onJoinPool\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"amountsIn\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"dueProtocolFeeAmounts\",\"type\":\"uint256[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"enum IVault.SwapKind\",\"name\":\"kind\",\"type\":\"uint8\"},{\"internalType\":\"contract IERC20\",\"name\":\"tokenIn\",\"type\":\"address\"},{\"internalType\":\"contract IERC20\",\"name\":\"tokenOut\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"lastChangeBlock\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"userData\",\"type\":\"bytes\"}],\"internalType\":\"struct IPoolSwapStructs.SwapRequest\",\"name\":\"swapRequest\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"currentBalanceTokenIn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"currentBalanceTokenOut\",\"type\":\"uint256\"}],\"name\":\"onSwap\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Pool contracts with the MinimalSwapInfo or TwoToken specialization settings should implement this interface. This is called by the Vault when a user calls `IVault.swap` or `IVault.batchSwap` to swap with this Pool. Returns the number of tokens the Pool will grant to the user in a 'given in' swap, or that the user will grant to the pool in a 'given out' swap. This can often be implemented by a `view` function, since many pricing algorithms don't need to track state changes in swaps. However, contracts implementing this in non-view functions should check that the caller is indeed the Vault.\",\"kind\":\"dev\",\"methods\":{\"onExitPool(bytes32,address,address,uint256[],uint256,uint256,bytes)\":{\"details\":\"Called by the Vault when a user calls `IVault.exitPool` to remove liquidity from this Pool. Returns how many tokens the Vault should deduct from the Pool's balances, as well as the amount of protocol fees the Pool owes to the Vault. The Vault will then take tokens from the Pool's balances and send them to `recipient`, as well as collect the reported amount in protocol fees, which the Pool should calculate based on `protocolSwapFeePercentage`. Protocol fees are charged on exit events to guarantee that users exiting the Pool have paid their share. `sender` is the account performing the exit (typically the pool shareholder), and `recipient` is the account to which the Vault will send the proceeds. `currentBalances` contains the total token balances for each token the Pool registered in the Vault, in the same order that `IVault.getPoolTokens` would return. `lastChangeBlock` is the last block in which *any* of the Pool's registered tokens last changed its total balance. `userData` contains any pool-specific instructions needed to perform the calculations, such as the type of exit (e.g., proportional given an amount of pool shares, single-asset, multi-asset, etc.) Contracts implementing this function should check that the caller is indeed the Vault before performing any state-changing operations, such as burning pool shares.\"},\"onJoinPool(bytes32,address,address,uint256[],uint256,uint256,bytes)\":{\"details\":\"Called by the Vault when a user calls `IVault.joinPool` to add liquidity to this Pool. Returns how many of each registered token the user should provide, as well as the amount of protocol fees the Pool owes to the Vault. The Vault will then take tokens from `sender` and add them to the Pool's balances, as well as collect the reported amount in protocol fees, which the pool should calculate based on `protocolSwapFeePercentage`. Protocol fees are reported and charged on join events so that the Pool is free of debt whenever new users join. `sender` is the account performing the join (from which tokens will be withdrawn), and `recipient` is the account designated to receive any benefits (typically pool shares). `currentBalances` contains the total balances for each token the Pool registered in the Vault, in the same order that `IVault.getPoolTokens` would return. `lastChangeBlock` is the last block in which *any* of the Pool's registered tokens last changed its total balance. `userData` contains any pool-specific instructions needed to perform the calculations, such as the type of join (e.g., proportional given an amount of pool shares, single-asset, multi-asset, etc.) Contracts implementing this function should check that the caller is indeed the Vault before performing any state-changing operations, such as minting pool shares.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IMinimalSwapInfoPool.sol\":\"IMinimalSwapInfoPool\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@balancer-labs/v2-solidity-utils/contracts/helpers/ISignaturesValidator.sol\":{\"keccak256\":\"0x2fe46b13b7c8bfc6f5c539c0b73d6325813f383f551b71fb6bca8dafd06964e1\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://8e651ae7a3a3652c8bb7aaa42c2cce5924310df62a923d9ec50ddb9c850d2995\",\"dweb:/ipfs/QmTHz9y18L5FD7v9GcvxGWSLJuin2KCUEYoARTgz8njce8\"]},\"@balancer-labs/v2-solidity-utils/contracts/helpers/ITemporarilyPausable.sol\":{\"keccak256\":\"0xb3e5b7c63f80b80ef3f0138eac56c397a439bf6b667fc06d5061aa869828b562\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://978d66fba0721a1a67e29a32eaddab8d1f92ab2fb2d611724ea8d0d3c9b0e95b\",\"dweb:/ipfs/QmfG4foZvx3NDZao7d4VvGzL4Uxtk8VWNJXvgo9fiAJxZv\"]},\"@balancer-labs/v2-solidity-utils/contracts/misc/IWETH.sol\":{\"keccak256\":\"0x19a0628bedbe48178a4c90509a40d750d5039677b964ec533a24361a8d97274b\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://c55887c89f152f00e5d65389061de28fada0e73eb5f41ebd16a3b8e65846cb1a\",\"dweb:/ipfs/QmNbVtaA44BGvKnKiCT4bEtjZu1ZD5ZJ6XrgBDh5qVEGcP\"]},\"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/IERC20.sol\":{\"keccak256\":\"0xd828a935a72a6d182912abba290e4debb8c684c36fd756088f7acb30e0b2bb76\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1e6ac013b95e9622917c5ad388dc73f0a389a76341597731746e54547aa9de8a\",\"dweb:/ipfs/QmPB8qWcRPZaDsASgQpf5a6i2YrZ4TDV3Ebi25Mn9EAdf4\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IAsset.sol\":{\"keccak256\":\"0x70ecf1d48c285d78718bd2e159345677038ed8a81c74444bedd6a5c61af9aff6\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://8c7c210e449ea5d284abeaaed82e3bb3c203b57d8b3e5dfb6daedf76eaae31d1\",\"dweb:/ipfs/QmfJWLPhCG6PcHNJMLNDbAM6nd2ZVFCexCXvJ9qQmRaNbn\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IAuthorizer.sol\":{\"keccak256\":\"0x792871e208bba1dad291f8d1cffad86f4afa5e2360816bd9c43481f7297155f5\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://af8ab65258e294c8ba0a5feee91208789f641181d225364b02123d38d9eec7d0\",\"dweb:/ipfs/Qmb5HUXRaSrHJafwK1H8XRjcCTnAZMShTvBNhr1ovA1j2m\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IBasePool.sol\":{\"keccak256\":\"0x1fdce4de26cad355f4ad93e4a5b66d5a5692c4cd2f0b6c2bb2c3aef3ee49422f\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://fde5dea4a8a65dd019813530ecb4cc857484ff104e80cf18c12d196b0ec74973\",\"dweb:/ipfs/QmPyVrmus8pqbPKofTonEgtWCCsn3j4MXFPsy481f8jav8\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IFlashLoanRecipient.sol\":{\"keccak256\":\"0x5ceb7a9b209c01659b25898622a2415414e12a7200559e57283fd511fe96c92a\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://35a6ee6cb389f2675c1b64f9813862d3503524ee05067ba88172c9298d4f5e3c\",\"dweb:/ipfs/QmZGPUaoKfRigdo2U9U3695j9wX97GRSzgiK8c6zhVjjFY\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IMinimalSwapInfoPool.sol\":{\"keccak256\":\"0x7469919e147c0db8b4f290d310ca3816dec5d3c6cc6b258cf6e0df820a20a179\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://ad47775f388a985c265ef4ca1d1531e4bffa97ef51a03fea9273a2ce8f1ab667\",\"dweb:/ipfs/QmZ4mMm2rPPZ4eLHHUY82vxLLRyKXb5ekchgGvDReryiTS\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IPoolSwapStructs.sol\":{\"keccak256\":\"0x618519301dfd8c123981fef84161e3068988bc2a231cd41785c304ba45135af3\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://58313981bc5fc28df617f798df77cab1813251d37be42cecee623617b29bf8c5\",\"dweb:/ipfs/QmREMv5117SFpM6GBYgvY1zf4xYXeMQknVi12TqfJ1KPxp\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IProtocolFeesCollector.sol\":{\"keccak256\":\"0xacad6dfbdf2395aeb8b793b3cb5d9ee2702d8d5f667084ff7bfa248f64700f47\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://b8a27ce7efd29cb653529a2e2c6a828f5bd973b286dc166d12a8f81426bca68a\",\"dweb:/ipfs/QmPFuddzXwjK58qDG4z1n9S9Yff865yCToAStRbdfWMo1D\"]},\"project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IVault.sol\":{\"keccak256\":\"0x8a0904cb11d6571fdc0051b2de6b675d0e1cf8af45c1a5467d047812f1086223\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://e428d19d1bd18504c5c8a797b0a80515072f4d7fc278df73b9fec0ab8efe155d\",\"dweb:/ipfs/QmYeJPPQKAckBVvuhU9XXiZR4aSrVNu3WcfTmSsXJJYey3\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: GPL-3.0-or-later\n// This program is free software: you can redistribute it and/or modify\n// it under the terms of the GNU General Public License as published by\n// the Free Software Foundation, either version 3 of the License, or\n// (at your option) any later version.\n\n// This program is distributed in the hope that it will be useful,\n// but WITHOUT ANY WARRANTY; without even the implied warranty of\n// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n// GNU General Public License for more details.\n\n// You should have received a copy of the GNU General Public License\n// along with this program.  If not, see <http://www.gnu.org/licenses/>.\n\npragma solidity ^0.7.0;\npragma experimental ABIEncoderV2;\n\nimport \"./IBasePool.sol\";\n\n/**\n * @dev Pool contracts with the MinimalSwapInfo or TwoToken specialization settings should implement this interface.\n *\n * This is called by the Vault when a user calls `IVault.swap` or `IVault.batchSwap` to swap with this Pool.\n * Returns the number of tokens the Pool will grant to the user in a 'given in' swap, or that the user will grant\n * to the pool in a 'given out' swap.\n *\n * This can often be implemented by a `view` function, since many pricing algorithms don't need to track state\n * changes in swaps. However, contracts implementing this in non-view functions should check that the caller is\n * indeed the Vault.\n */\ninterface IMinimalSwapInfoPool is IBasePool {\n    function onSwap(\n        SwapRequest memory swapRequest,\n        uint256 currentBalanceTokenIn,\n        uint256 currentBalanceTokenOut\n    ) external returns (uint256 amount);\n}\n",
+  "sourcePath": "/home/tatsu/Station/CrossAssetPaymentPool/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IMinimalSwapInfoPool.sol",
+  "ast": {
+    "absolutePath": "project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IMinimalSwapInfoPool.sol",
+    "exportedSymbols": {
+      "IMinimalSwapInfoPool": [
+        19582
+      ]
+    },
+    "id": 19583,
+    "license": "GPL-3.0-or-later",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 19565,
+        "literals": [
+          "solidity",
+          "^",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "688:23:78"
+      },
+      {
+        "id": 19566,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "712:33:78"
+      },
+      {
+        "absolutePath": "project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IBasePool.sol",
+        "file": "./IBasePool.sol",
+        "id": 19567,
+        "nodeType": "ImportDirective",
+        "scope": 19583,
+        "sourceUnit": 19523,
+        "src": "747:25:78",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 19569,
+              "name": "IBasePool",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 19522,
+              "src": "1444:9:78",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IBasePool_$19522",
+                "typeString": "contract IBasePool"
+              }
+            },
+            "id": 19570,
+            "nodeType": "InheritanceSpecifier",
+            "src": "1444:9:78"
+          }
+        ],
+        "contractDependencies": [
+          19522,
+          19607
+        ],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 19568,
+          "nodeType": "StructuredDocumentation",
+          "src": "774:635:78",
+          "text": " @dev Pool contracts with the MinimalSwapInfo or TwoToken specialization settings should implement this interface.\n This is called by the Vault when a user calls `IVault.swap` or `IVault.batchSwap` to swap with this Pool.\n Returns the number of tokens the Pool will grant to the user in a 'given in' swap, or that the user will grant\n to the pool in a 'given out' swap.\n This can often be implemented by a `view` function, since many pricing algorithms don't need to track state\n changes in swaps. However, contracts implementing this in non-view functions should check that the caller is\n indeed the Vault."
+        },
+        "fullyImplemented": false,
+        "id": 19582,
+        "linearizedBaseContracts": [
+          19582,
+          19522,
+          19607
+        ],
+        "name": "IMinimalSwapInfoPool",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "9d2c110c",
+            "id": 19581,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "onSwap",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 19577,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 19572,
+                  "mutability": "mutable",
+                  "name": "swapRequest",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 19581,
+                  "src": "1485:30:78",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_SwapRequest_$19606_memory_ptr",
+                    "typeString": "struct IPoolSwapStructs.SwapRequest"
+                  },
+                  "typeName": {
+                    "id": 19571,
+                    "name": "SwapRequest",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 19606,
+                    "src": "1485:11:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_SwapRequest_$19606_storage_ptr",
+                      "typeString": "struct IPoolSwapStructs.SwapRequest"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 19574,
+                  "mutability": "mutable",
+                  "name": "currentBalanceTokenIn",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 19581,
+                  "src": "1525:29:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 19573,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1525:7:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 19576,
+                  "mutability": "mutable",
+                  "name": "currentBalanceTokenOut",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 19581,
+                  "src": "1564:30:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 19575,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1564:7:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1475:125:78"
+            },
+            "returnParameters": {
+              "id": 19580,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 19579,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 19581,
+                  "src": "1619:14:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 19578,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1619:7:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1618:16:78"
+            },
+            "scope": 19582,
+            "src": "1460:175:78",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 19583,
+        "src": "1410:227:78"
+      }
+    ],
+    "src": "688:950:78"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IMinimalSwapInfoPool.sol",
+      "exportedSymbols": {
+        "IMinimalSwapInfoPool": [
+          19582
+        ]
+      },
+      "license": "GPL-3.0-or-later"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.7",
+            ".0"
+          ]
+        },
+        "id": 19565,
+        "name": "PragmaDirective",
+        "src": "688:23:78"
+      },
+      {
+        "attributes": {
+          "literals": [
+            "experimental",
+            "ABIEncoderV2"
+          ]
+        },
+        "id": 19566,
+        "name": "PragmaDirective",
+        "src": "712:33:78"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 19523,
+          "absolutePath": "project:/node_modules/@balancer-labs/v2-vault/contracts/interfaces/IBasePool.sol",
+          "file": "./IBasePool.sol",
+          "scope": 19583,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 19567,
+        "name": "ImportDirective",
+        "src": "747:25:78"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "contractDependencies": [
+            19522,
+            19607
+          ],
+          "contractKind": "interface",
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            19582,
+            19522,
+            19607
+          ],
+          "name": "IMinimalSwapInfoPool",
+          "scope": 19583
+        },
+        "children": [
+          {
+            "attributes": {
+              "text": " @dev Pool contracts with the MinimalSwapInfo or TwoToken specialization settings should implement this interface.\n This is called by the Vault when a user calls `IVault.swap` or `IVault.batchSwap` to swap with this Pool.\n Returns the number of tokens the Pool will grant to the user in a 'given in' swap, or that the user will grant\n to the pool in a 'given out' swap.\n This can often be implemented by a `view` function, since many pricing algorithms don't need to track state\n changes in swaps. However, contracts implementing this in non-view functions should check that the caller is\n indeed the Vault."
+            },
+            "id": 19568,
+            "name": "StructuredDocumentation",
+            "src": "774:635:78"
+          },
+          {
+            "attributes": {},
+            "children": [
+              {
+                "attributes": {
+                  "name": "IBasePool",
+                  "referencedDeclaration": 19522,
+                  "type": "contract IBasePool"
+                },
+                "id": 19569,
+                "name": "UserDefinedTypeName",
+                "src": "1444:9:78"
+              }
+            ],
+            "id": 19570,
+            "name": "InheritanceSpecifier",
+            "src": "1444:9:78"
+          },
+          {
+            "attributes": {
+              "functionSelector": "9d2c110c",
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "onSwap",
+              "scope": 19582,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "swapRequest",
+                      "scope": 19581,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "struct IPoolSwapStructs.SwapRequest",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "SwapRequest",
+                          "referencedDeclaration": 19606,
+                          "type": "struct IPoolSwapStructs.SwapRequest"
+                        },
+                        "id": 19571,
+                        "name": "UserDefinedTypeName",
+                        "src": "1485:11:78"
+                      }
+                    ],
+                    "id": 19572,
+                    "name": "VariableDeclaration",
+                    "src": "1485:30:78"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "currentBalanceTokenIn",
+                      "scope": 19581,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 19573,
+                        "name": "ElementaryTypeName",
+                        "src": "1525:7:78"
+                      }
+                    ],
+                    "id": 19574,
+                    "name": "VariableDeclaration",
+                    "src": "1525:29:78"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "currentBalanceTokenOut",
+                      "scope": 19581,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 19575,
+                        "name": "ElementaryTypeName",
+                        "src": "1564:7:78"
+                      }
+                    ],
+                    "id": 19576,
+                    "name": "VariableDeclaration",
+                    "src": "1564:30:78"
+                  }
+                ],
+                "id": 19577,
+                "name": "ParameterList",
+                "src": "1475:125:78"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "amount",
+                      "scope": 19581,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 19578,
+                        "name": "ElementaryTypeName",
+                        "src": "1619:7:78"
+                      }
+                    ],
+                    "id": 19579,
+                    "name": "VariableDeclaration",
+                    "src": "1619:14:78"
+                  }
+                ],
+                "id": 19580,
+                "name": "ParameterList",
+                "src": "1618:16:78"
+              }
+            ],
+            "id": 19581,
+            "name": "FunctionDefinition",
+            "src": "1460:175:78"
+          }
+        ],
+        "id": 19582,
+        "name": "ContractDefinition",
+        "src": "1410:227:78"
+      }
+    ],
+    "id": 19583,
+    "name": "SourceUnit",
+    "src": "688:950:78"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.1+commit.f4a555be.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.2",
+  "updatedAt": "2021-08-19T22:46:59.510Z",
+  "devdoc": {
+    "details": "Pool contracts with the MinimalSwapInfo or TwoToken specialization settings should implement this interface. This is called by the Vault when a user calls `IVault.swap` or `IVault.batchSwap` to swap with this Pool. Returns the number of tokens the Pool will grant to the user in a 'given in' swap, or that the user will grant to the pool in a 'given out' swap. This can often be implemented by a `view` function, since many pricing algorithms don't need to track state changes in swaps. However, contracts implementing this in non-view functions should check that the caller is indeed the Vault.",
+    "kind": "dev",
+    "methods": {
+      "onExitPool(bytes32,address,address,uint256[],uint256,uint256,bytes)": {
+        "details": "Called by the Vault when a user calls `IVault.exitPool` to remove liquidity from this Pool. Returns how many tokens the Vault should deduct from the Pool's balances, as well as the amount of protocol fees the Pool owes to the Vault. The Vault will then take tokens from the Pool's balances and send them to `recipient`, as well as collect the reported amount in protocol fees, which the Pool should calculate based on `protocolSwapFeePercentage`. Protocol fees are charged on exit events to guarantee that users exiting the Pool have paid their share. `sender` is the account performing the exit (typically the pool shareholder), and `recipient` is the account to which the Vault will send the proceeds. `currentBalances` contains the total token balances for each token the Pool registered in the Vault, in the same order that `IVault.getPoolTokens` would return. `lastChangeBlock` is the last block in which *any* of the Pool's registered tokens last changed its total balance. `userData` contains any pool-specific instructions needed to perform the calculations, such as the type of exit (e.g., proportional given an amount of pool shares, single-asset, multi-asset, etc.) Contracts implementing this function should check that the caller is indeed the Vault before performing any state-changing operations, such as burning pool shares."
+      },
+      "onJoinPool(bytes32,address,address,uint256[],uint256,uint256,bytes)": {
+        "details": "Called by the Vault when a user calls `IVault.joinPool` to add liquidity to this Pool. Returns how many of each registered token the user should provide, as well as the amount of protocol fees the Pool owes to the Vault. The Vault will then take tokens from `sender` and add them to the Pool's balances, as well as collect the reported amount in protocol fees, which the pool should calculate based on `protocolSwapFeePercentage`. Protocol fees are reported and charged on join events so that the Pool is free of debt whenever new users join. `sender` is the account performing the join (from which tokens will be withdrawn), and `recipient` is the account designated to receive any benefits (typically pool shares). `currentBalances` contains the total balances for each token the Pool registered in the Vault, in the same order that `IVault.getPoolTokens` would return. `lastChangeBlock` is the last block in which *any* of the Pool's registered tokens last changed its total balance. `userData` contains any pool-specific instructions needed to perform the calculations, such as the type of join (e.g., proportional given an amount of pool shares, single-asset, multi-asset, etc.) Contracts implementing this function should check that the caller is indeed the Vault before performing any state-changing operations, such as minting pool shares."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

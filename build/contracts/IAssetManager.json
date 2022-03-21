@@ -1,0 +1,531 @@
+{
+  "contractName": "IAssetManager",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "poolId",
+          "type": "bytes32"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint64",
+              "name": "targetPercentage",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "criticalPercentage",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "feePercentage",
+              "type": "uint64"
+            }
+          ],
+          "internalType": "struct IAssetManager.PoolConfig",
+          "name": "config",
+          "type": "tuple"
+        }
+      ],
+      "name": "setPoolConfig",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.1+commit.f4a555be\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"poolId\",\"type\":\"bytes32\"},{\"components\":[{\"internalType\":\"uint64\",\"name\":\"targetPercentage\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"criticalPercentage\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"feePercentage\",\"type\":\"uint64\"}],\"internalType\":\"struct IAssetManager.PoolConfig\",\"name\":\"config\",\"type\":\"tuple\"}],\"name\":\"setPoolConfig\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@balancer-labs/v2-asset-manager-utils/contracts/IAssetManager.sol\":\"IAssetManager\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@balancer-labs/v2-asset-manager-utils/contracts/IAssetManager.sol\":{\"keccak256\":\"0x37e359b9683fe88b1e7ba7b3522212c836dc93a0de8e76492f5ac7a1665c3fc9\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://1531e5c3844f8438bbdcbb987955163f6baca6e0ebd3a75f165cbaf95065a00f\",\"dweb:/ipfs/Qmbe6z6Q6jydV7G17Y36ccrWxBsdPyNz6B9W14wgGWBFRj\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: GPL-3.0-or-later\n// This program is free software: you can redistribute it and/or modify\n// it under the terms of the GNU General Public License as published by\n// the Free Software Foundation, either version 3 of the License, or\n// (at your option) any later version.\n\n// This program is distributed in the hope that it will be useful,\n// but WITHOUT ANY WARRANTY; without even the implied warranty of\n// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n// GNU General Public License for more details.\n\n// You should have received a copy of the GNU General Public License\n// along with this program.  If not, see <http://www.gnu.org/licenses/>.\n\npragma solidity ^0.7.0;\npragma experimental ABIEncoderV2;\n\ninterface IAssetManager {\n    struct PoolConfig {\n        uint64 targetPercentage;\n        uint64 criticalPercentage;\n        uint64 feePercentage;\n    }\n\n    function setPoolConfig(bytes32 poolId, PoolConfig calldata config) external;\n}\n",
+  "sourcePath": "@balancer-labs/v2-asset-manager-utils/contracts/IAssetManager.sol",
+  "ast": {
+    "absolutePath": "@balancer-labs/v2-asset-manager-utils/contracts/IAssetManager.sol",
+    "exportedSymbols": {
+      "IAssetManager": [
+        17
+      ]
+    },
+    "id": 18,
+    "license": "GPL-3.0-or-later",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "688:23:0"
+      },
+      {
+        "id": 2,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "712:33:0"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 17,
+        "linearizedBaseContracts": [
+          17
+        ],
+        "name": "IAssetManager",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "IAssetManager.PoolConfig",
+            "id": 9,
+            "members": [
+              {
+                "constant": false,
+                "id": 4,
+                "mutability": "mutable",
+                "name": "targetPercentage",
+                "nodeType": "VariableDeclaration",
+                "scope": 9,
+                "src": "805:23:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint64",
+                  "typeString": "uint64"
+                },
+                "typeName": {
+                  "id": 3,
+                  "name": "uint64",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "805:6:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 6,
+                "mutability": "mutable",
+                "name": "criticalPercentage",
+                "nodeType": "VariableDeclaration",
+                "scope": 9,
+                "src": "838:25:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint64",
+                  "typeString": "uint64"
+                },
+                "typeName": {
+                  "id": 5,
+                  "name": "uint64",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "838:6:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 8,
+                "mutability": "mutable",
+                "name": "feePercentage",
+                "nodeType": "VariableDeclaration",
+                "scope": 9,
+                "src": "873:20:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint64",
+                  "typeString": "uint64"
+                },
+                "typeName": {
+                  "id": 7,
+                  "name": "uint64",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "873:6:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "PoolConfig",
+            "nodeType": "StructDefinition",
+            "scope": 17,
+            "src": "777:123:0",
+            "visibility": "public"
+          },
+          {
+            "functionSelector": "b49fb8d4",
+            "id": 16,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setPoolConfig",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 14,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11,
+                  "mutability": "mutable",
+                  "name": "poolId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 16,
+                  "src": "929:14:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 10,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "929:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13,
+                  "mutability": "mutable",
+                  "name": "config",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 16,
+                  "src": "945:26:0",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_PoolConfig_$9_calldata_ptr",
+                    "typeString": "struct IAssetManager.PoolConfig"
+                  },
+                  "typeName": {
+                    "id": 12,
+                    "name": "PoolConfig",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 9,
+                    "src": "945:10:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_PoolConfig_$9_storage_ptr",
+                      "typeString": "struct IAssetManager.PoolConfig"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "928:44:0"
+            },
+            "returnParameters": {
+              "id": 15,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "981:0:0"
+            },
+            "scope": 17,
+            "src": "906:76:0",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 18,
+        "src": "747:237:0"
+      }
+    ],
+    "src": "688:297:0"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "@balancer-labs/v2-asset-manager-utils/contracts/IAssetManager.sol",
+      "exportedSymbols": {
+        "IAssetManager": [
+          17
+        ]
+      },
+      "license": "GPL-3.0-or-later"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.7",
+            ".0"
+          ]
+        },
+        "id": 1,
+        "name": "PragmaDirective",
+        "src": "688:23:0"
+      },
+      {
+        "attributes": {
+          "literals": [
+            "experimental",
+            "ABIEncoderV2"
+          ]
+        },
+        "id": 2,
+        "name": "PragmaDirective",
+        "src": "712:33:0"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "interface",
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            17
+          ],
+          "name": "IAssetManager",
+          "scope": 18
+        },
+        "children": [
+          {
+            "attributes": {
+              "canonicalName": "IAssetManager.PoolConfig",
+              "name": "PoolConfig",
+              "scope": 17,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "targetPercentage",
+                  "scope": 9,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint64",
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint64",
+                      "type": "uint64"
+                    },
+                    "id": 3,
+                    "name": "ElementaryTypeName",
+                    "src": "805:6:0"
+                  }
+                ],
+                "id": 4,
+                "name": "VariableDeclaration",
+                "src": "805:23:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "criticalPercentage",
+                  "scope": 9,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint64",
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint64",
+                      "type": "uint64"
+                    },
+                    "id": 5,
+                    "name": "ElementaryTypeName",
+                    "src": "838:6:0"
+                  }
+                ],
+                "id": 6,
+                "name": "VariableDeclaration",
+                "src": "838:25:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "feePercentage",
+                  "scope": 9,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint64",
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint64",
+                      "type": "uint64"
+                    },
+                    "id": 7,
+                    "name": "ElementaryTypeName",
+                    "src": "873:6:0"
+                  }
+                ],
+                "id": 8,
+                "name": "VariableDeclaration",
+                "src": "873:20:0"
+              }
+            ],
+            "id": 9,
+            "name": "StructDefinition",
+            "src": "777:123:0"
+          },
+          {
+            "attributes": {
+              "functionSelector": "b49fb8d4",
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "setPoolConfig",
+              "scope": 17,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "poolId",
+                      "scope": 16,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bytes32",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes32",
+                          "type": "bytes32"
+                        },
+                        "id": 10,
+                        "name": "ElementaryTypeName",
+                        "src": "929:7:0"
+                      }
+                    ],
+                    "id": 11,
+                    "name": "VariableDeclaration",
+                    "src": "929:14:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "config",
+                      "scope": 16,
+                      "stateVariable": false,
+                      "storageLocation": "calldata",
+                      "type": "struct IAssetManager.PoolConfig",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "PoolConfig",
+                          "referencedDeclaration": 9,
+                          "type": "struct IAssetManager.PoolConfig"
+                        },
+                        "id": 12,
+                        "name": "UserDefinedTypeName",
+                        "src": "945:10:0"
+                      }
+                    ],
+                    "id": 13,
+                    "name": "VariableDeclaration",
+                    "src": "945:26:0"
+                  }
+                ],
+                "id": 14,
+                "name": "ParameterList",
+                "src": "928:44:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 15,
+                "name": "ParameterList",
+                "src": "981:0:0"
+              }
+            ],
+            "id": 16,
+            "name": "FunctionDefinition",
+            "src": "906:76:0"
+          }
+        ],
+        "id": 17,
+        "name": "ContractDefinition",
+        "src": "747:237:0"
+      }
+    ],
+    "id": 18,
+    "name": "SourceUnit",
+    "src": "688:297:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.1+commit.f4a555be.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.2",
+  "updatedAt": "2021-08-19T22:46:59.461Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
